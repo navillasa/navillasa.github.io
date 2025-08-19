@@ -63,6 +63,13 @@ title: "DevOps Engineer"
                 <span class="tech-tag">PostgreSQL</span>
                 <span class="tech-tag">React</span>
             </div>
+            <div class="live-dashboard">
+                <h4 class="blog-section-title">🚀 Live Dashboard:</h4>
+                <ul class="blog-list">
+                    <li><a href="https://monitoring.navillasa.dev/d/e0c978bd-6077-403e-ab3b-ba03f4b34962/tv-hub-business-intelligence-dashboard" target="_blank" class="project-link dashboard-link">Business Intelligence Dashboard</a></li>
+                </ul>
+                <p class="dashboard-note">Interactive monitoring with streaming analytics (demo/password)</p>
+            </div>
             <div class="blog-posts">
                 <h4 class="blog-section-title">Related Blog Posts:</h4>
                 <ul class="blog-list">
