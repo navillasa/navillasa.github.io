@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-19T06:32:12-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">Building Production-Grade Infrastructure for a Simple App</title><link href="http://localhost:4000/blog/tv-hub-project-overview/" rel="alternate" type="text/html" title="Building Production-Grade Infrastructure for a Simple App" /><published>2025-08-19T00:00:00-04:00</published><updated>2025-08-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/tv-hub-project-overview</id><content type="html" xml:base="http://localhost:4000/blog/tv-hub-project-overview/">## The Paradox of Portfolio Projects
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-19T06:40:37-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">Building Production-Grade Infrastructure for a Simple App</title><link href="http://localhost:4000/blog/tv-hub-project-overview/" rel="alternate" type="text/html" title="Building Production-Grade Infrastructure for a Simple App" /><published>2025-08-19T00:00:00-04:00</published><updated>2025-08-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/tv-hub-project-overview</id><content type="html" xml:base="http://localhost:4000/blog/tv-hub-project-overview/">## The Paradox of Portfolio Projects
 
 I faced a classic engineering dilemma: **build something complex that needs sophisticated infrastructure, or build something simple and add sophisticated infrastructure anyway?**
 
@@ -98,74 +98,73 @@ This project demonstrates that I can build production-ready infrastructure, make
 
 More than learning how to use individual tools, I learned how they integrate, _when_ to use them, and what trade-offs each decision creates.
 
-Building infrastructure for a simple application taught me more about production DevOps than building a complex application with simple deployment ever could.</content><author><name>Natalie Villasana</name></author><category term="devops" /><category term="kubernetes" /><category term="architecture" /><category term="kubernetes" /><category term="argocd" /><category term="terraform" /><category term="gitops" /><category term="gke" /><category term="portfolio" /><summary type="html">The Paradox of Portfolio Projects</summary></entry><entry><title type="html">The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s</title><link href="http://localhost:4000/blog/debugging-502-errors/" rel="alternate" type="text/html" title="The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/debugging-502-errors</id><content type="html" xml:base="http://localhost:4000/blog/debugging-502-errors/">&lt;h2 id=&quot;the-problem-pattern&quot;&gt;The Problem Pattern&lt;/h2&gt;
+Building infrastructure for a simple application taught me more about production DevOps than building a complex application with simple deployment ever could.</content><author><name>Natalie Villasana</name></author><category term="devops" /><category term="kubernetes" /><category term="architecture" /><category term="kubernetes" /><category term="argocd" /><category term="terraform" /><category term="gitops" /><category term="gke" /><category term="portfolio" /><summary type="html">The Paradox of Portfolio Projects</summary></entry><entry><title type="html">The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s</title><link href="http://localhost:4000/blog/debugging-502-errors/" rel="alternate" type="text/html" title="The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/debugging-502-errors</id><content type="html" xml:base="http://localhost:4000/blog/debugging-502-errors/">## The Problem Pattern
 
-&lt;p&gt;Throughout this project, I’ve hit the same type of issue repeatedly:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Frontend&lt;/strong&gt; looking for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dev-backend-service&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prod-backend-service&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;ArgoCD ingress&lt;/strong&gt; using port 443 instead of port 80&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Vault&lt;/strong&gt; connection errors due to service discovery issues&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;External Secrets&lt;/strong&gt; pointing to wrong Vault paths&lt;/li&gt;
-&lt;/ul&gt;
+Throughout this project, I've hit the same type of issue repeatedly:
+- **Frontend** looking for `dev-backend-service` instead of `prod-backend-service`
+- **ArgoCD ingress** using port 443 instead of port 80
+- **Vault** connection errors due to service discovery issues
+- **External Secrets** pointing to wrong Vault paths
 
-&lt;p&gt;&lt;strong&gt;The common thread&lt;/strong&gt;: 502 Bad Gateway errors caused by communication mismatches.&lt;/p&gt;
+**The common thread**: 502 Bad Gateway errors caused by communication mismatches.
 
-&lt;h2 id=&quot;the-502-error-what-it-really-means&quot;&gt;The 502 Error: What It Really Means&lt;/h2&gt;
+## The 502 Error: What It Really Means
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;502 Bad Gateway = &quot;I can reach something, but it's not responding correctly&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
+502 Bad Gateway = &quot;I can reach something, but it's not responding correctly&quot;
+```
 
-&lt;p&gt;&lt;strong&gt;This is different from:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;404&lt;/strong&gt;: “I can’t find anything at this path”&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;503&lt;/strong&gt;: “Service is temporarily unavailable”&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Connection timeout&lt;/strong&gt;: “I can’t reach anything at all”&lt;/li&gt;
-&lt;/ul&gt;
+**This is different from:**
+- **404**: &quot;I can't find anything at this path&quot;
+- **503**: &quot;Service is temporarily unavailable&quot;  
+- **Connection timeout**: &quot;I can't reach anything at all&quot;
 
-&lt;p&gt;&lt;strong&gt;502 specifically means&lt;/strong&gt;: The proxy/load balancer reached a backend, but the backend response was invalid.&lt;/p&gt;
+**502 specifically means**: The proxy/load balancer reached a backend, but the backend response was invalid.
 
-&lt;h2 id=&quot;the-systematic-debugging-approach&quot;&gt;The Systematic Debugging Approach&lt;/h2&gt;
+## The Systematic Debugging Approach
 
-&lt;h3 id=&quot;step-1-identify-the-communication-chain&quot;&gt;Step 1: Identify the Communication Chain&lt;/h3&gt;
+### Step 1: Identify the Communication Chain
 
-&lt;p&gt;Every 502 has a path like this:&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Client → Load Balancer → Service → Pod
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+Every 502 has a path like this:
+```
+Client → Load Balancer → Service → Pod
+```
 
-&lt;p&gt;Find where it breaks by checking each link.&lt;/p&gt;
+Find where it breaks by checking each link.
 
-&lt;h3 id=&quot;step-2-check-backend-health-in-load-balancer&quot;&gt;Step 2: Check Backend Health in Load Balancer&lt;/h3&gt;
+### Step 2: Check Backend Health in Load Balancer
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Get detailed ingress status&lt;/span&gt;
-kubectl describe ingress &amp;lt;ingress-name&amp;gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; &amp;lt;namespace&amp;gt;
+```bash
+# Get detailed ingress status
+kubectl describe ingress &lt;ingress-name&gt; -n &lt;namespace&gt;
 
-&lt;span class=&quot;c&quot;&gt;# Look for backend health status&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# Example output:&lt;/span&gt;
-ingress.kubernetes.io/backends: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;s2&quot;&gt;&quot;k8s1-backend-service-443&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;UNHEALTHY&quot;&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# ← The smoking gun!&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+# Look for backend health status
+# Example output:
+ingress.kubernetes.io/backends: {
+  &quot;k8s1-backend-service-443&quot;:&quot;UNHEALTHY&quot;  # ← The smoking gun!
+}
+```
 
-&lt;p&gt;&lt;strong&gt;Key indicators:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UNHEALTHY&lt;/code&gt; = Backend isn’t responding on expected port/protocol&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HEALTHY&lt;/code&gt; = Backend is fine, look elsewhere&lt;/li&gt;
-&lt;/ul&gt;
+**Key indicators:**
+- `UNHEALTHY` = Backend isn't responding on expected port/protocol
+- `HEALTHY` = Backend is fine, look elsewhere
 
-&lt;h2 id=&quot;pro-tips-for-faster-debugging&quot;&gt;Pro Tips for Faster Debugging&lt;/h2&gt;
+## Pro Tips for Faster Debugging
 
-&lt;h3 id=&quot;1-use-port-forward-for-direct-testing&quot;&gt;1. &lt;strong&gt;Use Port-Forward for Direct Testing&lt;/strong&gt;&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Bypass ingress/service and test pod directly&lt;/span&gt;
-kubectl port-forward pod/&amp;lt;pod-name&amp;gt; 8080:8080
+### 1. **Use Port-Forward for Direct Testing**
+```bash
+# Bypass ingress/service and test pod directly
+kubectl port-forward pod/&lt;pod-name&gt; 8080:8080
 curl http://localhost:8080/health
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;h3 id=&quot;2-check-multiple-namespaces&quot;&gt;2. &lt;strong&gt;Check Multiple Namespaces&lt;/strong&gt;&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Service in wrong namespace is super common&lt;/span&gt;
-kubectl get services &lt;span class=&quot;nt&quot;&gt;--all-namespaces&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &amp;lt;service-name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+### 2. **Check Multiple Namespaces**
+```bash
+# Service in wrong namespace is super common
+kubectl get services --all-namespaces | grep &lt;service-name&gt;
+```
 
-&lt;p&gt;The key insight: Most 502 errors are configuration mismatches, not infrastructure failures. A systematic approach beats random troubleshooting every time.&lt;/p&gt;</content><author><name>Natalie Villasana</name></author><category term="kubernetes" /><category term="debugging" /><category term="devops" /><category term="kubernetes" /><category term="502-errors" /><category term="troubleshooting" /><category term="nginx" /><category term="ingress" /><summary type="html">The Problem Pattern</summary></entry><entry><title type="html">Why I Didn’t Make Vault an ArgoCD Application</title><link href="http://localhost:4000/blog/vault-gitops/" rel="alternate" type="text/html" title="Why I Didn’t Make Vault an ArgoCD Application" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/vault-gitops</id><content type="html" xml:base="http://localhost:4000/blog/vault-gitops/">## The Question
+The key insight: Most 502 errors are configuration mismatches, not infrastructure failures. A systematic approach beats random troubleshooting every time.</content><author><name>Natalie Villasana</name></author><category term="kubernetes" /><category term="debugging" /><category term="devops" /><category term="kubernetes" /><category term="502-errors" /><category term="troubleshooting" /><category term="nginx" /><category term="ingress" /><summary type="html">The Problem Pattern</summary></entry><entry><title type="html">Why I Didn’t Make Vault an ArgoCD Application</title><link href="http://localhost:4000/blog/vault-gitops/" rel="alternate" type="text/html" title="Why I Didn’t Make Vault an ArgoCD Application" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/vault-gitops</id><content type="html" xml:base="http://localhost:4000/blog/vault-gitops/">## The Question
 
 During the GitOps implementation, I considered whether HashiCorp Vault should be managed as an ArgoCD application alongside the other workloads. This post explains why I chose to keep Vault outside of the GitOps workflow.
 

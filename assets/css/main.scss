@@ -54,7 +54,11 @@ body {
     height: 100px;
     border-radius: 4px;
     object-fit: cover;
+    object-position: center;
     box-shadow: 0 8px 24px rgba(52, 152, 219, 0.3);
+    display: block;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .profile-placeholder {
@@ -564,6 +568,8 @@ body {
     .profile-image, .profile-placeholder {
         width: 100px;
         height: 100px;
+        max-width: 100px;
+        max-height: 100px;
     }
     
     .profile-initials {
