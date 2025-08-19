@@ -1,0 +1,139 @@
+---
+layout: default
+title: "DevOps Engineer"
+---
+
+<div class="container">
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-content">
+            <div class="profile-section">
+                <div class="profile-picture">
+                    <!-- Profile picture placeholder - replace with actual image -->
+                    <div class="profile-placeholder">
+                        <span class="profile-initials">NV</span>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1 class="name">{{ site.author.name }}</h1>
+                    <p class="title">DevOps Engineer</p>
+                    <p class="location">{{ site.author.location }} • {{ site.author.domain }}</p>
+                </div>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:{{ site.author.email }}" class="contact-link">Email</a>
+                <a href="https://github.com/{{ site.author.github }}" target="_blank" class="contact-link">GitHub</a>
+                <a href="https://www.linkedin.com/in/{{ site.author.linkedin }}/" target="_blank" class="contact-link">LinkedIn</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <p>DevOps Engineer with 3+ years of production Kubernetes and cloud infrastructure experience, returning to tech after a brief adventure in advertising. I combine deep technical skills in cloud-native technologies with strong communication abilities.</p>
+                <p>Previously built and scaled distributed cloud storage systems at Storj Labs. Currently expanding expertise in modern DevOps practices through hands-on projects featuring GitOps, observability, and infrastructure automation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        
+        <!-- TV Hub Project -->
+        <div class="project-card">
+            <div class="project-header">
+                <h3 class="project-title">📺 TV Hub</h3>
+                <div class="project-links">
+                    <a href="https://github.com/navillasa/tv-dashboard-k8s" target="_blank" class="project-link">GitHub</a>
+                    <a href="http://tv-hub.navillasa.dev" target="_blank" class="project-link">Live Demo</a>
+                </div>
+            </div>
+            <p class="project-description">
+                A production-ready TV show dashboard showcasing enterprise DevOps practices. While the app is intentionally simple (aggregating trending shows), the infrastructure demonstrates GitOps, observability, and cloud-native architecture patterns.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Terraform</span>
+                <span class="tech-tag">ArgoCD</span>
+                <span class="tech-tag">GCP</span>
+                <span class="tech-tag">Docker</span>
+            </div>
+            <div class="blog-posts">
+                <h4 class="blog-section-title">Related Blog Posts:</h4>
+                <ul class="blog-list">
+                    <li><a href="{{ '/blog/debugging-502-errors/' | relative_url }}" class="blog-link">Debugging 502 Errors in Production</a></li>
+                    <li><a href="{{ '/blog/development-workflow/' | relative_url }}" class="blog-link">Development Workflow & Best Practices</a></li>
+                    <li><a href="{{ '/blog/vault-gitops-decision/' | relative_url }}" class="blog-link">Vault GitOps Decision Framework</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Self-Hosted LLM Project -->
+        <div class="project-card">
+            <div class="project-header">
+                <h3 class="project-title">🧠 Self-Hosted Mini LLM API</h3>
+                <div class="project-links">
+                    <a href="https://github.com/navillasa/self-hosted-mini-llm" target="_blank" class="project-link">GitHub</a>
+                    <a href="https://llm.navillasa.dev" target="_blank" class="project-link">Live Demo</a>
+                </div>
+            </div>
+            <p class="project-description">
+                A lightweight, self-hosted LLM server using GPT4All, running entirely on CPU. Demonstrates infrastructure provisioning, containerization, and secure API deployment with HTTPS and authentication.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">Terraform</span>
+                <span class="tech-tag">Traefik</span>
+                <span class="tech-tag">GPT4All</span>
+                <span class="tech-tag">Hetzner Cloud</span>
+            </div>
+            <div class="blog-posts">
+                <h4 class="blog-section-title">Related Blog Posts:</h4>
+                <ul class="blog-list">
+                    <li><a href="{{ '/blog/self-hosting-llms/' | relative_url }}" class="blog-link">Self-Hosting LLMs: A Practical Guide</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- VPN Ad Blocker Project -->
+        <div class="project-card">
+            <div class="project-header">
+                <h3 class="project-title">🛡️ VPN Ad Blocker</h3>
+                <div class="project-links">
+                    <a href="https://github.com/navillasa/vpn-ad-blocker" target="_blank" class="project-link">GitHub</a>
+                </div>
+            </div>
+            <p class="project-description">
+                A self-hosted WireGuard VPN combined with AdGuard Home for DNS-level ad blocking. Features automated setup scripts, secure configuration, and multi-device support with QR code generation.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">WireGuard</span>
+                <span class="tech-tag">AdGuard Home</span>
+                <span class="tech-tag">Ubuntu</span>
+                <span class="tech-tag">UFW</span>
+                <span class="tech-tag">Bash</span>
+                <span class="tech-tag">Hetzner Cloud</span>
+            </div>
+            <div class="blog-posts">
+                <h4 class="blog-section-title">Related Blog Posts:</h4>
+                <ul class="blog-list">
+                    <li><a href="{{ '/blog/vpn-ad-blocker/' | relative_url }}" class="blog-link">Building a Personal VPN with Ad Blocking</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 {{ site.author.name }}</p>
+    </footer>
+</div>

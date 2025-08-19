@@ -1,0 +1,56 @@
+# Jekyll Configuration for GitHub Pages
+
+# Site settings
+title: "Natalie Villasana"
+description: "DevOps Engineer | navillasa.dev"
+url: "https://navillasa.github.io"
+baseurl: "/portfolio"
+
+# Personal info
+author:
+  name: "Natalie Villasana"
+  email: "navillasa.dev@gmail.com"
+  github: "navillasa"
+  linkedin: "natalievillasana"
+  location: "Atlanta, GA"
+  domain: "navillasa.dev"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:title/
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
+# Sass settings
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Natalie Villasana"
