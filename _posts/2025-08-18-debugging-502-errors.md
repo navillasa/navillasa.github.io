@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Debugging 502 Bad Gateway Errors"
-subtitle: "A Kubernetes Detective Story"
+title: "The K8s Doctor, or How I Learned to Stop Worrying and Fix 502s"
+subtitle: "A systematic approach to debugging port and protocol mismatches"
 description: "How to systematically diagnose and fix port/protocol mismatches in Kubernetes"
-date: 2024-01-15
+date: 2025-08-18
 categories: [kubernetes, debugging, devops]
 tags: [kubernetes, 502-errors, troubleshooting, nginx, ingress]
 ---
