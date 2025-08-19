@@ -12,9 +12,9 @@ tags: [kubernetes, argocd, terraform, gitops, gke, portfolio]
 
 I faced a classic engineering dilemma: **build something complex that needs sophisticated infrastructure, or build something simple and add sophisticated infrastructure anyway?**
 
-After cycling through ideas (distributed microservices, ML pipelines, IoT dashboards) I kept returning to one idea: a TV show aggregator. Because it was an app with some appeal and use beyond demonstrating its own tech stack. The app itself is straightforward: fetch trending shows from TMDB and TVmaze APIs, rank by popularity, display in a clean interface.
+After cycling through ideas (distributed microservices, ML pipelines, IoT dashboards) I kept returning to one idea: a TV show aggregator. Because it was an app with some appeal and usefulness beyond demonstrating its own tech stack. The app itself is straightforward: fetch trending shows from TMDB and TVmaze APIs, rank by popularity, display in a clean interface.
 
-**The twist?** I deployed it with enterprise-grade DevOps practices that would typically serve a team of a 50+ engineers. Or at least a dozen.
+**But there's a twist.** I deployed it with enterprise-grade DevOps practices that would typically serve a team of a 50+ engineers. Or at least a dozen.
 
 ## Strategic Design Decisions
 
@@ -79,7 +79,7 @@ Every decision has implications. For example: [Vault as ArgoCD Application]({{ '
 
 ### **3. Systematic Debugging**
 
-Production systems fail in creative ways. My approach: [The K8s Doctor]({{ '/blog/debugging-502-errors/' | relative_url }}) demonstrates systematic troubleshooting methodology.
+Production systems fail in creative ways. In [The Cluster Doctor]({{ '/blog/debugging-502-errors/' | relative_url }}) blog post I demonstrate my approach to systematic troubleshooting.
 
 **Core Principle**: Most failures are configuration mismatches, not infrastructure failures. Port conflicts, service discovery issues, and protocol mismatches accounted for the vast majority of my deployment problems.
 

@@ -61,9 +61,9 @@
 
 <p>I faced a classic engineering dilemma: <strong>build something complex that needs sophisticated infrastructure, or build something simple and add sophisticated infrastructure anyway?</strong></p>
 
-<p>After cycling through ideas (distributed microservices, ML pipelines, IoT dashboards) I kept returning to one idea: a TV show aggregator. Because it was an app with some appeal and use beyond demonstrating its own tech stack. The app itself is straightforward: fetch trending shows from TMDB and TVmaze APIs, rank by popularity, display in a clean interface.</p>
+<p>After cycling through ideas (distributed microservices, ML pipelines, IoT dashboards) I kept returning to one idea: a TV show aggregator. Because it was an app with some appeal and usefulness beyond demonstrating its own tech stack. The app itself is straightforward: fetch trending shows from TMDB and TVmaze APIs, rank by popularity, display in a clean interface.</p>
 
-<p><strong>The twist?</strong> I deployed it with enterprise-grade DevOps practices that would typically serve a team of a 50+ engineers. Or at least a dozen.</p>
+<p><strong>But there’s a twist.</strong> I deployed it with enterprise-grade DevOps practices that would typically serve a team of a 50+ engineers. Or at least a dozen.</p>
 
 <h2 id="strategic-design-decisions">Strategic Design Decisions</h2>
 
@@ -128,7 +128,7 @@ Monitoring ← Prometheus ← Applications → Logs
 
 <h3 id="3-systematic-debugging"><strong>3. Systematic Debugging</strong></h3>
 
-<p>Production systems fail in creative ways. My approach: <a href="/blog/debugging-502-errors/">The K8s Doctor</a> demonstrates systematic troubleshooting methodology.</p>
+<p>Production systems fail in creative ways. In <a href="/blog/debugging-502-errors/">The Cluster Doctor</a> blog post I demonstrate my approach to systematic troubleshooting.</p>
 
 <p><strong>Core Principle</strong>: Most failures are configuration mismatches, not infrastructure failures. Port conflicts, service discovery issues, and protocol mismatches accounted for the vast majority of my deployment problems.</p>
 
