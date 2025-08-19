@@ -2,7 +2,6 @@
 layout: post
 title: "The K8s Doctor, or How I Learned to Stop Worrying and Fix 502s"
 subtitle: "A systematic approach to debugging port and protocol mismatches"
-description: "How to systematically diagnose and fix port/protocol mismatches in Kubernetes"
 date: 2025-08-18
 categories: [kubernetes, debugging, devops]
 tags: [kubernetes, 502-errors, troubleshooting, nginx, ingress]
@@ -35,12 +34,12 @@ Throughout this project, I've hit the same issue repeatedly:
 
 ### Step 1: Identify the Communication Chain
 
-**Every 502 has a path like this:**
+Every 502 has a path like this:
 ```
 Client → Load Balancer → Service → Pod
 ```
 
-**Find where it breaks by checking each link.**
+Find where it breaks by checking each link.
 
 ### Step 2: Check Backend Health in Load Balancer
 

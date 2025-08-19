@@ -21,8 +21,8 @@
 <meta property="og:title" content="The K8s Doctor, or How I Learned to Stop Worrying and Fix 502s" />
 <meta name="author" content="Natalie Villasana" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="How to systematically diagnose and fix port/protocol mismatches in Kubernetes" />
-<meta property="og:description" content="How to systematically diagnose and fix port/protocol mismatches in Kubernetes" />
+<meta name="description" content="The Problem Pattern" />
+<meta property="og:description" content="The Problem Pattern" />
 <link rel="canonical" href="http://localhost:4000/blog/debugging-502-errors/" />
 <meta property="og:url" content="http://localhost:4000/blog/debugging-502-errors/" />
 <meta property="og:site_name" content="Natalie Villasana" />
@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="The K8s Doctor, or How I Learned to Stop Worrying and Fix 502s" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-18T00:00:00-04:00","datePublished":"2025-08-18T00:00:00-04:00","description":"How to systematically diagnose and fix port/protocol mismatches in Kubernetes","headline":"The K8s Doctor, or How I Learned to Stop Worrying and Fix 502s","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/debugging-502-errors/"},"url":"http://localhost:4000/blog/debugging-502-errors/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-18T00:00:00-04:00","datePublished":"2025-08-18T00:00:00-04:00","description":"The Problem Pattern","headline":"The K8s Doctor, or How I Learned to Stop Worrying and Fix 502s","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/debugging-502-errors/"},"url":"http://localhost:4000/blog/debugging-502-errors/"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -47,8 +47,6 @@
         <p class="blog-subtitle">A systematic approach to debugging port and protocol mismatches</p>
         
         <div class="blog-meta">
-            
-            How to systematically diagnose and fix port/protocol mismatches in Kubernetes
             
             
             <br><time datetime="2025-08-18T00:00:00-04:00">August 18, 2025</time>
@@ -87,11 +85,11 @@
 
 <h3 id="step-1-identify-the-communication-chain">Step 1: Identify the Communication Chain</h3>
 
-<p><strong>Every 502 has a path like this:</strong></p>
+<p>Every 502 has a path like this:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client → Load Balancer → Service → Pod
 </code></pre></div></div>
 
-<p><strong>Find where it breaks by checking each link.</strong></p>
+<p>Find where it breaks by checking each link.</p>
 
 <h3 id="step-2-check-backend-health-in-load-balancer">Step 2: Check Backend Health in Load Balancer</h3>
 

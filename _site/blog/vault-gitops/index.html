@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why I Didn't Make Vault an ArgoCD Application | Natalie Villasana</title>
+    <meta name="description" content="The Question">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SEO -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Why I Didn’t Make Vault an ArgoCD Application | Natalie Villasana</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Why I Didn’t Make Vault an ArgoCD Application" />
+<meta name="author" content="Natalie Villasana" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Question" />
+<meta property="og:description" content="The Question" />
+<link rel="canonical" href="http://localhost:4000/blog/vault-gitops/" />
+<meta property="og:url" content="http://localhost:4000/blog/vault-gitops/" />
+<meta property="og:site_name" content="Natalie Villasana" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-18T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Why I Didn’t Make Vault an ArgoCD Application" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-18T00:00:00-04:00","datePublished":"2025-08-18T00:00:00-04:00","description":"The Question","headline":"Why I Didn’t Make Vault an ArgoCD Application","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/vault-gitops/"},"url":"http://localhost:4000/blog/vault-gitops/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <div class="blog-container">
+    <div class="blog-nav">
+        <a href="/" class="back-link">← Back to Portfolio</a>
+    </div>
+    
+    <header class="blog-header">
+        <h1 class="blog-title">Why I Didn't Make Vault an ArgoCD Application</h1>
+        
+        <p class="blog-subtitle">An architectural decision on secret management and GitOps boundaries</p>
+        
+        <div class="blog-meta">
+            
+            
+            <br><time datetime="2025-08-18T00:00:00-04:00">August 18, 2025</time>
+            
+        </div>
+    </header>
+
+    <div class="blog-content">
+        <h2 id="the-question">The Question</h2>
+
+<p>During the GitOps implementation, I considered whether HashiCorp Vault should be managed as an ArgoCD application alongside the other workloads. This post explains why I chose to keep Vault outside of the GitOps workflow.</p>
+
+<h2 id="the-temptation">The Temptation</h2>
+
+<p>At first glance, managing Vault through ArgoCD seems <em>pretty</em> cool:</p>
+
+<ul>
+  <li><strong>Consistency</strong>: Everything else is managed by ArgoCD</li>
+  <li><strong>Version Control</strong>: Vault configuration tracked in Git</li>
+  <li><strong>Declarative</strong>: Infrastructure as Code principles</li>
+  <li><strong>Automation</strong>: Automated deployments and updates</li>
+</ul>
+
+<h2 id="the-bootstrap-problem">The Bootstrap Problem</h2>
+
+<p>The fundamental issue is a <strong>circular dependency</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────┐    needs    ┌──────────────────┐    needs    ┌───────────┐
+│   ArgoCD    │ ──────────► │ External Secrets │ ──────────► │   Vault   │
+│             │             │    Operator      │             │           │
+└─────────────┘             └──────────────────┘             └───────────┘
+       ▲                                                            │
+       │                    manages (if GitOps)                     │
+       └────────────────────────────────────────────────────────────┘
+</code></pre></div></div>
+
+<p><strong>The problem</strong>: If ArgoCD manages Vault, then ArgoCD depends on Vault (for secrets) which depends on ArgoCD (for deployment). This creates an unresolvable bootstrap dependency.</p>
+
+<h2 id="infrastructure-layers">Infrastructure Layers</h2>
+
+<p>I solved this by establishing clear <strong>infrastructure layers</strong>:</p>
+
+<h3 id="layer-0-foundation-infrastructure">Layer 0: Foundation Infrastructure</h3>
+<ul>
+  <li><strong>GKE Cluster</strong> (Terraform)</li>
+  <li><strong>Static IPs</strong> (Terraform)</li>
+  <li><strong>Vault</strong> (kubectl apply)</li>
+  <li><strong>External Secrets Operator</strong> (Helm)</li>
+</ul>
+
+<h3 id="layer-1-gitops-platform">Layer 1: GitOps Platform</h3>
+<ul>
+  <li><strong>ArgoCD</strong> (kubectl apply)</li>
+  <li><strong>ClusterSecretStore</strong> (ArgoCD)</li>
+</ul>
+
+<h3 id="layer-2-applications">Layer 2: Applications</h3>
+<ul>
+  <li><strong>tv-dashboard-dev</strong> (ArgoCD)</li>
+  <li><strong>tv-dashboard-prod</strong> (ArgoCD)</li>
+  <li><strong>monitoring-stack</strong> (ArgoCD)</li>
+</ul>
+
+<h2 id="alternative-approaches-considered">Alternative Approaches Considered</h2>
+
+<h3 id="1-manual-sync-only">1. Manual Sync Only</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># vault-app.yaml</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">syncPolicy</span><span class="pi">:</span>
+    <span class="na">automated</span><span class="pi">:</span> <span class="no">null</span>  <span class="c1"># No auto-sync to avoid bootstrap issues</span>
+</code></pre></div></div>
+
+<p><strong>Pros</strong>: Vault config in Git<br />
+<strong>Cons</strong>: Manual intervention required, defeats GitOps automation</p>
+
+<h3 id="2-app-of-apps-pattern">2. App-of-Apps Pattern</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># bootstrap-app.yaml - deployed manually</span>
+<span class="c1"># Manages vault-app.yaml and argocd-apps.yaml</span>
+</code></pre></div></div>
+
+<p><strong>Pros</strong>: Complete GitOps coverage<br />
+<strong>Cons</strong>: Complex bootstrap sequence, harder to debug</p>
+
+<h3 id="3-external-vault">3. External Vault</h3>
+<p>Use a managed secret service (Google Secret Manager, AWS Secrets Manager)</p>
+
+<p><strong>Pros</strong>: No bootstrap problem, less operational overhead<br />
+<strong>Cons</strong>: Vendor lock-in, less learning value for this project</p>
+
+<h2 id="the-decision-keep-vault-outside-gitops">The Decision: Keep Vault Outside GitOps</h2>
+
+<p><strong>Reasons</strong>:</p>
+
+<ol>
+  <li><strong>Operational Simplicity</strong>: Vault is foundational infrastructure that should be stable and simple to manage</li>
+  <li><strong>Recovery Scenarios</strong>: If ArgoCD fails, we can still access Vault to recover secrets</li>
+  <li><strong>Bootstrap Clarity</strong>: Clear separation between foundation and application layers</li>
+  <li><strong>Production Patterns</strong>: Many organizations treat secret management as Layer 0 infrastructure</li>
+</ol>
+
+<h2 id="production-considerations">Production Considerations</h2>
+
+<p>In production environments, you might see:</p>
+
+<h3 id="at-large-organizations">At Large Organizations</h3>
+<ul>
+  <li><strong>Dedicated Vault clusters</strong> managed by platform teams</li>
+  <li><strong>Vault-as-a-Service</strong> provided to application teams</li>
+  <li><strong>Manual deployment</strong> with infrastructure automation (Terraform)</li>
+</ul>
+
+<h3 id="at-cloud-native-shops">At Cloud-Native Shops</h3>
+<ul>
+  <li><strong>Managed secret services</strong> (AWS Secrets Manager, etc.)</li>
+  <li><strong>External Secrets Operator</strong> connecting to cloud providers</li>
+  <li><strong>No self-hosted Vault</strong> at all</li>
+</ul>
+
+<h3 id="in-gitops-purist-repos">In GitOps Purist Repos</h3>
+<ul>
+  <li><strong>Everything in Git</strong> including Vault</li>
+  <li><strong>Complex bootstrap procedures</strong> with operator dependencies</li>
+  <li><strong>Acceptance of operational complexity</strong> for consistency</li>
+</ul>
+
+<h2 id="key-takeaway">Key Takeaway</h2>
+
+<p><strong>Not everything needs to be in GitOps.</strong> The right architectural boundary depends on:</p>
+
+<ul>
+  <li><strong>Operational complexity</strong> vs <strong>consistency benefits</strong></li>
+  <li><strong>Bootstrap dependencies</strong> and <strong>recovery scenarios</strong></li>
+  <li><strong>Team structure</strong> and <strong>operational expertise</strong></li>
+  <li><strong>Compliance requirements</strong> and <strong>audit trails</strong></li>
+</ul>
+
+<p>For my TV Dashboard project, keeping Vault as foundational infrastructure provided the right balance of simplicity and functionality while still demonstrating modern secret management practices.</p>
+
+<h2 id="what-i-learned">What I Learned</h2>
+
+<ol>
+  <li><strong>Architectural boundaries matter</strong> - not every tool fits every pattern</li>
+  <li><strong>Bootstrap dependencies</strong> are real constraints in system design</li>
+  <li><strong>Operational simplicity</strong> often trumps theoretical consistency</li>
+  <li><strong>Production patterns</strong> should inform learning project decisions</li>
+</ol>
+
+<p>The goal isn’t to GitOps-ify everything — it’s to build systems that are <strong>reliable, maintainable, and appropriate for their context</strong>.</p>
+
+<hr />
+
+<p><em>This decision reflects my specific context and learning goals. Your environment may have different constraints and requirements.</em></p>
+
+    </div>
+</div>
+</body>
+</html>
