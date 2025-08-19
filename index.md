@@ -9,10 +9,7 @@ title: "DevOps Engineer"
         <div class="header-content">
             <div class="profile-section">
                 <div class="profile-picture">
-                    <!-- Profile picture placeholder - replace with actual image -->
-                    <div class="profile-placeholder">
-                        <span class="profile-initials">NV</span>
-                    </div>
+                    <img src="{{ '/assets/images/squarephoto.jpg' | relative_url }}" alt="Natalie Villasana" class="profile-image">
                 </div>
                 <div class="profile-info">
                     <h1 class="name">{{ site.author.name }}</h1>
@@ -56,22 +53,22 @@ title: "DevOps Engineer"
                 A production-ready TV show dashboard showcasing enterprise DevOps practices. While the app is intentionally simple (aggregating trending shows), the infrastructure demonstrates GitOps, observability, and cloud-native architecture patterns.
             </p>
             <div class="tech-stack">
-                <span class="tech-tag">Kubernetes</span>
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">PostgreSQL</span>
                 <span class="tech-tag">Terraform</span>
+                <span class="tech-tag">Kubernetes</span>
                 <span class="tech-tag">ArgoCD</span>
+                <span class="tech-tag">Prometheus</span>
                 <span class="tech-tag">GCP</span>
                 <span class="tech-tag">Docker</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">React</span>
             </div>
             <div class="blog-posts">
                 <h4 class="blog-section-title">Related Blog Posts:</h4>
                 <ul class="blog-list">
                     <li><a href="{{ '/blog/tv-hub-project-overview/' | relative_url }}" class="blog-link">Building Production-Grade Infrastructure for a Simple App</a></li>
-                    <li><a href="{{ '/blog/debugging-502-errors/' | relative_url }}" class="blog-link">The 502 Detective: Solving Kubernetes Communication Mysteries</a></li>
-                    <li><a href="{{ '/blog/development-workflow/' | relative_url }}" class="blog-link">Development Workflow & Best Practices</a></li>
-                    <li><a href="{{ '/blog/vault-gitops-decision/' | relative_url }}" class="blog-link">Vault GitOps Decision Framework</a></li>
+                    <li><a href="{{ '/blog/debugging-502-errors/' | relative_url }}" class="blog-link">The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s</a></li>
+                    <li><a href="{{ '/blog/vault-gitops/' | relative_url }}" class="blog-link">Why I Didn't Make Vault an ArgoCD Application</a></li>
                 </ul>
             </div>
         </div>
@@ -97,12 +94,7 @@ title: "DevOps Engineer"
                 <span class="tech-tag">GPT4All</span>
                 <span class="tech-tag">Hetzner Cloud</span>
             </div>
-            <div class="blog-posts">
-                <h4 class="blog-section-title">Related Blog Posts:</h4>
-                <ul class="blog-list">
-                    <li><a href="{{ '/blog/self-hosting-llms/' | relative_url }}" class="blog-link">Self-Hosting LLMs: A Practical Guide</a></li>
-                </ul>
-            </div>
+
         </div>
 
         <!-- VPN Ad Blocker Project -->
@@ -124,17 +116,16 @@ title: "DevOps Engineer"
                 <span class="tech-tag">Bash</span>
                 <span class="tech-tag">Hetzner Cloud</span>
             </div>
-            <div class="blog-posts">
-                <h4 class="blog-section-title">Related Blog Posts:</h4>
-                <ul class="blog-list">
-                    <li><a href="{{ '/blog/vpn-ad-blocker/' | relative_url }}" class="blog-link">Building a Personal VPN with Ad Blocking</a></li>
-                </ul>
-            </div>
+
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 {{ site.author.name }}</p>
+        <div class="footer-links">
+            <a href="https://github.com/{{ site.author.github }}" target="_blank">GitHub</a> • 
+            <a href="https://www.linkedin.com/in/{{ site.author.linkedin }}/" target="_blank">LinkedIn</a> • 
+            <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+        </div>
     </footer>
 </div>

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The K8s Doctor, or How I Learned to Stop Worrying and Debug 502s"
+title: "The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s"
 subtitle: "A systematic approach to debugging port and protocol mismatches"
 date: 2025-08-18
 categories: [kubernetes, debugging, devops]
