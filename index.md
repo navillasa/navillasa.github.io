@@ -74,6 +74,7 @@ title: "DevOps Engineer"
                 <h4 class="blog-section-title">Related Blog Posts:</h4>
                 <ul class="blog-list">
                     <li><a href="{{ '/blog/tv-hub-project-overview/' | relative_url }}" class="blog-link">Building Production-Grade Infrastructure for a Simple App</a></li>
+                    <li><a href="{{ '/blog/gitops-cicd-pipeline/' | relative_url }}" class="blog-link">The CI/CD Pipeline I Wish I'd Built Sooner</a></li>
                     <li><a href="{{ '/blog/debugging-502-errors/' | relative_url }}" class="blog-link">The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s</a></li>
                     <li><a href="{{ '/blog/vault-gitops/' | relative_url }}" class="blog-link">Why I Didn't Make Vault an ArgoCD Application</a></li>
                 </ul>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The CI/CD Pipeline I Wish I'd Built Sooner | Natalie Villasana</title>
+    <meta name="description" content="When I started building my TV Hub project, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I ...">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SEO -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The CI/CD Pipeline I Wish I’d Built Sooner | Natalie Villasana</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="The CI/CD Pipeline I Wish I’d Built Sooner" />
+<meta name="author" content="Natalie Villasana" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="When I started building my TV Hub project, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here’s the GitOps pipeline I wish I’d built from day one." />
+<meta property="og:description" content="When I started building my TV Hub project, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here’s the GitOps pipeline I wish I’d built from day one." />
+<link rel="canonical" href="http://localhost:4000/blog/gitops-cicd-pipeline/" />
+<meta property="og:url" content="http://localhost:4000/blog/gitops-cicd-pipeline/" />
+<meta property="og:site_name" content="Natalie Villasana" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-19T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The CI/CD Pipeline I Wish I’d Built Sooner" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-19T00:00:00-04:00","datePublished":"2025-08-19T00:00:00-04:00","description":"When I started building my TV Hub project, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here’s the GitOps pipeline I wish I’d built from day one.","headline":"The CI/CD Pipeline I Wish I’d Built Sooner","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/gitops-cicd-pipeline/"},"url":"http://localhost:4000/blog/gitops-cicd-pipeline/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <div class="blog-container">
+    <div class="blog-nav">
+        <a href="/" class="back-link">← Back to Portfolio</a>
+    </div>
+    
+    <header class="blog-header">
+        <h1 class="blog-title">The CI/CD Pipeline I Wish I'd Built Sooner</h1>
+        
+        <p class="blog-subtitle">The Joys of Building a GitOps Pipeline That Actually Works</p>
+        
+        <div class="blog-meta">
+            
+            
+            <br><time datetime="2025-08-19T00:00:00-04:00">August 19, 2025</time>
+            
+        </div>
+    </header>
+
+    <div class="blog-content">
+        <p>When I started building my <a href="/blog/tv-hub-project-overview/">TV Hub project</a>, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here’s the GitOps pipeline I wish I’d built from day one.</p>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>My original setup was very simple and anxiety-inducingly fragile. Every git push triggered a full deployment to production. No gates, no testing environment, just vibes.</p>
+
+<p>When a color-changing button broke the frontend one too many times, I realized I needed a system that could move fast without breaking things. The solution needed to automatically deploy tested code while preventing untested changes from reaching “production.”</p>
+
+<h2 id="the-solution-two-speed-gitops">The Solution: Two-Speed GitOps</h2>
+<h4 id="aka-its-still-production-even-if-its-just-me-on-the-app-okay-this-is-how-we-learn">Aka It’s Still Production Even If It’s Just Me on the App Okay This Is How We Learn</h4>
+
+<p>I ended up with a hybrid approach that treats development and production very differently:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push → GitHub Actions → new images → dev deploys automatically
+                                      → prod requires manual promotion
+</code></pre></div></div>
+
+<p>Here’s how it works:</p>
+
+<p><strong>Development environment:</strong> Every successful build auto-deploys. Fast feedback, immediate testing, maximum iteration speed.</p>
+
+<p><strong>Production environment:</strong> Requires explicit promotion of a tested version. Slower, deliberate, with human accountability.</p>
+
+<h2 id="how-the-pipeline-works">How the Pipeline Works</h2>
+
+<p>When I push code to main, GitHub Actions runs the full test suite, builds Docker images, and tags them with a date-based version like <code class="language-plaintext highlighter-rouge">v20250819-f3b8541</code>. If tests pass, it automatically updates the development Kubernetes manifests and pushes the change back to git.</p>
+
+<p>ArgoCD watches the git repo and syncs any changes to the development cluster within about 30 seconds. I can immediately test the new version at the dev URL.</p>
+
+<p>For production, there’s no automatic deployment. Instead, I run a promotion script:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># See what versions are available</span>
+./scripts/promote-to-prod.sh
+
+<span class="c"># Promote a tested version to production  </span>
+./scripts/promote-to-prod.sh v20250819-f3b8541
+</code></pre></div></div>
+
+<p>The script shows me exactly what will change, asks for confirmation, then updates the production manifests and pushes to git. ArgoCD syncs the change to production.</p>
+
+<h2 id="technical-choices">Technical Choices</h2>
+
+<p>I made several specific decisions that shaped how this pipeline works:</p>
+
+<p><strong>Date-based versioning:</strong> Instead of incrementing numbers, I use <code class="language-plaintext highlighter-rouge">v$(date +%Y%m%d)-$(git-hash)</code>. This makes it obvious when a version was created and provides a direct link back to the source code. Much easier for operations than trying to remember what v1.47 contained.</p>
+
+<p><strong>Kustomize overlays:</strong> The same base Kubernetes manifests work for both environments, with environment-specific patches. Development gets relaxed resource limits and debug logging; production gets proper resource constraints, and theoretically should get structured logs.</p>
+
+<p><strong>ArgoCD split configuration:</strong> The development ArgoCD app has <code class="language-plaintext highlighter-rouge">automated: true</code> for immediate deployments. The production app has automated sync disabled, requiring manual intervention for every change.</p>
+
+<p><strong>Container registry strategy:</strong> Both environments pull from the same registry, just with different tags. This ensures what I test in dev is exactly what deploys to prod—no separate build processes or subtle differences.</p>
+
+<h2 id="what-i-could-have-done-differently">What I Could Have Done Differently</h2>
+
+<p><strong>Full automation:</strong> I could have set up comprehensive integration tests and deployed to production automatically if everything passes. The tooling exists—Argo Rollouts for progressive delivery, sophisticated test suites, automated rollback triggers.</p>
+
+<p>I chose manual promotion instead because I wanted deliberate production changes. This is my portfolio project after all! The slight overhead of manual promotion forces me to actually test changes in dev and think about the impact.</p>
+
+<p><strong>Branch-based environments:</strong> Many teams use feature branches for feature environments, develop branch for staging, and main branch for production. I went with a simpler model where main always goes to dev, and production gets explicit promotions.</p>
+
+<p>The branch approach would have been more “textbook correct” but would have required more operational overhead managing multiple environments and branch policies. For a portfolio project, the current approach demonstrates the core GitOps concepts without unnecessary complexity.</p>
+
+<p><strong>External tools:</strong> I could have used Flux instead of ArgoCD, or Tekton instead of GitHub Actions, or Jenkins X for the whole pipeline. The GitHub Actions + ArgoCD combination is incredibly common in the industry, well-documented, and has good operational tooling.</p>
+
+<h2 id="results">Results</h2>
+
+<p>The manual promotion gate adds maybe 2 minutes to the deployment process but provides huge peace of mind. I can deploy more frequently because I’m confident each change has been tested and validated.</p>
+
+<p>For a team environment, I’d probably add Slack notifications for deployments and automated integration tests against the dev environment. But for a solo project, this pipeline hits the sweet spot of safety, speed, and simplicity.</p>
+
+<p>The beauty of GitOps is that these patterns scale. The same basic structure works whether you’re promoting manually like I do, or using sophisticated automated promotion with comprehensive test coverage. The deployment mechanism stays consistent—only the automation boundaries change.</p>
+
+<hr />
+
+<p><em>This pipeline powers the <a href="http://tv-hub.navillasa.dev">TV Hub project</a> with full source available in the <a href="https://github.com/navillasa/tv-dashboard-k8s">GitHub repo</a>. You can see real deployment metrics in the <a href="https://monitoring.navillasa.dev/d/e0c978bd-6077-403e-ab3b-ba03f4b34962/tv-hub-business-intelligence-dashboard">live monitoring dashboard</a>.</em></p>
+
+    </div>
+</div>
+</body>
+</html>
