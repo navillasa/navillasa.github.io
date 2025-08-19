@@ -16,7 +16,6 @@ My original setup was very simple and anxiety-inducingly fragile. Every git push
 When a color-changing button broke the frontend one too many times, I realized I needed a system that could move fast without breaking things. The solution needed to automatically deploy tested code while preventing untested changes from reaching "production."
 
 ## The Solution: Two-Speed GitOps
-#### Aka It's Still Production Even If It's Just Me on the App Okay This Is How We Learn
 
 I ended up with a hybrid approach that treats development and production very differently:
 
