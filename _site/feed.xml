@@ -1,68 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/portfolio/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/portfolio/" rel="alternate" type="text/html" /><updated>2025-08-19T02:24:05-04:00</updated><id>http://localhost:4000/portfolio/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">Debugging 502 Bad Gateway Errors</title><link href="http://localhost:4000/portfolio/blog/debugging-502-errors/" rel="alternate" type="text/html" title="Debugging 502 Bad Gateway Errors" /><published>2024-01-15T00:00:00-05:00</published><updated>2024-01-15T00:00:00-05:00</updated><id>http://localhost:4000/portfolio/blog/debugging-502-errors</id><content type="html" xml:base="http://localhost:4000/portfolio/blog/debugging-502-errors/"><![CDATA[<h2 id="the-problem-pattern">The Problem Pattern</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/portfolio/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/portfolio/" rel="alternate" type="text/html" /><updated>2025-08-19T02:37:09-04:00</updated><id>http://localhost:4000/portfolio/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">Debugging 502 Bad Gateway Errors</title><link href="http://localhost:4000/portfolio/blog/debugging-502-errors/" rel="alternate" type="text/html" title="Debugging 502 Bad Gateway Errors" /><published>2024-01-15T00:00:00-05:00</published><updated>2024-01-15T00:00:00-05:00</updated><id>http://localhost:4000/portfolio/blog/debugging-502-errors</id><content type="html" xml:base="http://localhost:4000/portfolio/blog/debugging-502-errors/"><![CDATA[## The Problem Pattern
 
-<p>Throughout this project, I’ve hit the same issue repeatedly:</p>
-<ul>
-  <li><strong>Frontend</strong> looking for <code class="language-plaintext highlighter-rouge">dev-backend-service</code> instead of <code class="language-plaintext highlighter-rouge">prod-backend-service</code></li>
-  <li><strong>ArgoCD ingress</strong> using port 443 instead of port 80</li>
-  <li><strong>Vault</strong> connection errors due to service discovery issues</li>
-  <li><strong>External Secrets</strong> pointing to wrong Vault paths</li>
-</ul>
+Throughout this project, I've hit the same issue repeatedly:
+- **Frontend** looking for `dev-backend-service` instead of `prod-backend-service`
+- **ArgoCD ingress** using port 443 instead of port 80
+- **Vault** connection errors due to service discovery issues
+- **External Secrets** pointing to wrong Vault paths
 
-<p><strong>The common thread</strong>: <strong>502 Bad Gateway errors caused by communication mismatches.</strong></p>
+**The common thread**: **502 Bad Gateway errors caused by communication mismatches.**
 
-<h2 id="the-502-error-what-it-really-means">The 502 Error: What It Really Means</h2>
+## The 502 Error: What It Really Means
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>502 Bad Gateway = "I can reach something, but it's not responding correctly"
-</code></pre></div></div>
+```
+502 Bad Gateway = "I can reach something, but it's not responding correctly"
+```
 
-<p><strong>This is different from:</strong></p>
-<ul>
-  <li><strong>404</strong>: “I can’t find anything at this path”</li>
-  <li><strong>503</strong>: “Service is temporarily unavailable”</li>
-  <li><strong>Connection timeout</strong>: “I can’t reach anything at all”</li>
-</ul>
+**This is different from:**
+- **404**: "I can't find anything at this path"
+- **503**: "Service is temporarily unavailable"  
+- **Connection timeout**: "I can't reach anything at all"
 
-<p><strong>502 specifically means</strong>: The proxy/load balancer reached a backend, but the backend response was invalid.</p>
+**502 specifically means**: The proxy/load balancer reached a backend, but the backend response was invalid.
 
-<h2 id="the-systematic-debugging-approach">The Systematic Debugging Approach</h2>
+## The Systematic Debugging Approach
 
-<h3 id="step-1-identify-the-communication-chain">Step 1: Identify the Communication Chain</h3>
+### Step 1: Identify the Communication Chain
 
-<p><strong>Every 502 has a path like this:</strong></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Client → Load Balancer → Service → Pod
-</code></pre></div></div>
+**Every 502 has a path like this:**
+```
+Client → Load Balancer → Service → Pod
+```
 
-<p><strong>Find where it breaks by checking each link.</strong></p>
+**Find where it breaks by checking each link.**
 
-<h3 id="step-2-check-backend-health-in-load-balancer">Step 2: Check Backend Health in Load Balancer</h3>
+### Step 2: Check Backend Health in Load Balancer
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Get detailed ingress status</span>
-kubectl describe ingress &lt;ingress-name&gt; <span class="nt">-n</span> &lt;namespace&gt;
+```bash
+# Get detailed ingress status
+kubectl describe ingress <ingress-name> -n <namespace>
 
-<span class="c"># Look for backend health status</span>
-<span class="c"># Example output:</span>
-ingress.kubernetes.io/backends: <span class="o">{</span>
-  <span class="s2">"k8s1-backend-service-443"</span>:<span class="s2">"UNHEALTHY"</span>  <span class="c"># ← The smoking gun!</span>
-<span class="o">}</span>
-</code></pre></div></div>
+# Look for backend health status
+# Example output:
+ingress.kubernetes.io/backends: {
+  "k8s1-backend-service-443":"UNHEALTHY"  # ← The smoking gun!
+}
+```
 
-<p><strong>Key indicators:</strong></p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">UNHEALTHY</code> = Backend isn’t responding on expected port/protocol</li>
-  <li><code class="language-plaintext highlighter-rouge">HEALTHY</code> = Backend is fine, look elsewhere</li>
-</ul>
+**Key indicators:**
+- `UNHEALTHY` = Backend isn't responding on expected port/protocol
+- `HEALTHY` = Backend is fine, look elsewhere
 
-<h2 id="pro-tips-for-faster-debugging">Pro Tips for Faster Debugging</h2>
+## Pro Tips for Faster Debugging
 
-<h3 id="1-use-port-forward-for-direct-testing">1. <strong>Use Port-Forward for Direct Testing</strong></h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Bypass ingress/service and test pod directly</span>
-kubectl port-forward pod/&lt;pod-name&gt; 8080:8080
+### 1. **Use Port-Forward for Direct Testing**
+```bash
+# Bypass ingress/service and test pod directly
+kubectl port-forward pod/<pod-name> 8080:8080
 curl http://localhost:8080/health
-</code></pre></div></div>
+```
 
-<h3 id="2-check-multiple-namespaces">2. <strong>Check Multiple Namespaces</strong></h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Service in wrong namespace is super common</span>
-kubectl get services <span class="nt">--all-namespaces</span> | <span class="nb">grep</span> &lt;service-name&gt;
-</code></pre></div></div>
+### 2. **Check Multiple Namespaces**
+```bash
+# Service in wrong namespace is super common
+kubectl get services --all-namespaces | grep <service-name>
+```
 
-<p>The key insight: Most 502 errors are configuration mismatches, not infrastructure failures. A systematic approach beats random troubleshooting every time.</p>]]></content><author><name>Natalie Villasana</name></author><category term="kubernetes" /><category term="debugging" /><category term="devops" /><category term="kubernetes" /><category term="502-errors" /><category term="troubleshooting" /><category term="nginx" /><category term="ingress" /><summary type="html"><![CDATA[How to systematically diagnose and fix port/protocol mismatches in Kubernetes]]></summary></entry></feed>
+The key insight: Most 502 errors are configuration mismatches, not infrastructure failures. A systematic approach beats random troubleshooting every time.]]></content><author><name>Natalie Villasana</name></author><category term="kubernetes" /><category term="debugging" /><category term="devops" /><category term="kubernetes" /><category term="502-errors" /><category term="troubleshooting" /><category term="nginx" /><category term="ingress" /><summary type="html"><![CDATA[How to systematically diagnose and fix port/protocol mismatches in Kubernetes]]></summary></entry></feed>
