@@ -1,12 +1,112 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-19T04:23:24-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">The K8s Doctor, or How I Learned to Stop Worrying and Fix 502s</title><link href="http://localhost:4000/blog/debugging-502-errors/" rel="alternate" type="text/html" title="The K8s Doctor, or How I Learned to Stop Worrying and Fix 502s" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/debugging-502-errors</id><content type="html" xml:base="http://localhost:4000/blog/debugging-502-errors/">## The Problem Pattern
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-19T06:03:02-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">Building Production-Grade Infrastructure for a Simple App</title><link href="http://localhost:4000/blog/tv-hub-project/" rel="alternate" type="text/html" title="Building Production-Grade Infrastructure for a Simple App" /><published>2025-08-19T00:00:00-04:00</published><updated>2025-08-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/tv-hub-project</id><content type="html" xml:base="http://localhost:4000/blog/tv-hub-project/">&lt;h2 id=&quot;the-paradox-of-portfolio-projects&quot;&gt;The Paradox of Portfolio Projects&lt;/h2&gt;
 
-Throughout this project, I've hit the same issue repeatedly:
+&lt;p&gt;I faced a classic engineering dilemma: &lt;strong&gt;build something complex that needs sophisticated infrastructure, or build something simple and add sophisticated infrastructure anyway?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;After cycling through ideas (distributed microservices, ML pipelines, IoT dashboards) I kept returning to one idea: a TV show aggregator. Because it was an app with some appeal and use beyond demonstrating its own tech stack. The app itself is straightforward: fetch trending shows from TMDB and TVmaze APIs, rank by popularity, display in a clean interface.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The twist?&lt;/strong&gt; I deployed it with enterprise-grade DevOps practices that would typically serve a team of a 50+ engineers. Or at least a dozen.&lt;/p&gt;
+
+&lt;h2 id=&quot;strategic-design-decisions&quot;&gt;Strategic Design Decisions&lt;/h2&gt;
+
+&lt;h3 id=&quot;simple-app-complex-infrastructure&quot;&gt;&lt;strong&gt;Simple App, Complex Infrastructure&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;I specifically chose a simple application to isolate and focus on infrastructure complexity. Here’s why this approach worked:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cognitive Load Management&lt;/strong&gt;: Managing ArgoCD, Vault integration, and Prometheus monitoring is challenging enough without debugging distributed system race conditions simultaneously.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Clear Separation of Concerns&lt;/strong&gt;: When something breaks, I can immediately identify whether it’s an application bug (less likely, given the simplicity) or an infrastructure configuration issue (very likely, given the learning curve).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Real-World Simulation&lt;/strong&gt;: Most production systems start simple and grow complex. This project demonstrates the infrastructure foundation that scales.&lt;/p&gt;
+
+&lt;h2 id=&quot;technical-architecture&quot;&gt;Technical Architecture&lt;/h2&gt;
+
+&lt;p&gt;The application architecture is intentionally minimal:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;React Frontend ←→ Node.js API ←→ PostgreSQL ←→ External APIs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;strong&gt;infrastructure architecture&lt;/strong&gt; tells a different story:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;GitHub → Actions → GCR → ArgoCD → GKE Autopilot
+    ↓                        ↓
+Terraform → GCP Resources   Vault → External Secrets → K8s Secrets
+    ↓                        ↓
+Monitoring ← Prometheus ← Applications → Logs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;production-grade-components&quot;&gt;&lt;strong&gt;Production-Grade Components&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;GitOps with ArgoCD&lt;/strong&gt;: Declarative deployments with dev/staging/prod environment promotion. Changes flow through Git, not &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl apply&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Infrastructure as Code&lt;/strong&gt;: Terraform manages GKE clusters, static IPs, DNS records, and IAM policies.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Secrets Management&lt;/strong&gt;: HashiCorp Vault with External Secrets Operator. API keys and database credentials never touch Git or container images.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Multi-Environment Overlays&lt;/strong&gt;: Kustomize overlays handle environment-specific configurations. Production can use different resource limits, replica counts, and ingress rules than development.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Observability Stack&lt;/strong&gt;: Prometheus metrics collection with Grafana dashboards. Custom application metrics track API response times and cache hit rates.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-i-learned&quot;&gt;What I Learned&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-mental-model-clarity&quot;&gt;&lt;strong&gt;1. Mental Model Clarity&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Complex infrastructure demands clear mental models. When ArgoCD shows “OutOfSync” status, I need to immediately understand:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Which Git commit should be deployed?&lt;/li&gt;
+  &lt;li&gt;What Kustomize transformations apply?&lt;/li&gt;
+  &lt;li&gt;How do external secrets affect pod startup?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Practical Impact&lt;/strong&gt;: Reduced debugging time from hours to minutes by maintaining clear architectural diagrams and understanding component dependencies.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-architectural-trade-offs&quot;&gt;&lt;strong&gt;2. Architectural Trade-offs&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Every decision has implications. For example: &lt;a href=&quot;/blog/vault-gitops/&quot;&gt;Vault as ArgoCD Application&lt;/a&gt; explores why I kept secrets management outside GitOps workflows.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Key Trade-off&lt;/strong&gt;: GitOps consistency vs. bootstrap complexity. Pure GitOps purists would manage Vault through ArgoCD, but circular dependencies make this operationally complex.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Decision Framework&lt;/strong&gt;: Evaluate based on operational simplicity, recovery scenarios, and production patterns, not theoretical purity.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-systematic-debugging&quot;&gt;&lt;strong&gt;3. Systematic Debugging&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Production systems fail in creative ways. My approach: &lt;a href=&quot;/blog/debugging-502-errors/&quot;&gt;The K8s Doctor&lt;/a&gt; demonstrates systematic troubleshooting methodology.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Core Principle&lt;/strong&gt;: Most failures are configuration mismatches, not infrastructure failures. Port conflicts, service discovery issues, and protocol mismatches accounted for the vast majority of my deployment problems.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-this-approach-works&quot;&gt;Why This Approach Works&lt;/h2&gt;
+
+&lt;h3 id=&quot;for-learning&quot;&gt;&lt;strong&gt;For Learning&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Starting with a simple application let me focus on infrastructure concepts without application complexity interference. I could experiment with GitOps workflows, monitoring configurations, and security policies without worrying about business logic bugs. For the most part :)&lt;/p&gt;
+
+&lt;h3 id=&quot;for-demonstrating&quot;&gt;&lt;strong&gt;For Demonstrating&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Systems Thinking&lt;/strong&gt;: Understanding how components interact across multiple layers (application, orchestration, infrastructure, security).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Production Readiness&lt;/strong&gt;: Moving beyond “it works on my machine” to “it works reliably in production with proper monitoring, security, and deployment practices.”&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Technology Integration&lt;/strong&gt;: Connecting multiple tools (ArgoCD, Vault, Prometheus, Terraform) into cohesive workflows rather than using them in isolation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Decision Making&lt;/strong&gt;: Choosing appropriate architectural patterns based on trade-offs. A lot more fun, and difficult, than following tutorials.&lt;/p&gt;
+
+&lt;h2 id=&quot;current-status&quot;&gt;Current Status&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://tv-hub.navillasa.dev&quot;&gt;Live application&lt;/a&gt; with full GitOps deployment, multi-environment promotion, and comprehensive monitoring.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Next Phases&lt;/strong&gt;: Cost optimization dashboard, Redis caching layer, and advanced alerting rules.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-meta-learning&quot;&gt;The Meta-Learning&lt;/h2&gt;
+
+&lt;p&gt;This project demonstrates that I can build production-ready infrastructure, make informed architectural decisions, and systematically debug complex systems.&lt;/p&gt;
+
+&lt;p&gt;More than learning how to use individual tools, I learned how they integrate, &lt;em&gt;when&lt;/em&gt; to use them, and what trade-offs each decision creates.&lt;/p&gt;
+
+&lt;p&gt;Building infrastructure for a simple application taught me more about production DevOps than building a complex application with simple deployment ever could.&lt;/p&gt;</content><author><name>Natalie Villasana</name></author><category term="devops" /><category term="kubernetes" /><category term="architecture" /><category term="kubernetes" /><category term="argocd" /><category term="terraform" /><category term="gitops" /><category term="gke" /><category term="portfolio" /><summary type="html">The Paradox of Portfolio Projects</summary></entry><entry><title type="html">The K8s Doctor, or How I Learned to Stop Worrying and Debug 502s</title><link href="http://localhost:4000/blog/debugging-502-errors/" rel="alternate" type="text/html" title="The K8s Doctor, or How I Learned to Stop Worrying and Debug 502s" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/debugging-502-errors</id><content type="html" xml:base="http://localhost:4000/blog/debugging-502-errors/">## The Problem Pattern
+
+Throughout this project, I've hit the same type of issue repeatedly:
 - **Frontend** looking for `dev-backend-service` instead of `prod-backend-service`
 - **ArgoCD ingress** using port 443 instead of port 80
 - **Vault** connection errors due to service discovery issues
 - **External Secrets** pointing to wrong Vault paths
 
-**The common thread**: **502 Bad Gateway errors caused by communication mismatches.**
+**The common thread**: 502 Bad Gateway errors caused by communication mismatches.
 
 ## The 502 Error: What It Really Means
 
@@ -64,147 +164,130 @@ curl http://localhost:8080/health
 kubectl get services --all-namespaces | grep &lt;service-name&gt;
 ```
 
-The key insight: Most 502 errors are configuration mismatches, not infrastructure failures. A systematic approach beats random troubleshooting every time.</content><author><name>Natalie Villasana</name></author><category term="kubernetes" /><category term="debugging" /><category term="devops" /><category term="kubernetes" /><category term="502-errors" /><category term="troubleshooting" /><category term="nginx" /><category term="ingress" /><summary type="html">The Problem Pattern</summary></entry><entry><title type="html">Why I Didn’t Make Vault an ArgoCD Application</title><link href="http://localhost:4000/blog/vault-gitops/" rel="alternate" type="text/html" title="Why I Didn’t Make Vault an ArgoCD Application" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/vault-gitops</id><content type="html" xml:base="http://localhost:4000/blog/vault-gitops/">&lt;h2 id=&quot;the-question&quot;&gt;The Question&lt;/h2&gt;
+The key insight: Most 502 errors are configuration mismatches, not infrastructure failures. A systematic approach beats random troubleshooting every time.</content><author><name>Natalie Villasana</name></author><category term="kubernetes" /><category term="debugging" /><category term="devops" /><category term="kubernetes" /><category term="502-errors" /><category term="troubleshooting" /><category term="nginx" /><category term="ingress" /><summary type="html">The Problem Pattern</summary></entry><entry><title type="html">Why I Didn’t Make Vault an ArgoCD Application</title><link href="http://localhost:4000/blog/vault-gitops/" rel="alternate" type="text/html" title="Why I Didn’t Make Vault an ArgoCD Application" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/vault-gitops</id><content type="html" xml:base="http://localhost:4000/blog/vault-gitops/">## The Question
 
-&lt;p&gt;During the GitOps implementation, I considered whether HashiCorp Vault should be managed as an ArgoCD application alongside the other workloads. This post explains why I chose to keep Vault outside of the GitOps workflow.&lt;/p&gt;
+During the GitOps implementation, I considered whether HashiCorp Vault should be managed as an ArgoCD application alongside the other workloads. This post explains why I chose to keep Vault outside of the GitOps workflow.
 
-&lt;h2 id=&quot;the-temptation&quot;&gt;The Temptation&lt;/h2&gt;
+## The Temptation
 
-&lt;p&gt;At first glance, managing Vault through ArgoCD seems &lt;em&gt;pretty&lt;/em&gt; cool:&lt;/p&gt;
+At first glance, managing Vault through ArgoCD seems _pretty_ cool:
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Consistency&lt;/strong&gt;: Everything else is managed by ArgoCD&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Version Control&lt;/strong&gt;: Vault configuration tracked in Git&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Declarative&lt;/strong&gt;: Infrastructure as Code principles&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Automation&lt;/strong&gt;: Automated deployments and updates&lt;/li&gt;
-&lt;/ul&gt;
+- **Consistency**: Everything else is managed by ArgoCD
+- **Version Control**: Vault configuration tracked in Git
+- **Declarative**: Infrastructure as Code principles
+- **Automation**: Automated deployments and updates
 
-&lt;h2 id=&quot;the-bootstrap-problem&quot;&gt;The Bootstrap Problem&lt;/h2&gt;
+## The Bootstrap Problem
 
-&lt;p&gt;The fundamental issue is a &lt;strong&gt;circular dependency&lt;/strong&gt;:&lt;/p&gt;
+The fundamental issue is a **circular dependency**:
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌─────────────┐    needs    ┌──────────────────┐    needs    ┌───────────┐
+```
+┌─────────────┐    needs    ┌──────────────────┐    needs    ┌───────────┐
 │   ArgoCD    │ ──────────► │ External Secrets │ ──────────► │   Vault   │
 │             │             │    Operator      │             │           │
 └─────────────┘             └──────────────────┘             └───────────┘
        ▲                                                            │
        │                    manages (if GitOps)                     │
        └────────────────────────────────────────────────────────────┘
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;&lt;strong&gt;The problem&lt;/strong&gt;: If ArgoCD manages Vault, then ArgoCD depends on Vault (for secrets) which depends on ArgoCD (for deployment). This creates an unresolvable bootstrap dependency.&lt;/p&gt;
+**The problem**: If ArgoCD manages Vault, then ArgoCD depends on Vault (for secrets) which depends on ArgoCD (for deployment). This creates an unresolvable bootstrap dependency.
 
-&lt;h2 id=&quot;infrastructure-layers&quot;&gt;Infrastructure Layers&lt;/h2&gt;
+## Infrastructure Layers
 
-&lt;p&gt;I solved this by establishing clear &lt;strong&gt;infrastructure layers&lt;/strong&gt;:&lt;/p&gt;
+I solved this by establishing clear **infrastructure layers**:
 
-&lt;h3 id=&quot;layer-0-foundation-infrastructure&quot;&gt;Layer 0: Foundation Infrastructure&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;GKE Cluster&lt;/strong&gt; (Terraform)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Static IPs&lt;/strong&gt; (Terraform)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Vault&lt;/strong&gt; (kubectl apply)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;External Secrets Operator&lt;/strong&gt; (Helm)&lt;/li&gt;
-&lt;/ul&gt;
+### Layer 0: Foundation Infrastructure
+- **GKE Cluster** (Terraform)
+- **Static IPs** (Terraform)
+- **Vault** (kubectl apply)
+- **External Secrets Operator** (Helm)
 
-&lt;h3 id=&quot;layer-1-gitops-platform&quot;&gt;Layer 1: GitOps Platform&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;ArgoCD&lt;/strong&gt; (kubectl apply)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;ClusterSecretStore&lt;/strong&gt; (ArgoCD)&lt;/li&gt;
-&lt;/ul&gt;
+### Layer 1: GitOps Platform
+- **ArgoCD** (kubectl apply)
+- **ClusterSecretStore** (ArgoCD)
 
-&lt;h3 id=&quot;layer-2-applications&quot;&gt;Layer 2: Applications&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;tv-dashboard-dev&lt;/strong&gt; (ArgoCD)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;tv-dashboard-prod&lt;/strong&gt; (ArgoCD)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;monitoring-stack&lt;/strong&gt; (ArgoCD)&lt;/li&gt;
-&lt;/ul&gt;
+### Layer 2: Applications
+- **tv-dashboard-dev** (ArgoCD)
+- **tv-dashboard-prod** (ArgoCD)
+- **monitoring-stack** (ArgoCD)
 
-&lt;h2 id=&quot;alternative-approaches-considered&quot;&gt;Alternative Approaches Considered&lt;/h2&gt;
+## Alternative Approaches Considered
 
-&lt;h3 id=&quot;1-manual-sync-only&quot;&gt;1. Manual Sync Only&lt;/h3&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# vault-app.yaml&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;syncPolicy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;automated&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;null&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# No auto-sync to avoid bootstrap issues&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+### 1. Manual Sync Only
+```yaml
+# vault-app.yaml
+spec:
+  syncPolicy:
+    automated: null  # No auto-sync to avoid bootstrap issues
+```
 
-&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;: Vault config in Git&lt;br /&gt;
-&lt;strong&gt;Cons&lt;/strong&gt;: Manual intervention required, defeats GitOps automation&lt;/p&gt;
+**Pros**: Vault config in Git  
+**Cons**: Manual intervention required, defeats GitOps automation
 
-&lt;h3 id=&quot;2-app-of-apps-pattern&quot;&gt;2. App-of-Apps Pattern&lt;/h3&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# bootstrap-app.yaml - deployed manually&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Manages vault-app.yaml and argocd-apps.yaml&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+### 2. App-of-Apps Pattern
+```yaml
+# bootstrap-app.yaml - deployed manually
+# Manages vault-app.yaml and argocd-apps.yaml
+```
 
-&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;: Complete GitOps coverage&lt;br /&gt;
-&lt;strong&gt;Cons&lt;/strong&gt;: Complex bootstrap sequence, harder to debug&lt;/p&gt;
+**Pros**: Complete GitOps coverage  
+**Cons**: Complex bootstrap sequence, harder to debug
 
-&lt;h3 id=&quot;3-external-vault&quot;&gt;3. External Vault&lt;/h3&gt;
-&lt;p&gt;Use a managed secret service (Google Secret Manager, AWS Secrets Manager)&lt;/p&gt;
+### 3. External Vault
+Use a managed secret service (Google Secret Manager, AWS Secrets Manager)
 
-&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;: No bootstrap problem, less operational overhead&lt;br /&gt;
-&lt;strong&gt;Cons&lt;/strong&gt;: Vendor lock-in, less learning value for this project&lt;/p&gt;
+**Pros**: No bootstrap problem, less operational overhead  
+**Cons**: Vendor lock-in, less learning value for this project
 
-&lt;h2 id=&quot;the-decision-keep-vault-outside-gitops&quot;&gt;The Decision: Keep Vault Outside GitOps&lt;/h2&gt;
+## The Decision: Keep Vault Outside GitOps
 
-&lt;p&gt;&lt;strong&gt;Reasons&lt;/strong&gt;:&lt;/p&gt;
+**Reasons**:
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Operational Simplicity&lt;/strong&gt;: Vault is foundational infrastructure that should be stable and simple to manage&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Recovery Scenarios&lt;/strong&gt;: If ArgoCD fails, we can still access Vault to recover secrets&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Bootstrap Clarity&lt;/strong&gt;: Clear separation between foundation and application layers&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Production Patterns&lt;/strong&gt;: Many organizations treat secret management as Layer 0 infrastructure&lt;/li&gt;
-&lt;/ol&gt;
+1. **Operational Simplicity**: Vault is foundational infrastructure that should be stable and simple to manage
+2. **Recovery Scenarios**: If ArgoCD fails, we can still access Vault to recover secrets
+3. **Bootstrap Clarity**: Clear separation between foundation and application layers
+4. **Production Patterns**: Many organizations treat secret management as Layer 0 infrastructure
 
-&lt;h2 id=&quot;production-considerations&quot;&gt;Production Considerations&lt;/h2&gt;
+## Production Considerations
 
-&lt;p&gt;In production environments, you might see:&lt;/p&gt;
+In production environments, you might see:
 
-&lt;h3 id=&quot;at-large-organizations&quot;&gt;At Large Organizations&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Dedicated Vault clusters&lt;/strong&gt; managed by platform teams&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Vault-as-a-Service&lt;/strong&gt; provided to application teams&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Manual deployment&lt;/strong&gt; with infrastructure automation (Terraform)&lt;/li&gt;
-&lt;/ul&gt;
+### At Large Organizations
+- **Dedicated Vault clusters** managed by platform teams
+- **Vault-as-a-Service** provided to application teams
+- **Manual deployment** with infrastructure automation (Terraform)
 
-&lt;h3 id=&quot;at-cloud-native-shops&quot;&gt;At Cloud-Native Shops&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Managed secret services&lt;/strong&gt; (AWS Secrets Manager, etc.)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;External Secrets Operator&lt;/strong&gt; connecting to cloud providers&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;No self-hosted Vault&lt;/strong&gt; at all&lt;/li&gt;
-&lt;/ul&gt;
+### At Cloud-Native Shops
+- **Managed secret services** (AWS Secrets Manager, etc.)
+- **External Secrets Operator** connecting to cloud providers
+- **No self-hosted Vault** at all
 
-&lt;h3 id=&quot;in-gitops-purist-repos&quot;&gt;In GitOps Purist Repos&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Everything in Git&lt;/strong&gt; including Vault&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Complex bootstrap procedures&lt;/strong&gt; with operator dependencies&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Acceptance of operational complexity&lt;/strong&gt; for consistency&lt;/li&gt;
-&lt;/ul&gt;
+### In GitOps Purist Repos
+- **Everything in Git** including Vault
+- **Complex bootstrap procedures** with operator dependencies
+- **Acceptance of operational complexity** for consistency
 
-&lt;h2 id=&quot;key-takeaway&quot;&gt;Key Takeaway&lt;/h2&gt;
+## Key Takeaway
 
-&lt;p&gt;&lt;strong&gt;Not everything needs to be in GitOps.&lt;/strong&gt; The right architectural boundary depends on:&lt;/p&gt;
+**Not everything needs to be in GitOps.** The right architectural boundary depends on:
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Operational complexity&lt;/strong&gt; vs &lt;strong&gt;consistency benefits&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Bootstrap dependencies&lt;/strong&gt; and &lt;strong&gt;recovery scenarios&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Team structure&lt;/strong&gt; and &lt;strong&gt;operational expertise&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Compliance requirements&lt;/strong&gt; and &lt;strong&gt;audit trails&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
+- **Operational complexity** vs **consistency benefits**
+- **Bootstrap dependencies** and **recovery scenarios**  
+- **Team structure** and **operational expertise**
+- **Compliance requirements** and **audit trails**
 
-&lt;p&gt;For my TV Dashboard project, keeping Vault as foundational infrastructure provided the right balance of simplicity and functionality while still demonstrating modern secret management practices.&lt;/p&gt;
+For my TV Dashboard project, keeping Vault as foundational infrastructure provided the right balance of simplicity and functionality while still demonstrating modern secret management practices.
 
-&lt;h2 id=&quot;what-i-learned&quot;&gt;What I Learned&lt;/h2&gt;
+## What I Learned
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Architectural boundaries matter&lt;/strong&gt; - not every tool fits every pattern&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Bootstrap dependencies&lt;/strong&gt; are real constraints in system design&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Operational simplicity&lt;/strong&gt; often trumps theoretical consistency&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Production patterns&lt;/strong&gt; should inform learning project decisions&lt;/li&gt;
-&lt;/ol&gt;
+1. **Architectural boundaries matter** - not every tool fits every pattern
+2. **Bootstrap dependencies** are real constraints in system design
+3. **Operational simplicity** often trumps theoretical consistency
+4. **Production patterns** should inform learning project decisions
 
-&lt;p&gt;The goal isn’t to GitOps-ify everything — it’s to build systems that are &lt;strong&gt;reliable, maintainable, and appropriate for their context&lt;/strong&gt;.&lt;/p&gt;
+The goal isn't to GitOps-ify everything — it's to build systems that are **reliable, maintainable, and appropriate for their context**.
 
-&lt;hr /&gt;
+---
 
-&lt;p&gt;&lt;em&gt;This decision reflects my specific context and learning goals. Your environment may have different constraints and requirements.&lt;/em&gt;&lt;/p&gt;</content><author><name>Natalie Villasana</name></author><category term="kubernetes" /><category term="vault" /><category term="gitops" /><category term="argocd" /><category term="devops" /><category term="kubernetes" /><category term="vault" /><category term="gitops" /><category term="argocd" /><category term="devops" /><category term="design" /><summary type="html">The Question</summary></entry></feed>
+*This decision reflects my specific context and learning goals. Your environment may have different constraints and requirements.*</content><author><name>Natalie Villasana</name></author><category term="kubernetes" /><category term="vault" /><category term="gitops" /><category term="argocd" /><category term="devops" /><category term="kubernetes" /><category term="vault" /><category term="gitops" /><category term="argocd" /><category term="devops" /><category term="design" /><summary type="html">The Question</summary></entry></feed>

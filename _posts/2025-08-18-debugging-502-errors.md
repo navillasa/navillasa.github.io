@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The K8s Doctor, or How I Learned to Stop Worrying and Fix 502s"
+title: "The K8s Doctor, or How I Learned to Stop Worrying and Debug 502s"
 subtitle: "A systematic approach to debugging port and protocol mismatches"
 date: 2025-08-18
 categories: [kubernetes, debugging, devops]
@@ -9,13 +9,13 @@ tags: [kubernetes, 502-errors, troubleshooting, nginx, ingress]
 
 ## The Problem Pattern
 
-Throughout this project, I've hit the same issue repeatedly:
+Throughout this project, I've hit the same type of issue repeatedly:
 - **Frontend** looking for `dev-backend-service` instead of `prod-backend-service`
 - **ArgoCD ingress** using port 443 instead of port 80
 - **Vault** connection errors due to service discovery issues
 - **External Secrets** pointing to wrong Vault paths
 
-**The common thread**: **502 Bad Gateway errors caused by communication mismatches.**
+**The common thread**: 502 Bad Gateway errors caused by communication mismatches.
 
 ## The 502 Error: What It Really Means
 

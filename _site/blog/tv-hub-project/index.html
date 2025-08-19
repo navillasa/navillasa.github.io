@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Production-Grade Infrastructure for a Simple App | Natalie Villasana</title>
+    <meta name="description" content="The Paradox of Portfolio Projects">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SEO -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Building Production-Grade Infrastructure for a Simple App | Natalie Villasana</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Building Production-Grade Infrastructure for a Simple App" />
+<meta name="author" content="Natalie Villasana" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A TV show aggregator became a showcase for GitOps, observability, and cloud-native architecture patterns" />
+<meta property="og:description" content="A TV show aggregator became a showcase for GitOps, observability, and cloud-native architecture patterns" />
+<link rel="canonical" href="http://localhost:4000/blog/tv-hub-project/" />
+<meta property="og:url" content="http://localhost:4000/blog/tv-hub-project/" />
+<meta property="og:site_name" content="Natalie Villasana" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-19T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Building Production-Grade Infrastructure for a Simple App" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-19T00:00:00-04:00","datePublished":"2025-08-19T00:00:00-04:00","description":"A TV show aggregator became a showcase for GitOps, observability, and cloud-native architecture patterns","headline":"Building Production-Grade Infrastructure for a Simple App","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/tv-hub-project/"},"url":"http://localhost:4000/blog/tv-hub-project/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <div class="blog-container">
+    <div class="blog-nav">
+        <a href="/" class="back-link">← Back to Portfolio</a>
+    </div>
+    
+    <header class="blog-header">
+        <h1 class="blog-title">Building Production-Grade Infrastructure for a Simple App</h1>
+        
+        <p class="blog-subtitle">Why I chose complexity over simplicity for my DevOps portfolio</p>
+        
+        <div class="blog-meta">
+            
+            A TV show aggregator became a showcase for GitOps, observability, and cloud-native architecture patterns
+            
+            
+            <br><time datetime="2025-08-19T00:00:00-04:00">August 19, 2025</time>
+            
+        </div>
+    </header>
+
+    <div class="blog-content">
+        <h2 id="the-paradox-of-portfolio-projects">The Paradox of Portfolio Projects</h2>
+
+<p>I faced a classic engineering dilemma: <strong>build something complex that needs sophisticated infrastructure, or build something simple and add sophisticated infrastructure anyway?</strong></p>
+
+<p>After cycling through ideas (distributed microservices, ML pipelines, IoT dashboards) I kept returning to one idea: a TV show aggregator. Because it was an app with some appeal and use beyond demonstrating its own tech stack. The app itself is straightforward: fetch trending shows from TMDB and TVmaze APIs, rank by popularity, display in a clean interface.</p>
+
+<p><strong>The twist?</strong> I deployed it with enterprise-grade DevOps practices that would typically serve a team of a 50+ engineers. Or at least a dozen.</p>
+
+<h2 id="strategic-design-decisions">Strategic Design Decisions</h2>
+
+<h3 id="simple-app-complex-infrastructure"><strong>Simple App, Complex Infrastructure</strong></h3>
+
+<p>I specifically chose a simple application to isolate and focus on infrastructure complexity. Here’s why this approach worked:</p>
+
+<p><strong>Cognitive Load Management</strong>: Managing ArgoCD, Vault integration, and Prometheus monitoring is challenging enough without debugging distributed system race conditions simultaneously.</p>
+
+<p><strong>Clear Separation of Concerns</strong>: When something breaks, I can immediately identify whether it’s an application bug (less likely, given the simplicity) or an infrastructure configuration issue (very likely, given the learning curve).</p>
+
+<p><strong>Real-World Simulation</strong>: Most production systems start simple and grow complex. This project demonstrates the infrastructure foundation that scales.</p>
+
+<h2 id="technical-architecture">Technical Architecture</h2>
+
+<p>The application architecture is intentionally minimal:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>React Frontend ←→ Node.js API ←→ PostgreSQL ←→ External APIs
+</code></pre></div></div>
+
+<p>The <strong>infrastructure architecture</strong> tells a different story:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GitHub → Actions → GCR → ArgoCD → GKE Autopilot
+    ↓                        ↓
+Terraform → GCP Resources   Vault → External Secrets → K8s Secrets
+    ↓                        ↓
+Monitoring ← Prometheus ← Applications → Logs
+</code></pre></div></div>
+
+<h3 id="production-grade-components"><strong>Production-Grade Components</strong></h3>
+
+<p><strong>GitOps with ArgoCD</strong>: Declarative deployments with dev/staging/prod environment promotion. Changes flow through Git, not <code class="language-plaintext highlighter-rouge">kubectl apply</code>.</p>
+
+<p><strong>Infrastructure as Code</strong>: Terraform manages GKE clusters, static IPs, DNS records, and IAM policies.</p>
+
+<p><strong>Secrets Management</strong>: HashiCorp Vault with External Secrets Operator. API keys and database credentials never touch Git or container images.</p>
+
+<p><strong>Multi-Environment Overlays</strong>: Kustomize overlays handle environment-specific configurations. Production can use different resource limits, replica counts, and ingress rules than development.</p>
+
+<p><strong>Observability Stack</strong>: Prometheus metrics collection with Grafana dashboards. Custom application metrics track API response times and cache hit rates.</p>
+
+<h2 id="what-i-learned">What I Learned</h2>
+
+<h3 id="1-mental-model-clarity"><strong>1. Mental Model Clarity</strong></h3>
+
+<p>Complex infrastructure demands clear mental models. When ArgoCD shows “OutOfSync” status, I need to immediately understand:</p>
+<ul>
+  <li>Which Git commit should be deployed?</li>
+  <li>What Kustomize transformations apply?</li>
+  <li>How do external secrets affect pod startup?</li>
+</ul>
+
+<p><strong>Practical Impact</strong>: Reduced debugging time from hours to minutes by maintaining clear architectural diagrams and understanding component dependencies.</p>
+
+<h3 id="2-architectural-trade-offs"><strong>2. Architectural Trade-offs</strong></h3>
+
+<p>Every decision has implications. For example: <a href="/blog/vault-gitops/">Vault as ArgoCD Application</a> explores why I kept secrets management outside GitOps workflows.</p>
+
+<p><strong>Key Trade-off</strong>: GitOps consistency vs. bootstrap complexity. Pure GitOps purists would manage Vault through ArgoCD, but circular dependencies make this operationally complex.</p>
+
+<p><strong>Decision Framework</strong>: Evaluate based on operational simplicity, recovery scenarios, and production patterns, not theoretical purity.</p>
+
+<h3 id="3-systematic-debugging"><strong>3. Systematic Debugging</strong></h3>
+
+<p>Production systems fail in creative ways. My approach: <a href="/blog/debugging-502-errors/">The K8s Doctor</a> demonstrates systematic troubleshooting methodology.</p>
+
+<p><strong>Core Principle</strong>: Most failures are configuration mismatches, not infrastructure failures. Port conflicts, service discovery issues, and protocol mismatches accounted for the vast majority of my deployment problems.</p>
+
+<h2 id="why-this-approach-works">Why This Approach Works</h2>
+
+<h3 id="for-learning"><strong>For Learning</strong></h3>
+<p>Starting with a simple application let me focus on infrastructure concepts without application complexity interference. I could experiment with GitOps workflows, monitoring configurations, and security policies without worrying about business logic bugs. For the most part :)</p>
+
+<h3 id="for-demonstrating"><strong>For Demonstrating</strong></h3>
+<p><strong>Systems Thinking</strong>: Understanding how components interact across multiple layers (application, orchestration, infrastructure, security).</p>
+
+<p><strong>Production Readiness</strong>: Moving beyond “it works on my machine” to “it works reliably in production with proper monitoring, security, and deployment practices.”</p>
+
+<p><strong>Technology Integration</strong>: Connecting multiple tools (ArgoCD, Vault, Prometheus, Terraform) into cohesive workflows rather than using them in isolation.</p>
+
+<p><strong>Decision Making</strong>: Choosing appropriate architectural patterns based on trade-offs. A lot more fun, and difficult, than following tutorials.</p>
+
+<h2 id="current-status">Current Status</h2>
+<p><a href="http://tv-hub.navillasa.dev">Live application</a> with full GitOps deployment, multi-environment promotion, and comprehensive monitoring.</p>
+
+<p><strong>Next Phases</strong>: Cost optimization dashboard, Redis caching layer, and advanced alerting rules.</p>
+
+<h2 id="the-meta-learning">The Meta-Learning</h2>
+
+<p>This project demonstrates that I can build production-ready infrastructure, make informed architectural decisions, and systematically debug complex systems.</p>
+
+<p>More than learning how to use individual tools, I learned how they integrate, <em>when</em> to use them, and what trade-offs each decision creates.</p>
+
+<p>Building infrastructure for a simple application taught me more about production DevOps than building a complex application with simple deployment ever could.</p>
+
+    </div>
+</div>
+</body>
+</html>

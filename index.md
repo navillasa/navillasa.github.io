@@ -68,7 +68,8 @@ title: "DevOps Engineer"
             <div class="blog-posts">
                 <h4 class="blog-section-title">Related Blog Posts:</h4>
                 <ul class="blog-list">
-                    <li><a href="{{ '/blog/debugging-502-errors/' | relative_url }}" class="blog-link">Debugging 502 Errors in Production</a></li>
+                    <li><a href="{{ '/blog/tv-hub-project-overview/' | relative_url }}" class="blog-link">Building Production-Grade Infrastructure for a Simple App</a></li>
+                    <li><a href="{{ '/blog/debugging-502-errors/' | relative_url }}" class="blog-link">The 502 Detective: Solving Kubernetes Communication Mysteries</a></li>
                     <li><a href="{{ '/blog/development-workflow/' | relative_url }}" class="blog-link">Development Workflow & Best Practices</a></li>
                     <li><a href="{{ '/blog/vault-gitops-decision/' | relative_url }}" class="blog-link">Vault GitOps Decision Framework</a></li>
                 </ul>
