@@ -66,9 +66,9 @@ title: "DevOps Engineer"
             <div class="live-dashboard">
                 <h4 class="blog-section-title">🚀 Live Dashboard:</h4>
                 <ul class="blog-list">
-                    <li><a href="https://monitoring.navillasa.dev/d/e0c978bd-6077-403e-ab3b-ba03f4b34962/tv-hub-business-intelligence-dashboard" target="_blank" class="project-link dashboard-link">Business Intelligence Dashboard</a></li>
+                    <li><a href="https://monitoring.navillasa.dev/d/e633cf5f-2c8b-483b-90a1-aaa85bddd4d9/tv-hub-business-intelligence-dashboard?orgId=1&refresh=15s" target="_blank" class="project-link dashboard-link">Business Intelligence Dashboard</a></li>
                 </ul>
-                <p class="dashboard-note">Interactive monitoring with streaming analytics (demo/password)</p>
+                <p class="dashboard-note">Interactive monitoring with streaming analytics</p>
             </div>
             <div class="blog-posts">
                 <h4 class="blog-section-title">Related Blog Posts:</h4>
@@ -127,6 +127,35 @@ title: "DevOps Engineer"
 
         </div>
     </section>
+
+        <!-- Storj Auditing & Repair Project -->
+        <div class="project-card">
+            <div class="project-header">
+                <h3 class="project-title">☁️  Storj V3 Auditing & Repair Systems</h3>
+                <div class="project-links">
+                    <a href="https://github.com/storj/storj" target="_blank" class="project-link">Open Source Repo</a>
+                </div>
+            </div>
+            <p class="project-description">
+              Key contributor to the design, development, and infrastructure of Storj's distributed cloud storage system from 2017 to 2022. My work spanned major improvements to auditing, data repair, monitoring, incident response, fault tolerance, and driving operational excellence across the team.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Go</span>
+                <span class="tech-tag">Postgres</span>
+                <span class="tech-tag">gRPC</span>
+                <span class="tech-tag">Microservices</span>
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">Prometheus</span>
+            </div>
+            <div class="blog-posts">
+                <h4 class="blog-section-title">Contribution Highlights</h4>
+                <ul class="blog-list">
+                    <li><a href="https://www.storj.io/blog/decentralized-auditing-and-repair-the-low-key-life-of-data-resurrection" class="blog-link">Blog Post: Decentralized Auditing & Repair Data Resurrection</a></li>
+                    <li><a href="https://github.com/storj/storj/pull/2577" class="blog-link">satellite/gc: Implement garbage collection service on satellite</a></li>
+                    <li><a href="https://github.com/storj/storj/pull/2888" class="blog-link">satellite/audit: Create the audit queue</a></li>
+                </ul>
+            </div>
+        </div>
 
     <!-- Footer -->
     <footer class="footer">

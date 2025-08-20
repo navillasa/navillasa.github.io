@@ -1,77 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-19T14:44:11-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">The CI/CD Pipeline I Wish I’d Built Sooner</title><link href="http://localhost:4000/blog/gitops-cicd-pipeline/" rel="alternate" type="text/html" title="The CI/CD Pipeline I Wish I’d Built Sooner" /><published>2025-08-19T00:00:00-04:00</published><updated>2025-08-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/gitops-cicd-pipeline</id><content type="html" xml:base="http://localhost:4000/blog/gitops-cicd-pipeline/">&lt;p&gt;When I started building my &lt;a href=&quot;/blog/tv-hub-project-overview/&quot;&gt;TV Hub project&lt;/a&gt;, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here’s the GitOps pipeline I wish I’d built from day one.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-19T23:53:53-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">The CI/CD Pipeline I Wish I’d Built Sooner</title><link href="http://localhost:4000/blog/gitops-cicd-pipeline/" rel="alternate" type="text/html" title="The CI/CD Pipeline I Wish I’d Built Sooner" /><published>2025-08-19T00:00:00-04:00</published><updated>2025-08-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/gitops-cicd-pipeline</id><content type="html" xml:base="http://localhost:4000/blog/gitops-cicd-pipeline/">When I started building my [TV Hub project]({% link _posts/2025-08-19-tv-hub-project-overview.md %}), I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here's the GitOps pipeline I wish I'd built from day one.
 
-&lt;h2 id=&quot;the-problem&quot;&gt;The Problem&lt;/h2&gt;
+## The Problem
 
-&lt;p&gt;My original setup was very simple and anxiety-inducingly fragile. Every git push triggered a full deployment to production. No gates, no testing environment, just vibes.&lt;/p&gt;
+My original setup was very simple and anxiety-inducingly fragile. Every git push triggered a full deployment to production. No gates, no testing environment, just vibes.
 
-&lt;p&gt;When a color-changing button broke the frontend one too many times, I realized I needed a system that could move fast without breaking things. The solution needed to automatically deploy tested code while preventing untested changes from reaching “production.”&lt;/p&gt;
+When a color-changing button broke the frontend one too many times, I realized I needed a system that could move fast without breaking things. The solution needed to automatically deploy tested code while preventing untested changes from reaching &quot;production.&quot;
 
-&lt;h2 id=&quot;the-solution-two-speed-gitops&quot;&gt;The Solution: Two-Speed GitOps&lt;/h2&gt;
+## The Solution: Two-Speed GitOps
 
-&lt;p&gt;I ended up with a hybrid approach that treats development and production very differently:&lt;/p&gt;
+I ended up with a hybrid approach that treats development and production very differently:
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push → GitHub Actions → new images → dev deploys automatically
+```
+git push → GitHub Actions → new images → dev deploys automatically
                                       → prod requires manual promotion
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Here’s how it works:&lt;/p&gt;
+Here's how it works:
 
-&lt;p&gt;&lt;strong&gt;Development environment:&lt;/strong&gt; Every successful build auto-deploys. Fast feedback, immediate testing, maximum iteration speed.&lt;/p&gt;
+**Development environment:** Every successful build auto-deploys. Fast feedback, immediate testing, maximum iteration speed.
 
-&lt;p&gt;&lt;strong&gt;Production environment:&lt;/strong&gt; Requires explicit promotion of a tested version. Slower, deliberate, with human accountability.&lt;/p&gt;
+**Production environment:** Requires explicit promotion of a tested version. Slower, deliberate, with human accountability.
 
-&lt;h2 id=&quot;how-the-pipeline-works&quot;&gt;How the Pipeline Works&lt;/h2&gt;
+## How the Pipeline Works
 
-&lt;p&gt;When I push code to main, GitHub Actions runs the full test suite, builds Docker images, and tags them with a date-based version like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v20250819-f3b8541&lt;/code&gt;. If tests pass, it automatically updates the development Kubernetes manifests and pushes the change back to git.&lt;/p&gt;
+When I push code to main, GitHub Actions runs the full test suite, builds Docker images, and tags them with a date-based version like `v20250819-f3b8541`. If tests pass, it automatically updates the development Kubernetes manifests and pushes the change back to git.
 
-&lt;p&gt;ArgoCD watches the git repo and syncs any changes to the development cluster within about 30 seconds. I can immediately test the new version at the dev URL.&lt;/p&gt;
+ArgoCD watches the git repo and syncs any changes to the development cluster within about 30 seconds. I can immediately test the new version at the dev URL.
 
-&lt;p&gt;For production, there’s no automatic deployment. Instead, I run a promotion script:&lt;/p&gt;
+For production, there's no automatic deployment. Instead, I run a promotion script:
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# See what versions are available&lt;/span&gt;
+```bash
+# See what versions are available
 ./scripts/promote-to-prod.sh
 
-&lt;span class=&quot;c&quot;&gt;# Promote a tested version to production  &lt;/span&gt;
+# Promote a tested version to production  
 ./scripts/promote-to-prod.sh v20250819-f3b8541
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;The script shows me exactly what will change, asks for confirmation, then updates the production manifests and pushes to git. ArgoCD syncs the change to production.&lt;/p&gt;
+The script shows me exactly what will change, asks for confirmation, then updates the production manifests and pushes to git. ArgoCD syncs the change to production.
 
-&lt;h2 id=&quot;technical-choices&quot;&gt;Technical Choices&lt;/h2&gt;
+## Technical Choices
 
-&lt;p&gt;I made several specific decisions that shaped how this pipeline works:&lt;/p&gt;
+I made several specific decisions that shaped how this pipeline works:
 
-&lt;p&gt;&lt;strong&gt;Date-based versioning:&lt;/strong&gt; Instead of incrementing numbers, I use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v$(date +%Y%m%d)-$(git-hash)&lt;/code&gt;. This makes it obvious when a version was created and provides a direct link back to the source code. Much easier for operations than trying to remember what v1.47 contained.&lt;/p&gt;
+**Date-based versioning:** Instead of incrementing numbers, I use `v$(date +%Y%m%d)-$(git-hash)`. This makes it obvious when a version was created and provides a direct link back to the source code. Much easier for operations than trying to remember what v1.47 contained.
 
-&lt;p&gt;&lt;strong&gt;Kustomize overlays:&lt;/strong&gt; The same base Kubernetes manifests work for both environments, with environment-specific patches. Development gets relaxed resource limits and debug logging; production gets proper resource constraints, and theoretically should get structured logs.&lt;/p&gt;
+**Kustomize overlays:** The same base Kubernetes manifests work for both environments, with environment-specific patches. Development gets relaxed resource limits and debug logging; production gets proper resource constraints, and theoretically should get structured logs.
 
-&lt;p&gt;&lt;strong&gt;ArgoCD split configuration:&lt;/strong&gt; The development ArgoCD app has &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;automated: true&lt;/code&gt; for immediate deployments. The production app has automated sync disabled, requiring manual intervention for every change.&lt;/p&gt;
+**ArgoCD split configuration:** The development ArgoCD app has `automated: true` for immediate deployments. The production app has automated sync disabled, requiring manual intervention for every change.
 
-&lt;p&gt;&lt;strong&gt;Container registry strategy:&lt;/strong&gt; Both environments pull from the same registry, just with different tags. This ensures what I test in dev is exactly what deploys to prod—no separate build processes or subtle differences.&lt;/p&gt;
+**Container registry strategy:** Both environments pull from the same registry, just with different tags. This ensures what I test in dev is exactly what deploys to prod—no separate build processes or subtle differences.
 
-&lt;h2 id=&quot;what-i-could-have-done-differently&quot;&gt;What I Could Have Done Differently&lt;/h2&gt;
+## What I Could Have Done Differently
 
-&lt;p&gt;&lt;strong&gt;Full automation:&lt;/strong&gt; I could have set up comprehensive integration tests and deployed to production automatically if everything passes. The tooling exists—Argo Rollouts for progressive delivery, sophisticated test suites, automated rollback triggers.&lt;/p&gt;
+**Full automation:** I could have set up comprehensive integration tests and deployed to production automatically if everything passes. The tooling exists—Argo Rollouts for progressive delivery, sophisticated test suites, automated rollback triggers.
 
-&lt;p&gt;I chose manual promotion instead because I wanted deliberate production changes. This is my portfolio project after all! The slight overhead of manual promotion forces me to actually test changes in dev and think about the impact.&lt;/p&gt;
+I chose manual promotion instead because I wanted deliberate production changes. This is my portfolio project after all! The slight overhead of manual promotion forces me to actually test changes in dev and think about the impact.
 
-&lt;p&gt;&lt;strong&gt;Branch-based environments:&lt;/strong&gt; Many teams use feature branches for feature environments, develop branch for staging, and main branch for production. I went with a simpler model where main always goes to dev, and production gets explicit promotions.&lt;/p&gt;
+**Branch-based environments:** Many teams use feature branches for feature environments, develop branch for staging, and main branch for production. I went with a simpler model where main always goes to dev, and production gets explicit promotions.
 
-&lt;p&gt;The branch approach would have been more “textbook correct” but would have required more operational overhead managing multiple environments and branch policies. For a portfolio project, the current approach demonstrates the core GitOps concepts without unnecessary complexity.&lt;/p&gt;
+The branch approach would have been more &quot;textbook correct&quot; but would have required more operational overhead managing multiple environments and branch policies. For a portfolio project, the current approach demonstrates the core GitOps concepts without unnecessary complexity.
 
-&lt;p&gt;&lt;strong&gt;External tools:&lt;/strong&gt; I could have used Flux instead of ArgoCD, or Tekton instead of GitHub Actions, or Jenkins X for the whole pipeline. The GitHub Actions + ArgoCD combination is incredibly common in the industry, well-documented, and has good operational tooling.&lt;/p&gt;
+**External tools:** I could have used Flux instead of ArgoCD, or Tekton instead of GitHub Actions, or Jenkins X for the whole pipeline. The GitHub Actions + ArgoCD combination is incredibly common in the industry, well-documented, and has good operational tooling.
 
-&lt;h2 id=&quot;results&quot;&gt;Results&lt;/h2&gt;
+## Results
 
-&lt;p&gt;The manual promotion gate adds maybe 2 minutes to the deployment process but provides huge peace of mind. I can deploy more frequently because I’m confident each change has been tested and validated.&lt;/p&gt;
+The manual promotion gate adds maybe 2 minutes to the deployment process but provides huge peace of mind. I can deploy more frequently because I'm confident each change has been tested and validated.
 
-&lt;p&gt;For a team environment, I’d probably add Slack notifications for deployments and automated integration tests against the dev environment. But for a solo project, this pipeline hits the sweet spot of safety, speed, and simplicity.&lt;/p&gt;
+For a team environment, I'd probably add Slack notifications for deployments and automated integration tests against the dev environment. But for a solo project, this pipeline hits the sweet spot of safety, speed, and simplicity.
 
-&lt;p&gt;The beauty of GitOps is that these patterns scale. The same basic structure works whether you’re promoting manually like I do, or using sophisticated automated promotion with comprehensive test coverage. The deployment mechanism stays consistent—only the automation boundaries change.&lt;/p&gt;
+The beauty of GitOps is that these patterns scale. The same basic structure works whether you're promoting manually like I do, or using sophisticated automated promotion with comprehensive test coverage. The deployment mechanism stays consistent—only the automation boundaries change.
 
-&lt;hr /&gt;
+---
 
-&lt;p&gt;&lt;em&gt;This pipeline powers the &lt;a href=&quot;http://tv-hub.navillasa.dev&quot;&gt;TV Hub project&lt;/a&gt; with full source available in the &lt;a href=&quot;https://github.com/navillasa/tv-dashboard-k8s&quot;&gt;GitHub repo&lt;/a&gt;. You can see real deployment metrics in the &lt;a href=&quot;https://monitoring.navillasa.dev/d/e0c978bd-6077-403e-ab3b-ba03f4b34962/tv-hub-business-intelligence-dashboard&quot;&gt;live monitoring dashboard&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</content><author><name>Natalie Villasana</name></author><category term="devops" /><category term="kubernetes" /><category term="gitops" /><category term="ci-cd" /><summary type="html">When I started building my TV Hub project, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here’s the GitOps pipeline I wish I’d built from day one.</summary></entry><entry><title type="html">Building Production-Grade Infrastructure for a Simple App</title><link href="http://localhost:4000/blog/tv-hub-project-overview/" rel="alternate" type="text/html" title="Building Production-Grade Infrastructure for a Simple App" /><published>2025-08-19T00:00:00-04:00</published><updated>2025-08-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/tv-hub-project-overview</id><content type="html" xml:base="http://localhost:4000/blog/tv-hub-project-overview/">## The Paradox of Portfolio Projects
+*This pipeline powers the [TV Hub project](http://tv-hub.navillasa.dev) with full source available in the [GitHub repo](https://github.com/navillasa/tv-dashboard-k8s). You can see real deployment metrics in the [live monitoring dashboard](https://monitoring.navillasa.dev/d/e0c978bd-6077-403e-ab3b-ba03f4b34962/tv-hub-business-intelligence-dashboard).*</content><author><name>Natalie Villasana</name></author><category term="devops" /><category term="kubernetes" /><category term="gitops" /><category term="ci-cd" /><summary type="html">When I started building my TV Hub project, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here’s the GitOps pipeline I wish I’d built from day one.</summary></entry><entry><title type="html">Building Production-Grade Infrastructure for a Simple App</title><link href="http://localhost:4000/blog/tv-hub-project-overview/" rel="alternate" type="text/html" title="Building Production-Grade Infrastructure for a Simple App" /><published>2025-08-19T00:00:00-04:00</published><updated>2025-08-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/tv-hub-project-overview</id><content type="html" xml:base="http://localhost:4000/blog/tv-hub-project-overview/">## The Paradox of Portfolio Projects
 
 I faced a classic engineering dilemma: **build something complex that needs sophisticated infrastructure, or build something simple and add sophisticated infrastructure anyway?**
 
