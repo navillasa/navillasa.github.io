@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-20T03:22:05-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">What I Learned From Building LLM Infrastructure After Missing the AI Revolution</title><link href="http://localhost:4000/blog/missed-ai-revolution/" rel="alternate" type="text/html" title="What I Learned From Building LLM Infrastructure After Missing the AI Revolution" /><published>2025-08-20T00:00:00-04:00</published><updated>2025-08-20T00:00:00-04:00</updated><id>http://localhost:4000/blog/missed-ai-revolution</id><content type="html" xml:base="http://localhost:4000/blog/missed-ai-revolution/">I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that's reshaping everything.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-20T03:29:22-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Natalie Villasana</title><subtitle>DevOps Engineer | navillasa.dev</subtitle><author><name>Natalie Villasana</name><email>navillasa.dev@gmail.com</email></author><entry><title type="html">What I Learned From Building LLM Infrastructure After Missing the AI Revolution</title><link href="http://localhost:4000/blog/missed-ai-revolution/" rel="alternate" type="text/html" title="What I Learned From Building LLM Infrastructure After Missing the AI Revolution" /><published>2025-08-20T00:00:00-04:00</published><updated>2025-08-20T00:00:00-04:00</updated><id>http://localhost:4000/blog/missed-ai-revolution</id><content type="html" xml:base="http://localhost:4000/blog/missed-ai-revolution/">I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that's reshaping everything.
 
 ## From Magic to Reality Check
 
@@ -135,107 +135,107 @@ The beauty of GitOps is that these patterns scale. The same basic structure work
 
 ---
 
-*This pipeline powers the [TV Hub project](http://tv-hub.navillasa.dev) with full source available in the [GitHub repo](https://github.com/navillasa/tv-dashboard-k8s). You can see real deployment metrics in the [live monitoring dashboard](https://monitoring.navillasa.dev/d/e0c978bd-6077-403e-ab3b-ba03f4b34962/tv-hub-business-intelligence-dashboard).*</content><author><name>Natalie Villasana</name></author><category term="devops" /><category term="kubernetes" /><category term="gitops" /><category term="ci-cd" /><summary type="html">When I started building my TV Hub project, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here’s the GitOps pipeline I wish I’d built from day one.</summary></entry><entry><title type="html">Building Production-Grade Infrastructure for a Simple App</title><link href="http://localhost:4000/blog/tv-hub-project-overview/" rel="alternate" type="text/html" title="Building Production-Grade Infrastructure for a Simple App" /><published>2025-08-19T00:00:00-04:00</published><updated>2025-08-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/tv-hub-project-overview</id><content type="html" xml:base="http://localhost:4000/blog/tv-hub-project-overview/">## The Paradox of Portfolio Projects
+*This pipeline powers the [TV Hub project](http://tv-hub.navillasa.dev) with full source available in the [GitHub repo](https://github.com/navillasa/tv-dashboard-k8s). You can see real deployment metrics in the [live monitoring dashboard](https://monitoring.navillasa.dev/d/e0c978bd-6077-403e-ab3b-ba03f4b34962/tv-hub-business-intelligence-dashboard).*</content><author><name>Natalie Villasana</name></author><category term="devops" /><category term="kubernetes" /><category term="gitops" /><category term="ci-cd" /><summary type="html">When I started building my TV Hub project, I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here’s the GitOps pipeline I wish I’d built from day one.</summary></entry><entry><title type="html">Go Big, Stay Simple: Building Production-Grade Infrastructure for a Simple App</title><link href="http://localhost:4000/blog/tv-hub-project-overview/" rel="alternate" type="text/html" title="Go Big, Stay Simple: Building Production-Grade Infrastructure for a Simple App" /><published>2025-08-19T00:00:00-04:00</published><updated>2025-08-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/tv-hub-project-overview</id><content type="html" xml:base="http://localhost:4000/blog/tv-hub-project-overview/">&lt;h2 id=&quot;the-paradox-of-portfolio-projects&quot;&gt;The Paradox of Portfolio Projects&lt;/h2&gt;
 
-I faced a classic engineering dilemma: **build something complex that needs sophisticated infrastructure, or build something simple and add sophisticated infrastructure anyway?**
+&lt;p&gt;I faced a classic engineering dilemma: &lt;strong&gt;build something complex that needs sophisticated infrastructure, or build something simple and add sophisticated infrastructure anyway?&lt;/strong&gt;&lt;/p&gt;
 
-After cycling through ideas (distributed microservices, ML pipelines, IoT dashboards) I kept returning to one idea: a TV show aggregator. Because it was an app with some appeal and usefulness beyond demonstrating its own tech stack. The app itself is straightforward: fetch trending shows from TMDB and TVmaze APIs, rank by popularity, display in a clean interface.
+&lt;p&gt;After cycling through ideas (distributed microservices, ML pipelines, IoT dashboards) I kept returning to one idea: a TV show aggregator. Because it was an app with some appeal and usefulness beyond demonstrating its own tech stack. The app itself is straightforward: fetch trending shows from TMDB and TVmaze APIs, rank by popularity, display in a clean interface.&lt;/p&gt;
 
-**But there's a twist.** I deployed it with enterprise-grade DevOps practices that would typically serve a team of a 50+ engineers. Or at least a dozen.
+&lt;p&gt;&lt;strong&gt;But there’s a twist.&lt;/strong&gt; I deployed it with enterprise-grade DevOps practices that would typically serve a team of a 50+ engineers. Or at least a dozen.&lt;/p&gt;
 
-## Strategic Design Decisions
+&lt;h2 id=&quot;strategic-design-decisions&quot;&gt;Strategic Design Decisions&lt;/h2&gt;
 
-### **Simple App, Complex Infrastructure**
+&lt;h3 id=&quot;simple-app-complex-infrastructure&quot;&gt;&lt;strong&gt;Simple App, Complex Infrastructure&lt;/strong&gt;&lt;/h3&gt;
 
-I specifically chose a simple application to isolate and focus on infrastructure complexity. Here's why this approach worked:
+&lt;p&gt;I specifically chose a simple application to isolate and focus on infrastructure complexity. Here’s why this approach worked:&lt;/p&gt;
 
-**Cognitive Load Management**: Managing ArgoCD, Vault integration, and Prometheus monitoring is challenging enough without debugging distributed system race conditions simultaneously.
+&lt;p&gt;&lt;strong&gt;Cognitive Load Management&lt;/strong&gt;: Managing ArgoCD, Vault integration, and Prometheus monitoring is challenging enough without debugging distributed system race conditions simultaneously.&lt;/p&gt;
 
-**Clear Separation of Concerns**: When something breaks, I can immediately identify whether it's an application bug (less likely, given the simplicity) or an infrastructure configuration issue (very likely, given the learning curve).
+&lt;p&gt;&lt;strong&gt;Clear Separation of Concerns&lt;/strong&gt;: When something breaks, I can immediately identify whether it’s an application bug (less likely, given the simplicity) or an infrastructure configuration issue (very likely, given the learning curve).&lt;/p&gt;
 
-**Real-World Simulation**: Most production systems start simple and grow complex. This project demonstrates the infrastructure foundation that scales.
+&lt;p&gt;&lt;strong&gt;Real-World Simulation&lt;/strong&gt;: Most production systems start simple and grow complex. This project demonstrates the infrastructure foundation that scales.&lt;/p&gt;
 
-## Technical Architecture
+&lt;h2 id=&quot;technical-architecture&quot;&gt;Technical Architecture&lt;/h2&gt;
 
-The application architecture is intentionally minimal:
+&lt;p&gt;The application architecture is intentionally minimal:&lt;/p&gt;
 
-```
-React Frontend ←→ Node.js API ←→ PostgreSQL ←→ External APIs
-```
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;React Frontend ←→ Node.js API ←→ PostgreSQL ←→ External APIs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-The **infrastructure architecture** tells a different story:
+&lt;p&gt;The &lt;strong&gt;infrastructure architecture&lt;/strong&gt; tells a different story:&lt;/p&gt;
 
-```
-GitHub → Actions → GCR → ArgoCD → GKE Autopilot
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;GitHub → Actions → GCR → ArgoCD → GKE Autopilot
     ↓                        ↓
 Terraform → GCP Resources   Vault → External Secrets → K8s Secrets
     ↓                        ↓
 Monitoring ← Prometheus ← Applications → Logs
-```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-### **Production-Grade Components**
+&lt;h3 id=&quot;production-grade-components&quot;&gt;&lt;strong&gt;Production-Grade Components&lt;/strong&gt;&lt;/h3&gt;
 
-**GitOps with ArgoCD**: Declarative deployments with dev/staging/prod environment promotion. Changes flow through Git, not `kubectl apply`.
+&lt;p&gt;&lt;strong&gt;GitOps with ArgoCD&lt;/strong&gt;: Declarative deployments with dev/staging/prod environment promotion. Changes flow through Git, not &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl apply&lt;/code&gt;.&lt;/p&gt;
 
-**Infrastructure as Code**: Terraform manages GKE clusters, static IPs, DNS records, and IAM policies.
+&lt;p&gt;&lt;strong&gt;Infrastructure as Code&lt;/strong&gt;: Terraform manages GKE clusters, static IPs, DNS records, and IAM policies.&lt;/p&gt;
 
-**Secrets Management**: HashiCorp Vault with External Secrets Operator. API keys and database credentials never touch Git or container images.
+&lt;p&gt;&lt;strong&gt;Secrets Management&lt;/strong&gt;: HashiCorp Vault with External Secrets Operator. API keys and database credentials never touch Git or container images.&lt;/p&gt;
 
-**Multi-Environment Overlays**: Kustomize overlays handle environment-specific configurations. Production can use different resource limits, replica counts, and ingress rules than development.
+&lt;p&gt;&lt;strong&gt;Multi-Environment Overlays&lt;/strong&gt;: Kustomize overlays handle environment-specific configurations. Production can use different resource limits, replica counts, and ingress rules than development.&lt;/p&gt;
 
-**Observability Stack**: Prometheus metrics collection with Grafana dashboards. Custom application metrics track API response times and cache hit rates.
+&lt;p&gt;&lt;strong&gt;Observability Stack&lt;/strong&gt;: Prometheus metrics collection with Grafana dashboards. Custom application metrics track API response times and cache hit rates.&lt;/p&gt;
 
-## What I Learned
+&lt;h2 id=&quot;what-i-learned&quot;&gt;What I Learned&lt;/h2&gt;
 
-### **1. Mental Model Clarity**
+&lt;h3 id=&quot;1-mental-model-clarity&quot;&gt;&lt;strong&gt;1. Mental Model Clarity&lt;/strong&gt;&lt;/h3&gt;
 
-Complex infrastructure demands clear mental models. When ArgoCD shows &quot;OutOfSync&quot; status, I need to immediately understand:
-- Which Git commit should be deployed?
-- What Kustomize transformations apply?
-- How do external secrets affect pod startup?
+&lt;p&gt;Complex infrastructure demands clear mental models. When ArgoCD shows “OutOfSync” status, I need to immediately understand:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Which Git commit should be deployed?&lt;/li&gt;
+  &lt;li&gt;What Kustomize transformations apply?&lt;/li&gt;
+  &lt;li&gt;How do external secrets affect pod startup?&lt;/li&gt;
+&lt;/ul&gt;
 
-**Practical Impact**: Reduced debugging time from hours to minutes by maintaining clear architectural diagrams and understanding component dependencies.
+&lt;p&gt;&lt;strong&gt;Practical Impact&lt;/strong&gt;: Reduced debugging time from hours to minutes by maintaining clear architectural diagrams and understanding component dependencies.&lt;/p&gt;
 
-### **2. Architectural Trade-offs**
+&lt;h3 id=&quot;2-architectural-trade-offs&quot;&gt;&lt;strong&gt;2. Architectural Trade-offs&lt;/strong&gt;&lt;/h3&gt;
 
-Every decision has implications. For example: [Vault as ArgoCD Application]({{ '/blog/vault-gitops/' | relative_url }}) explores why I kept secrets management outside GitOps workflows.
+&lt;p&gt;Every decision has implications. For example: &lt;a href=&quot;/blog/vault-gitops/&quot;&gt;Vault as ArgoCD Application&lt;/a&gt; explores why I kept secrets management outside GitOps workflows.&lt;/p&gt;
 
-**Key Trade-off**: GitOps consistency vs. bootstrap complexity. Pure GitOps purists would manage Vault through ArgoCD, but circular dependencies make this operationally complex.
+&lt;p&gt;&lt;strong&gt;Key Trade-off&lt;/strong&gt;: GitOps consistency vs. bootstrap complexity. Pure GitOps purists would manage Vault through ArgoCD, but circular dependencies make this operationally complex.&lt;/p&gt;
 
-**Decision Framework**: Evaluate based on operational simplicity, recovery scenarios, and production patterns, not theoretical purity.
+&lt;p&gt;&lt;strong&gt;Decision Framework&lt;/strong&gt;: Evaluate based on operational simplicity, recovery scenarios, and production patterns, not theoretical purity.&lt;/p&gt;
 
-### **3. Systematic Debugging**
+&lt;h3 id=&quot;3-systematic-debugging&quot;&gt;&lt;strong&gt;3. Systematic Debugging&lt;/strong&gt;&lt;/h3&gt;
 
-Production systems fail in creative ways. In [The Cluster Doctor]({{ '/blog/debugging-502-errors/' | relative_url }}) blog post I demonstrate my approach to systematic troubleshooting.
+&lt;p&gt;Production systems fail in creative ways. In &lt;a href=&quot;/blog/debugging-502-errors/&quot;&gt;The Cluster Doctor&lt;/a&gt; blog post I demonstrate my approach to systematic troubleshooting.&lt;/p&gt;
 
-**Core Principle**: Most failures are configuration mismatches, not infrastructure failures. Port conflicts, service discovery issues, and protocol mismatches accounted for the vast majority of my deployment problems.
+&lt;p&gt;&lt;strong&gt;Core Principle&lt;/strong&gt;: Most failures are configuration mismatches, not infrastructure failures. Port conflicts, service discovery issues, and protocol mismatches accounted for the vast majority of my deployment problems.&lt;/p&gt;
 
-## Why This Approach Works
+&lt;h2 id=&quot;why-this-approach-works&quot;&gt;Why This Approach Works&lt;/h2&gt;
 
-### **For Learning**
-Starting with a simple application let me focus on infrastructure concepts without application complexity interference. I could experiment with GitOps workflows, monitoring configurations, and security policies without worrying about business logic bugs. For the most part :)
+&lt;h3 id=&quot;for-learning&quot;&gt;&lt;strong&gt;For Learning&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Starting with a simple application let me focus on infrastructure concepts without application complexity interference. I could experiment with GitOps workflows, monitoring configurations, and security policies without worrying about business logic bugs. For the most part :)&lt;/p&gt;
 
-### **For Demonstrating**
-**Systems Thinking**: Understanding how components interact across multiple layers (application, orchestration, infrastructure, security).
+&lt;h3 id=&quot;for-demonstrating&quot;&gt;&lt;strong&gt;For Demonstrating&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Systems Thinking&lt;/strong&gt;: Understanding how components interact across multiple layers (application, orchestration, infrastructure, security).&lt;/p&gt;
 
-**Production Readiness**: Moving beyond &quot;it works on my machine&quot; to &quot;it works reliably in production with proper monitoring, security, and deployment practices.&quot;
+&lt;p&gt;&lt;strong&gt;Production Readiness&lt;/strong&gt;: Moving beyond “it works on my machine” to “it works reliably in production with proper monitoring, security, and deployment practices.”&lt;/p&gt;
 
-**Technology Integration**: Connecting multiple tools (ArgoCD, Vault, Prometheus, Terraform) into cohesive workflows rather than using them in isolation.
+&lt;p&gt;&lt;strong&gt;Technology Integration&lt;/strong&gt;: Connecting multiple tools (ArgoCD, Vault, Prometheus, Terraform) into cohesive workflows rather than using them in isolation.&lt;/p&gt;
 
-**Decision Making**: Choosing appropriate architectural patterns based on trade-offs. A lot more fun, and difficult, than following tutorials.
+&lt;p&gt;&lt;strong&gt;Decision Making&lt;/strong&gt;: Choosing appropriate architectural patterns based on trade-offs. A lot more fun, and difficult, than following tutorials.&lt;/p&gt;
 
-## Current Status
-[Live application](http://tv-hub.navillasa.dev) with full GitOps deployment, multi-environment promotion, and comprehensive monitoring.
+&lt;h2 id=&quot;current-status&quot;&gt;Current Status&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://tv-hub.navillasa.dev&quot;&gt;Live application&lt;/a&gt; with full GitOps deployment, multi-environment promotion, and comprehensive monitoring.&lt;/p&gt;
 
-**Next Phases**: Cost optimization dashboard, Redis caching layer, and advanced alerting rules.
+&lt;p&gt;&lt;strong&gt;Next Phases&lt;/strong&gt;: Cost optimization dashboard, Redis caching layer, and advanced alerting rules.&lt;/p&gt;
 
-## The Meta-Learning
+&lt;h2 id=&quot;the-meta-learning&quot;&gt;The Meta-Learning&lt;/h2&gt;
 
-This project demonstrates that I can build production-ready infrastructure, make informed architectural decisions, and systematically debug complex systems.
+&lt;p&gt;This project demonstrates that I can build production-ready infrastructure, make informed architectural decisions, and systematically debug complex systems.&lt;/p&gt;
 
-More than learning how to use individual tools, I learned how they integrate, _when_ to use them, and what trade-offs each decision creates.
+&lt;p&gt;More than learning how to use individual tools, I learned how they integrate, &lt;em&gt;when&lt;/em&gt; to use them, and what trade-offs each decision creates.&lt;/p&gt;
 
-Building infrastructure for a simple application taught me more about production DevOps than building a complex application with simple deployment ever could.</content><author><name>Natalie Villasana</name></author><category term="devops" /><category term="kubernetes" /><category term="architecture" /><category term="kubernetes" /><category term="argocd" /><category term="terraform" /><category term="gitops" /><category term="gke" /><category term="portfolio" /><summary type="html">The Paradox of Portfolio Projects</summary></entry><entry><title type="html">The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s</title><link href="http://localhost:4000/blog/debugging-502-errors/" rel="alternate" type="text/html" title="The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/debugging-502-errors</id><content type="html" xml:base="http://localhost:4000/blog/debugging-502-errors/">## The Problem Pattern
+&lt;p&gt;Building infrastructure for a simple application taught me more about production DevOps than building a complex application with simple deployment ever could.&lt;/p&gt;</content><author><name>Natalie Villasana</name></author><category term="devops" /><category term="kubernetes" /><category term="architecture" /><category term="kubernetes" /><category term="argocd" /><category term="terraform" /><category term="gitops" /><category term="gke" /><category term="portfolio" /><summary type="html">The Paradox of Portfolio Projects</summary></entry><entry><title type="html">The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s</title><link href="http://localhost:4000/blog/debugging-502-errors/" rel="alternate" type="text/html" title="The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s" /><published>2025-08-18T00:00:00-04:00</published><updated>2025-08-18T00:00:00-04:00</updated><id>http://localhost:4000/blog/debugging-502-errors</id><content type="html" xml:base="http://localhost:4000/blog/debugging-502-errors/">## The Problem Pattern
 
 Throughout this project, I've hit the same type of issue repeatedly:
 - **Frontend** looking for `dev-backend-service` instead of `prod-backend-service`

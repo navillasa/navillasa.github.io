@@ -1,8 +1,7 @@
 ---
 layout: post
-title: "Building Production-Grade Infrastructure for a Simple App"
-subtitle: "Why I chose complexity over simplicity for my DevOps portfolio"
-description: "A TV show aggregator became a showcase for GitOps, observability, and cloud-native architecture patterns"
+title: "Go Big, Stay Simple: Building Production-Grade Infrastructure for a Simple App"
+description: "How a TV show aggregator became a showcase for GitOps, observability, and cloud-native architecture patterns"
 date: 2025-08-19
 categories: [devops, kubernetes, architecture]
 tags: [kubernetes, argocd, terraform, gitops, gke, portfolio]
