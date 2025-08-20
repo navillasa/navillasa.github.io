@@ -21,8 +21,8 @@
 <meta property="og:title" content="What I Learned From Building LLM Infrastructure After Missing the AI Revolution" />
 <meta name="author" content="Natalie Villasana" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping everything." />
-<meta property="og:description" content="I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping everything." />
+<meta name="description" content="I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project this summer was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping our world." />
+<meta property="og:description" content="I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project this summer was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping our world." />
 <link rel="canonical" href="http://localhost:4000/blog/missed-ai-revolution/" />
 <meta property="og:url" content="http://localhost:4000/blog/missed-ai-revolution/" />
 <meta property="og:site_name" content="Natalie Villasana" />
@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="What I Learned From Building LLM Infrastructure After Missing the AI Revolution" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-20T00:00:00-04:00","datePublished":"2025-08-20T00:00:00-04:00","description":"I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping everything.","headline":"What I Learned From Building LLM Infrastructure After Missing the AI Revolution","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/missed-ai-revolution/"},"url":"http://localhost:4000/blog/missed-ai-revolution/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-20T00:00:00-04:00","datePublished":"2025-08-20T00:00:00-04:00","description":"I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project this summer was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping our world.","headline":"What I Learned From Building LLM Infrastructure After Missing the AI Revolution","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/missed-ai-revolution/"},"url":"http://localhost:4000/blog/missed-ai-revolution/"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -53,17 +53,17 @@
     </header>
 
     <div class="blog-content">
-        <p>I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping everything.</p>
+        <p>I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project this summer was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping our world.</p>
 
 <h2 id="from-magic-to-reality-check">From Magic to Reality Check</h2>
 
 <p>The first time I used Cursor to write code, my jaw hit the floor. I was genuinely mesmerized watching it generate entire files in seconds. But nothing could’ve snapped me out of it faster than Claude trying to hardcode database auth into a docker compose file. It was a moment that perfectly captured AI’s unique way of oscillating between the self-assured troubleshooting of a senior engineer to some kind of bull in a china shop summer intern from hell.</p>
 
-<p>(I just learned what vibe coding is this week by the way – a new approach where developers use AI tools to generate code based on natural language prompts. In other words, based on “vibes.” It sounds misleadingly calm and laidback, but at least in my experience, using coding agents brought up a lot more AI helicopter parent vibes than the feet on the desk chillin’ vibes.)</p>
+<p>(I just learned what vibe coding is this week by the way – a new approach where developers use AI tools to generate code based on natural language prompts. In other words, based on “vibes.” It sounds misleadingly calm and laidback, but at least in my experience, coding with agents has more of a “you’re a helicopter parent to a robot” type vibe than the “feet on the desk chillin’” vibe I expected.)</p>
 
 <h2 id="cpu-only-llms-when-sluggishness-is-part-of-the-charm">CPU-Only LLMs: When Sluggishness is Part of the Charm</h2>
 
-<p>For my LLM project, I wanted to understand the fundamentals without breaking the bank. I chose Hetzner for hosting and looked into CPU-only models. Part of the appeal of self-hosting your own LLM is that you can have chats without your data going to Google or OpenAI. But despite legitimate concerns about privacy, the vast majority of people have no option but use the major AI tools like ChatGPT, CoPilot, Gemini, etc. Their dominance in the market, and therefore convenience factor – not to mention the technical and economic hurdles of setting up your own private model – mean that privacy, as usual, is forced to take back seat to practicality.</p>
+<p>For my LLM project, I wanted to understand the fundamentals without breaking the bank. I chose Hetzner for hosting and looked into CPU-only models. Part of the appeal of self-hosting your own LLM is that you can have chats without your data going to Google or OpenAI. But despite legitimate concerns about privacy, the vast majority of people have no option but use the major AI tools like ChatGPT, CoPilot, Gemini, etc. Their dominance in the market, and therefore convenience factor – not to mention the technical and economic hurdles of setting up your own private model – mean that privacy, as usual, is forced to take a back seat to practicality.</p>
 
 <p>That said, the prevalence of mainstream tools doesn’t mean innovation or alternatives are out of reach. At the end of the day, experimenting and imagining new ways of doing things is what engineering is all about. While my app is charmingly unusable in its slowness, I built the infrastructure so one could easily switch out the models, inference engine, and hosting environment. It was an exercise in understanding how these applications actually work.</p>
 
@@ -95,21 +95,23 @@
 <p>Running even a small LLM gave me deep appreciation for the engineering challenges at scale. Meaning that optimization is no joke.</p>
 
 <h3 id="2-the-experimentation-framework">2. The Experimentation Framework</h3>
-<p>In an ideal world, I would have loved to deploy dozens of different models and built dashboards comparing cost, speed, accuracy, and specialization. (I know those dashboards exist somewhere and still would love to see them 👀)</p>
+<p>In an ideal world, I would have loved to deploy dozens of different models and built dashboards comparing cost, speed, accuracy, and specialization. (I know those dashboards exist somewhere and still would love to see them. 👀)</p>
 
-<h3 id="3-its-up-to-us-to-understand-ai">3. It’s Up to Us to Understand AI</h3>
-<p>We all need to demystify AI because it’s here whether we like it or not. It’s actually crucial for everyone to understand these systems because of the sheer magnitude that it is affecting our world. It’s changing our daily interactions, our work, and ultimately it’s reshaping the entire economy in ways we haven’t fully felt yet.</p>
+<h3 id="3-its-time-to-demystify-ai">3. It’s Time to Demystify AI</h3>
+<p>There’s a lot of misunderstanding around what AI is as a technology. In order for more people to have a say in how AI shapes our world, there needs to be more readily available, accurate information about what it is and how it works. There’s a need to demystify AI because it’s here whether we like it or not. It’s actually crucial for more people to understand how AI works because of the sheer magnitude with which it’s affecting our world. It’s changing our daily interactions, our work, and ultimately it’s reshaping the entire economy in ways we haven’t fully felt yet.</p>
 
-<p>The comparison to the assembly line or steam engine isn’t hyperbole. While the full consequences aren’t visible yet, the transformation is already underway. Understanding how these systems work, their limitations, and their capabilities isn’t just technical curiosity, it’s really a collective necessity.</p>
+<p>The comparison to the assembly line or steam engine isn’t hyperbole. While the full consequences aren’t visible yet, the transformation is already underway. Understanding how these systems work, their limitations, and how they can be changed, isn’t just a question of technical curiosity, it’s a collective necessity.</p>
 
 <h3 id="4-creative-engineering-exists">4. Creative Engineering Exists</h3>
-<p>I’ve always been drawn to the creative aspects of engineering: the problem-solving, the elegant solutions, the way good infrastructure feels like art. It’s fraught topic, but in my opinion, AI expands that human creative potential – because its power comes from human creativity and work in the first place. The question becomes – like with any epoch-shifting technology – who has oversight and calls the shots on how AI is used at the end of the day?</p>
+<p>I’ve always been drawn to the creative aspects of engineering: the problem-solving, the elegant solutions, the way good infrastructure feels like art. In my opinion, AI expands that human creative potential – because its power comes from human creativity and work in the first place. The question becomes – like with any epoch-shaping technology – who has oversight and calls the shots on how AI is used at the end of the day?</p>
 
 <h2 id="the-rip-van-winkle-effect">The Rip Van Winkle Effect</h2>
 <h4 id="is-that-a-dated-reference-besides-in-the-obvious-way">(Is that a dated reference? Besides in the obvious way.)</h4>
 <p>This has been a fascinating time-skip back into tech. Missing the initial AI explosion and returning to discover a self-coding VSCode has been eye-opening to say the least.</p>
 
-<p>I think AI is an incredible breakthrough with massive both creative and destructive potential. The direction it goes will be deteremined by who controls it in the future on a massive scale. I think the more people who learn about AI, demystify AI, and imagine ways to use it as a tool for collective good, the better off we all will be. And maybe it doesn’t need to be said, but to be clear, imagining the future of AI isn’t a responsibility reserved for just MLOps engineers or people in tech – this is something everyone has a stake in.</p>
+<p>I think AI is an incredible breakthrough with massive both creative and destructive potential. The direction it goes will be determined by who controls it in the future on a massive scale. I think the more people who learn about AI, demystify AI, and imagine ways to use it as a tool for collective good, the better off we all will be.</p>
+
+<p>Understanding AI doesn’t just mean understanding the math behind it or its technical functionality, but also means understanding the wide-reaching social impacts it has and will have in many aspects of life. Imagining the future of AI isn’t a responsibility reserved for just MLOps engineers and researchers, this is something everyone has a stake in.</p>
 
 <p>The future feels wide open, and I’m eager to keep learning – about LLMs, about infrastructure, and about the meeting point of creativity and automation. There’s something energizing about being back in tech during such a transformative moment.</p>
 
