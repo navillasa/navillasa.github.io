@@ -73,7 +73,7 @@ title: "DevOps Engineer"
             <div class="blog-posts">
                 <h4 class="blog-section-title">Related Blog Posts:</h4>
                 <ul class="blog-list">
-                    <li><a href="{{ '/blog/tv-hub-project-overview/' | relative_url }}" class="blog-link">Go Big, Stay Simple: Building Production-Grade Infrastructure for a Small App</a></li>
+                    <li><a href="{{ '/blog/tv-hub-project-overview/' | relative_url }}" class="blog-link">Go Big, Stay Simple: Building Production-Grade Infrastructure for a Tiny App</a></li>
                     <li><a href="{{ '/blog/gitops-cicd-pipeline/' | relative_url }}" class="blog-link">The CI/CD Pipeline I Wish I'd Built Sooner</a></li>
                     <li><a href="{{ '/blog/vault-gitops/' | relative_url }}" class="blog-link">Why I Didn't Make Vault an ArgoCD Application</a></li>
                 </ul>

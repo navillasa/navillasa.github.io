@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Go Big, Stay Simple: Building Production-Grade Infrastructure for a Simple App"
+title: "Go Big, Stay Simple: Building Production-Grade Infrastructure for a Tiny App"
 description: "How a TV show aggregator became a showcase for GitOps, observability, and cloud-native architecture patterns"
 date: 2025-08-19
 categories: [devops, kubernetes, architecture]

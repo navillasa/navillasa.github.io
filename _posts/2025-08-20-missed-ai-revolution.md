@@ -36,21 +36,19 @@ I had been researching ratings and reviews of different models, was hearing good
 
 Then I learned that a "budget" or smaller version of Mistral 7b would still require ~8-12 GB of VRAM (dedicated GPU memory) to function properly. And I learned that an AWS instance that could support that could run you upwards of $300/month.
 
-That is for a smaller, "quantized" version of Mistral 7b, mind you, where its inference is scaled down. The "Mid-tier GPU inference" – the FP16 version – would require ~24GB of VRAM for smooth inference. Which could run you upwards of $3k/month for the appropriate AWS instance.
+That's for a smaller version of Mistral 7b, mind you, where its inference is scaled down. The "Mid-tier GPU inference" – the FP16 version – would require ~24GB of VRAM for smooth inference. Which could run you upwards of $3k/month for the appropriate AWS instance.
 
-(I put "quantized" in quotes not to denote sarcasm or something but actually to flag that I would probably butcher the explanation of what it means, so I'll encourage you to find another blog post where someone more qualified can do that.)
-
-So yes, that's why even though I definitely totally have $3k to dish out monthly for my LLM pet project, I opted for the slowest, tiniest (but highly recommended) model I could find: GPT4All.
+So yes, that's why even though I definitely, totally have $3k to dish out monthly for my LLM pet project, I opted for the slowest, tiniest (but highly recommended) model I could find: GPT4All.
 
 All of this put into perspective the computational power needed for AI on an enterprise scale. And when you think about companies training models on the entire internet's worth of data, the scale is truly mind-boggling.
 
 ## What This Project Taught Me
 
 ### 1. The Infrastructure Reality
-Running even a small LLM gave me deep appreciation for the engineering challenges at scale. Meaning optimization is no joke.
+Running even a small LLM gave me deep appreciation for the engineering challenges at scale. Meaning that optimization is no joke.
 
 ### 2. The Experimentation Framework
-In an ideal world, I would have loved to deploy dozens of different models and built dashboards comparing cost, speed, accuracy, and specialization. (I know those dashboards exist somewhere, would love to see them 👀)
+In an ideal world, I would have loved to deploy dozens of different models and built dashboards comparing cost, speed, accuracy, and specialization. (I know those dashboards exist somewhere and still would love to see them 👀)
 
 ### 3. It's Up to Us to Understand AI
 We all need to demystify AI because it's here whether we like it or not. It's actually crucial for everyone to understand these systems because of the sheer magnitude that it is affecting our world. It's changing our daily interactions, our work, and ultimately it's reshaping the entire economy in ways we haven't fully felt yet.
@@ -62,7 +60,7 @@ I've always been drawn to the creative aspects of engineering: the problem-solvi
 
 ## The Rip Van Winkle Effect
 #### (Is that a dated reference? Besides in the obvious way.)
-This has been a fascinating time-skip back into tech. Missing the initial AI explosion and returning to discover a self-writing VSCode has been eye-opening to say the least.
+This has been a fascinating time-skip back into tech. Missing the initial AI explosion and returning to discover a self-coding VSCode has been eye-opening to say the least.
 
 I think AI is an incredible breakthrough with massive both creative and destructive potential. The direction it goes will be deteremined by who controls it in the future on a massive scale. I think the more people who learn about AI, demystify AI, and imagine ways to use it as a tool for collective good, the better off we all will be. And maybe it doesn't need to be said, but to be clear, imagining the future of AI isn't a responsibility reserved for just MLOps engineers or people in tech – this is something everyone has a stake in.
 
