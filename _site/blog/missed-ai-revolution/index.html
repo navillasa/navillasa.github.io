@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What I Learned From Building LLM Infrastructure After Missing the AI Revolution | Natalie Villasana</title>
+    <meta name="description" content="I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. ...">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SEO -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>What I Learned From Building LLM Infrastructure After Missing the AI Revolution | Natalie Villasana</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="What I Learned From Building LLM Infrastructure After Missing the AI Revolution" />
+<meta name="author" content="Natalie Villasana" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping everything." />
+<meta property="og:description" content="I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping everything." />
+<link rel="canonical" href="http://localhost:4000/blog/missed-ai-revolution/" />
+<meta property="og:url" content="http://localhost:4000/blog/missed-ai-revolution/" />
+<meta property="og:site_name" content="Natalie Villasana" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-20T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="What I Learned From Building LLM Infrastructure After Missing the AI Revolution" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-20T00:00:00-04:00","datePublished":"2025-08-20T00:00:00-04:00","description":"I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping everything.","headline":"What I Learned From Building LLM Infrastructure After Missing the AI Revolution","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/missed-ai-revolution/"},"url":"http://localhost:4000/blog/missed-ai-revolution/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <div class="blog-container">
+    <div class="blog-nav">
+        <a href="/" class="back-link">← Back to Portfolio</a>
+    </div>
+    
+    <header class="blog-header">
+        <h1 class="blog-title">What I Learned From Building LLM Infrastructure After Missing the AI Revolution</h1>
+        
+        <div class="blog-meta">
+            
+            
+            <br><time datetime="2025-08-20T00:00:00-04:00">August 20, 2025</time>
+            
+        </div>
+    </header>
+
+    <div class="blog-content">
+        <p>I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project was as much about refreshing my coding skills as it was about demystifying this technology that’s reshaping everything.</p>
+
+<h2 id="from-magic-to-reality-check">From Magic to Reality Check</h2>
+
+<p>The first time I used Cursor to write code, my jaw hit the floor. I was genuinely mesmerized watching it generate entire files in seconds. But nothing could’ve snapped me out of it faster than Claude trying to hardcode database auth into a Docker Compose file. It was a moment that perfectly captured AI’s unique way of oscillating between the self-assured troubleshooting of a senior engineer and wild flailing of someone who’s never seen a codebase before.</p>
+
+<p>(I just learned what vibe coding is this week by the way. It sounds calm and laidback, but trust me the vibes can go from immaculate to egregious faster than you can push to prod.)</p>
+
+<h2 id="cpu-only-llms-when-sluggishness-is-part-of-the-charm">CPU-Only LLMs: When Sluggishness is Part of the Charm</h2>
+
+<p>For my LLM project, I wanted to understand the fundamentals without breaking the bank. I chose Hetzner for hosting and looked into CPU-only models. I suppose the appeal of self-hosting your own LLM is that you can have chats without your data going to Google or OpenAI, but the cultural convenience and prevalence of ChatGPT and Gemini et al, and the complexity of running private instances obviously tips the scales against valid privacy concerns.</p>
+
+<p>But at the end of the day, experimenting and imagining other ways of doing things is what engineering is all about. While my app is charmingly unusable in its slowness, I built the infrastructure so one could easily switch out the models, inference engine, and hosting environment. It was an exercise in understanding how these applications actually work.</p>
+
+<h2 id="demystifying-the-components">Demystifying the Components</h2>
+
+<p><strong>A LLM</strong> (Large Language Model) is like a master chef who has trained by tasting thousands of dishes and internalized patterns of what makes food delicious.</p>
+
+<p>In reality, a model is just a giant file of numbers – millions or billions of numerical parameters encoding everything learned during training.</p>
+
+<p><strong>Inference</strong> is using the model to answer questions, generate images, etc. Inference is the actual cooking process. When you ask the model to generate text, it uses those learned patterns to make decisions.</p>
+
+<p>The <strong>inference engine</strong> is the kitchen itself: the computational environment that makes it possible for our chef to get to work.</p>
+
+<p>It wasn’t until I saw the price tags on the GCP Compute Engine page for GPU-resourced VMs that I began to understand just how much power LLMs need – even on a small scale!</p>
+
+<p>I had been researching ratings and reviews of different models, was hearing good things about the model Mistral 7b, and was planning on using it for my app.</p>
+
+<p>Then I learned that a “budget” or smaller version of Mistral 7b would still require ~8-12 GB of VRAM (dedicated GPU memory) to function properly. And I learned that an AWS instance that could support that could run you upwards of $300/month.</p>
+
+<p>That is for a smaller, “quantized” version of Mistral 7b, mind you, where its inference is scaled down. The “Mid-tier GPU inference” – the FP16 version – would require ~24GB of VRAM for smooth inference. Which could run you upwards of $3k/month for the appropriate AWS instance.</p>
+
+<p>(I put “quantized” in quotes not to denote sarcasm or something but actually to flag that I would probably butcher the explanation of what it means, so I’ll encourage you to find another blog post where someone more qualified can do that.)</p>
+
+<p>So yes, that’s why even though I definitely totally have $3k to dish out monthly for my LLM pet project, I opted for the slowest, tiniest (but highly recommended) model I could find: GPT4All.</p>
+
+<p>All of this put into perspective the computational power needed for AI on an enterprise scale. And when you think about companies training models on the entire internet’s worth of data, the scale is truly mind-boggling.</p>
+
+<h2 id="what-this-project-taught-me">What This Project Taught Me</h2>
+
+<h3 id="1-the-infrastructure-reality">1. The Infrastructure Reality</h3>
+<p>Running even a small LLM gave me deep appreciation for the engineering challenges at scale. Meaning optimization is no joke.</p>
+
+<h3 id="2-the-experimentation-framework">2. The Experimentation Framework</h3>
+<p>In an ideal world, I would have loved to deploy dozens of different models and built dashboards comparing cost, speed, accuracy, and specialization. (I know those dashboards exist somewhere, would love to see them 👀)</p>
+
+<h3 id="3-its-up-to-us-to-understand-ai">3. It’s Up to Us to Understand AI</h3>
+<p>We all need to demystify AI because it’s here whether we like it or not. It’s actually crucial for everyone to understand these systems because of the sheer magnitude that it is affecting our world. It’s changing our daily interactions, our work, and ultimately it’s reshaping the entire economy in ways we haven’t fully felt yet.</p>
+
+<p>The comparison to the assembly line or steam engine isn’t hyperbole. While the full consequences aren’t visible yet, the transformation is already underway. Understanding how these systems work, their limitations, and their capabilities isn’t just technical curiosity, it’s really a collective necessity.</p>
+
+<h3 id="4-creative-engineering-exists">4. Creative Engineering Exists</h3>
+<p>I’ve always been drawn to the creative aspects of engineering: the problem-solving, the elegant solutions, the way good infrastructure feels like art. It’s fraught topic, but in my opinion, AI expands that human creative potential – because its power comes from human creativity and work in the first place. The question becomes – like with any epoch-shifting technology – who has oversight and calls the shots on how AI is used at the end of the day?</p>
+
+<h2 id="the-rip-van-winkle-effect">The Rip Van Winkle Effect</h2>
+<h4 id="is-that-a-dated-reference-besides-in-the-obvious-way">(Is that a dated reference? Besides in the obvious way.)</h4>
+<p>This has been a fascinating time-skip back into tech. Missing the initial AI explosion and returning to discover a self-writing VSCode has been eye-opening to say the least.</p>
+
+<p>I think AI is an incredible breakthrough with massive both creative and destructive potential. The direction it goes will be deteremined by who controls it in the future on a massive scale. I think the more people who learn about AI, demystify AI, and imagine ways to use it as a tool for collective good, the better off we all will be. And maybe it doesn’t need to be said, but to be clear, imagining the future of AI isn’t a responsibility reserved for just MLOps engineers or people in tech – this is something everyone has a stake in.</p>
+
+<p>The future feels wide open, and I’m eager to keep learning – about LLMs, about infrastructure, and about the meeting point of creativity and automation. There’s something energizing about being back in tech during such a transformative moment.</p>
+
+<p>So even if my LLM API is so slow that it kind of hurts, it’s reminded me that understanding these systems isn’t optional anymore. It’s part of playing an active role in the world we’re all building.</p>
+
+    </div>
+</div>
+</body>
+</html>
