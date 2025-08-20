@@ -10,15 +10,15 @@ I left tech to pursue advertising in summer 2022, before AI really took off. Dur
 
 ## From Magic to Reality Check
 
-The first time I used Cursor to write code, my jaw hit the floor. I was genuinely mesmerized watching it generate entire files in seconds. But nothing could've snapped me out of it faster than Claude trying to hardcode database auth into a docker compose file. It was a moment that perfectly captured AI's unique way of oscillating between the self-assured troubleshooting of a senior engineer to some kind of bull-in-a-china-shop summer intern from hell.
+The first time I used Cursor to write code, my jaw hit the floor. I was genuinely mesmerized watching it generate entire files in seconds. But nothing could've snapped me out of it faster than Claude trying to hardcode database auth into a docker compose file. It was a moment that perfectly captured AI's unique way of oscillating between the self-assured troubleshooting of a senior engineer to some kind of bull in a china shop summer intern from hell.
 
-(I just learned what vibe coding is this week by the way – a new approach where developers use AI tools to generate code based on natural language prompts. In other words, based on "vibes." It sounds misleadingly calm and laidback, but at least in my experience, using coding agents brought up a lot more AI helicopter parent vibes than the feet on the desk chillin' vibes I'd expected.)
+(I just learned what vibe coding is this week by the way – a new approach where developers use AI tools to generate code based on natural language prompts. In other words, based on "vibes." It sounds misleadingly calm and laidback, but at least in my experience, using coding agents brought up a lot more AI helicopter parent vibes than the feet on the desk chillin' vibes.)
 
 ## CPU-Only LLMs: When Sluggishness is Part of the Charm
 
-For my LLM project, I wanted to understand the fundamentals without breaking the bank. I chose Hetzner for hosting and looked into CPU-only models. I suppose the appeal of self-hosting your own LLM is that you can have chats without your data going to Google or OpenAI, but the cultural convenience and prevalence of ChatGPT and Gemini et al, and the complexity of running private instances obviously tips the scales against valid privacy concerns.
+For my LLM project, I wanted to understand the fundamentals without breaking the bank. I chose Hetzner for hosting and looked into CPU-only models. Part of the appeal of self-hosting your own LLM is that you can have chats without your data going to Google or OpenAI. But despite legitimate concerns about privacy, the vast majority of people have no option but use the major AI tools like ChatGPT, CoPilot, Gemini, etc. Their dominance in the market, and therefore convenience factor – not to mention the technical and economic hurdles of setting up your own private model – mean that privacy, as usual, is forced to take back seat to practicality.
 
-But at the end of the day, experimenting and imagining other ways of doing things is what engineering is all about. While my app is charmingly unusable in its slowness, I built the infrastructure so one could easily switch out the models, inference engine, and hosting environment. It was an exercise in understanding how these applications actually work.
+That said, the prevalence of mainstream tools doesn’t mean innovation or alternatives are out of reach. At the end of the day, experimenting and imagining new ways of doing things is what engineering is all about. While my app is charmingly unusable in its slowness, I built the infrastructure so one could easily switch out the models, inference engine, and hosting environment. It was an exercise in understanding how these applications actually work.
 
 ## Demystifying the Components
 
