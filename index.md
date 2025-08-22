@@ -50,7 +50,7 @@ title: "DevOps Engineer"
                 </div>
             </div>
             <p class="project-description">
-                A production-ready TV show dashboard showcasing enterprise DevOps practices. While the app is intentionally simple (aggregating trending shows), the infrastructure demonstrates GitOps, observability, and cloud-native architecture patterns.
+                A TV show dashboard showcasing enterprise DevOps practices. While the app is intentionally simple (aggregating trending shows), the infrastructure demonstrates GitOps, observability, and cloud-native architecture patterns.
             </p>
             <div class="tech-stack">
                 <span class="tech-tag">Terraform</span>
