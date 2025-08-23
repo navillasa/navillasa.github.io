@@ -50,7 +50,7 @@ title: "DevOps Engineer"
                 </div>
             </div>
             <p class="project-description">
-                A production-ready TV show dashboard showcasing enterprise DevOps practices. While the app is intentionally simple (aggregating trending shows), the infrastructure demonstrates GitOps, observability, and cloud-native architecture patterns.
+                To explore advanced DevOps workflows, I created TV Hub – a full-stack dashboard for tracking top trending shows across streaming platforms. The project showcases GitOps, CI/CD automation, observability, secure secrets management with Vault, and cloud-native deployment on Google Kubernetes Engine.
             </p>
             <div class="tech-stack">
                 <span class="tech-tag">Terraform</span>
