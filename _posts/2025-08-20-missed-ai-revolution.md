@@ -10,7 +10,7 @@ I left tech to pursue advertising in summer 2022, before AI really took off. Dur
 
 ## From Magic to Reality Check
 
-The first time I used Cursor to write code, my jaw hit the floor. I was genuinely mesmerized watching it generate entire files in seconds. But nothing could've snapped me out of it faster than Claude trying to hardcode database auth into a docker compose file. It was a moment that perfectly captured AI's unique way of oscillating between the self-assured troubleshooting of a senior engineer to some kind of bull in a china shop summer intern from hell.
+The first time I used Cursor to write code, my jaw hit the floor. I was genuinely mesmerized watching it generate entire files in seconds. But nothing could've snapped me out of it faster than Claude trying to hardcode database auth into a docker compose file. It was a moment that perfectly captured AI's unique way of oscillating between the self-assured troubleshooting of a senior engineer to some kind of summer intern from hell.
 
 (I just learned what vibe coding is this week by the way – a new approach where developers use AI tools to generate code based on natural language prompts. In other words, based on "vibes." It sounds misleadingly calm and laidback, but at least in my experience, coding with agents has more of a "you're a helicopter parent to a robot" type vibe than the "feet on the desk chillin'" vibe I expected.)
 
