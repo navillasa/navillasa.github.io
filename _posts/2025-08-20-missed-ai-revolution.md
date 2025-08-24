@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "What I Learned From Building LLM Infrastructure After Missing the AI Revolution"
+title: "Late to the AI Party: Lessons from Building LLM Infrastructure"
+subtitle: "What happens when you build AI infrastructure after everyone else already started"
 date: 2025-08-20
-categories: [ai, llm, infrastructure]
-tags: [ai, llm, infrastructure]
+categories: [ai, llm, infrastructure, lessons]
+tags: [ai, llm, infrastructure, lessons, late-adopter]
 ---
 
 I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project this summer was as much about refreshing my coding skills as it was about demystifying this technology that's reshaping our world.

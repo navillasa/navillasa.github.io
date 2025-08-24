@@ -164,7 +164,7 @@ title: "DevOps Engineer"
             <li><a href="{{ '/blog/gitops-cicd-pipeline/' | relative_url }}" class="blog-link">The CI/CD Pipeline I Wish I'd Built Sooner</a></li>
             <li><a href="{{ '/blog/vault-gitops/' | relative_url }}" class="blog-link">Why I Didn't Make Vault an ArgoCD Application</a></li>
             <li><a href="{{ '/blog/debugging-502-errors/' | relative_url }}" class="blog-link">The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s</a></li>
-            <li><a href="{{ '/blog/missed-ai-revolution/' | relative_url }}" class="blog-link">What I Learned From Building LLM Infrastructure After Missing the AI Revolution</a></li>
+            <li><a href="{{ '/blog/missed-ai-revolution/' | relative_url }}" class="blog-link">Late to the AI Party: Lessons from Building LLM Infrastructure</a></li>
         </ul>
     </section>
 
