@@ -159,7 +159,7 @@ title: "DevOps Engineer"
     <section class="blog-section">
         <h2 class="section-title">Recent Writing</h2>
         
-        <h3 class="blog-month-title">August 2025</h3>
+        <h3 style="font-size: 1rem; font-weight: 600; color: #495057; margin-bottom: 1rem; margin-top: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e9ecef;">August 2025</h3>
         <ul class="blog-list">
             <li><a href="{{ '/blog/gitops-cicd-pipeline/' | relative_url }}" class="blog-link">The CI/CD Pipeline I Wish I'd Built Sooner</a></li>
             <li><a href="{{ '/blog/vault-gitops/' | relative_url }}" class="blog-link">Why I Didn't Make Vault an ArgoCD Application</a></li>
