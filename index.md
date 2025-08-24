@@ -80,34 +80,35 @@ title: "DevOps Engineer"
             </div>
         </div>
 
-        <!-- Self-Hosted LLM Project -->
+        <!-- Multi-Cloud LLM Router Project (In Progress) -->
         <div class="project-card">
             <div class="project-header">
-                <h3 class="project-title">🧠 Self-Hosted Mini LLM API</h3>
+                <h3 class="project-title">🪼 Multi-Cloud LLM Router <em>(In Progress)</em></h3>
                 <div class="project-links">
-                    <a href="https://github.com/navillasa/self-hosted-mini-llm" target="_blank" class="project-link">GitHub</a>
-                    <a href="https://llm.navillasa.dev" target="_blank" class="project-link">Live Demo</a>
+                    <a href="https://github.com/navillasa/multi-cloud-llm-router" target="_blank" class="project-link">GitHub</a>
                 </div>
             </div>
             <p class="project-description">
-                A lightweight, self-hosted LLM server using GPT4All, running entirely on CPU. Demonstrates infrastructure provisioning, containerization, and secure API deployment with HTTPS and authentication.
+                An intelligent routing system that automatically distributes LLM requests to the cheapest available cluster across AWS, GCP, and Azure. Features real-time cost calculation, health monitoring, and scale-to-zero capabilities. Currently working locally with AWS infrastructure provisioned - cloud deployment in progress.
             </p>
             <div class="tech-stack">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">Terraform</span>
-                <span class="tech-tag">Traefik</span>
-                <span class="tech-tag">GPT4All</span>
-                <span class="tech-tag">Hetzner Cloud</span>
+                <span class="tech-tag">Go</span>
+                <span class="tech-tag">Pulumi</span>
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">ArgoCD</span>
+                <span class="tech-tag">AWS EKS</span>
+                <span class="tech-tag">GCP GKE</span>
+                <span class="tech-tag">Azure AKS</span>
+                <span class="tech-tag">llama.cpp</span>
+                <span class="tech-tag">Prometheus</span>
             </div>
             <div class="blog-posts">
                 <h4 class="blog-section-title">Related Blog Posts:</h4>
                 <ul class="blog-list">
+                    <li><a href="{{ '/blog/multi-cloud-llm-router-journey/' | relative_url }}" class="blog-link">Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money</a></li>
                     <li><a href="{{ '/blog/missed-ai-revolution/' | relative_url }}" class="blog-link">What I Learned From Building LLM Infrastructure After Missing the AI Revolution</a></li>
                 </ul>
             </div>
-
         </div>
 
         <!-- VPN Ad Blocker Project -->

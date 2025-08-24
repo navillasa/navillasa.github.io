@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money | Natalie Villasana</title>
+    <meta name="description" content="After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my int...">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SEO -->
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money | Natalie Villasana</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money" />
+<meta name="author" content="Natalie Villasana" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my absolute favorite programming language)." />
+<meta property="og:description" content="After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my absolute favorite programming language)." />
+<link rel="canonical" href="http://localhost:4000/blog/multi-cloud-llm-router-journey/" />
+<meta property="og:url" content="http://localhost:4000/blog/multi-cloud-llm-router-journey/" />
+<meta property="og:site_name" content="Natalie Villasana" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-24T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-24T00:00:00-04:00","datePublished":"2025-08-24T00:00:00-04:00","description":"After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my absolute favorite programming language).","headline":"Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/multi-cloud-llm-router-journey/"},"url":"http://localhost:4000/blog/multi-cloud-llm-router-journey/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+    <div class="blog-container">
+    <div class="blog-nav">
+        <a href="/" class="back-link">← Back to Portfolio</a>
+    </div>
+    
+    <header class="blog-header">
+        <h1 class="blog-title">Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money</h1>
+        
+        <div class="blog-meta">
+            
+            
+            <br><time datetime="2025-08-24T00:00:00-04:00">August 24, 2025</time>
+            
+        </div>
+    </header>
+
+    <div class="blog-content">
+        <p>After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my absolute favorite programming language).</p>
+
+<p>What started as a learning exercise is evolving into an ambitious multi-cloud LLM router that will automatically distribute requests to the cheapest available cluster across AWS, GCP, and Azure. Currently, I have the router working locally and the AWS infrastructure fully provisioned, with the remaining cloud deployments and full multi-cloud integration as the next major milestone.</p>
+
+<h2 id="the-problem-llm-cost-optimization-at-scale">The Problem: LLM Cost Optimization at Scale</h2>
+
+<p>Large Language Models are expensive to run. Whether you’re using OpenAI’s API, hosting your own models, or running inference at scale, costs can quickly spiral out of control. The traditional approach involves either sticking with a single cloud provider (hello, vendor lock-in), manually switching between providers (time-consuming and error-prone), or using static routing that doesn’t adapt to real-time price changes or performance.</p>
+
+<p>I wanted to build something that could:</p>
+<ul>
+  <li>Automatically route to the cheapest healthy cluster in real-time</li>
+  <li>Run across multiple clouds for redundancy and cost optimization</li>
+  <li>Scale to zero during low usage periods</li>
+  <li>Use CPU-only inference with quantized models for maximum cost efficiency</li>
+  <li>Provide comprehensive observability for cost tracking and performance monitoring</li>
+</ul>
+
+<h2 id="the-solution-an-intelligent-multi-cloud-router">The Solution: An Intelligent Multi-Cloud Router</h2>
+
+<p>The architecture I built follows this pattern:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Client] ──HTTPS──&gt; [Global Router (Go Application)]
+                         │
+          ┌──────────────┼────────────────┐
+          │              │                │
+   HTTPS/mTLS      HTTPS/mTLS       HTTPS/mTLS
+          │              │                │
+ [Ingress + Argo CD] [Ingress + Argo CD] [Ingress + Argo CD]
+   AWS EKS (CPU)        GCP GKE (CPU)       Azure AKS (CPU)
+      │                    │                  │
+ [llama.cpp pods]    [llama.cpp pods]   [llama.cpp pods]
+  (gguf models)        (gguf models)       (gguf models)
+      │                    │                  │
+ [Prom + Exporter]  [Prom + Exporter]  [Prom + Exporter]
+      └───────────────metrics + costs─────────────┘
+                         ↓
+                 [Router cost engine]
+</code></pre></div></div>
+
+<h3 id="the-core-components">The Core Components</h3>
+
+<p><strong>Intelligent Router (Go):</strong> The heart of the system handles real-time cost calculation using the formula <code class="language-plaintext highlighter-rouge">(node_hourly_cost / (tokens_per_sec * 3600)) * overhead_factor * 1000</code>, along with health monitoring that enforces SLA requirements like latency and queue depth. It uses HMAC and mTLS authentication for security, collects Prometheus metrics for observability, and implements sticky routing to prevent flapping between providers.</p>
+
+<p><strong>Multi-Cloud Infrastructure (Pulumi):</strong> The infrastructure layer manages AWS EKS with optimized node groups (t3.large instances for cost efficiency), plus ready-to-deploy GCP GKE and Azure AKS configurations. Everything follows consistent networking, security, and naming patterns across clouds, with automated DNS and TLS certificate management.</p>
+
+<p><strong>GitOps Deployment (ArgoCD):</strong> For deployment, I’m using ArgoCD with an app-of-apps pattern to manage multiple clusters, automated deployments with self-healing capabilities, environment-specific configurations via Kustomize, and platform components like ingress-nginx, cert-manager, and prometheus.</p>
+
+<p><strong>CPU-Optimized LLM Serving:</strong> The LLM serving layer runs llama.cpp with quantized GGUF models, uses PVC for model caching (download once per node), supports auto-scaling with scale-to-zero capabilities, and includes comprehensive metrics collection.</p>
+
+<h2 id="technology-choices-and-learning-goals">Technology Choices and Learning Goals</h2>
+
+<h3 id="why-go">Why Go?</h3>
+<p>Go has become my favorite programming language for several reasons. The concurrency model is perfect for a router handling many simultaneous requests, the static typing catches errors at compile time, compilation is fast which makes iteration during development much quicker, the ecosystem has fantastic libraries for HTTP, metrics, and cloud APIs, and deployment is simple with a single binary and no dependencies.</p>
+
+<h3 id="why-pulumi">Why Pulumi?</h3>
+<p>Coming from Terraform, I was excited to try Pulumi because you can use a real programming language (Go in this case) instead of HCL, get type safety with IDE support and compile-time checking, use familiar patterns and existing Go knowledge and libraries, and write better tests using real Go testing frameworks.</p>
+
+<h3 id="why-argocd">Why ArgoCD?</h3>
+<p>My previous experience with ArgoCD was limited, so this project was perfect for learning GitOps best practices around declarative infrastructure management, multi-cluster management with a single pane of glass for all environments, application lifecycle management with automated deployments and rollbacks, and security features like RBAC and audit trails.</p>
+
+<h2 id="what-i-built">What I Built</h2>
+
+<h3 id="project-foundation--infrastructure">Project Foundation &amp; Infrastructure</h3>
+<p>I started with proper Go module structure and comprehensive documentation covering multi-cloud architecture overview, cost calculation methodology, and development and deployment guides. Then I built reusable components for consistent cloud deployments including resource naming conventions, kubeconfig generation for all three cloud providers, and standardized tagging and labeling.</p>
+
+<h3 id="aws-implementation--router-core">AWS Implementation &amp; Router Core</h3>
+<p>The AWS infrastructure implementation includes full EKS deployment with VPC and networking optimized for cost, node groups using t3.large instances, IAM roles and security policies, and automated ArgoCD installation.</p>
+
+<p>The intelligent router core became the heart of the system with:</p>
+<ul>
+  <li>Cost calculation engine for real-time $/1K token calculations</li>
+  <li>Health monitoring with SLA enforcement and circuit breaker patterns</li>
+  <li>Request forwarding with streaming support and authentication</li>
+  <li>Comprehensive Prometheus metrics for observability</li>
+</ul>
+
+<h3 id="deployment--developer-experience">Deployment &amp; Developer Experience</h3>
+<p>I created production-grade Kubernetes deployments with an llm-server chart for llama.cpp with model caching and auto-scaling, a platform chart for core infrastructure (ingress, monitoring, certificates), and cloud-specific values optimized for each provider’s services.</p>
+
+<p>The GitOps configuration includes complete ArgoCD setup with app-of-apps pattern for scalability, environment-specific overlays, and automated sync policies with self-healing. I also built model performance and cost documentation, a GitHub Actions pipeline with testing and security scanning, and automated Docker image building and deployment.</p>
+
+<p>To make it easy to contribute and deploy, I focused on comprehensive development documentation, interactive setup scripts with a clean UI, and multiple deployment options (local, cloud, development). The setup automation supports one-command deployment with options for local demo testing, full AWS deployment, and development environment setup.</p>
+
+<h2 id="the-magic-cost-aware-routing">The Magic: Cost-Aware Routing</h2>
+
+<p>The core innovation is the real-time cost calculation that considers: <code class="language-plaintext highlighter-rouge">costPer1K = (nodeHourlyCost / (tokensPerSecond * 3600)) * overheadFactor * 1000</code></p>
+
+<p>Here’s how it works with real numbers. An AWS t3.large costs $0.0928/hour and delivers about 15 tokens per second, which works out to roughly $0.0017 per 1K tokens. A GCP n1-standard-2 costs $0.0950/hour with 12 TPS, coming to about $0.0022 per 1K tokens. An Azure Standard_D2s_v3 costs $0.0968/hour with 14 TPS, working out to about $0.0019 per 1K tokens.</p>
+
+<p>In this scenario, the router automatically selects AWS, potentially saving 10-20% on inference costs. When you’re processing millions of tokens, those savings add up fast.</p>
+
+<h2 id="where-things-stand">Where Things Stand</h2>
+
+<p><strong>Current Status: Development Phase</strong> - The system is working locally with AWS infrastructure provisioned. Cloud deployment across all three providers is the next major milestone.</p>
+
+<h3 id="working-system">Working System</h3>
+<p>The router compiled successfully and is running locally. Health monitoring is detecting cluster status, API endpoints are responding correctly locally, Prometheus metrics are being collected, the cost engine is ready for real workloads, and AWS infrastructure is fully provisioned and tested.</p>
+
+<h3 id="production-architecture">Production Architecture</h3>
+<p>The production architecture is complete with infrastructure as code using Pulumi, a GitOps deployment pipeline with ArgoCD, professional Helm charts, and comprehensive monitoring and observability.</p>
+
+<h3 id="multi-cloud-foundation">Multi-Cloud Foundation</h3>
+<p>The multi-cloud foundation has AWS infrastructure fully implemented and working, with GCP and Azure patterns established, consistent tooling and naming across clouds, and everything ready for global deployment in the next phase.</p>
+
+<h2 id="performance-and-cost-expectations">Performance and Cost Expectations</h2>
+
+<p>Based on the architecture and testing, TinyLlama 1.1B on t3.large instances should deliver around 15 tokens per second at roughly $0.0017 per 1K tokens, with latency under 1 second for short prompts and 99.9%+ availability with multi-cloud redundancy.</p>
+
+<p>The scale-to-zero benefits are significant: pods scale down to 0 during low usage, models are cached in PVC so there’s no re-download cost, and clusters can auto-scale nodes to minimum when not needed.</p>
+
+<h2 id="lessons-learned">Lessons Learned</h2>
+
+<p>Go really is fantastic for infrastructure tools. The concurrency model and standard library made building the router straightforward, and I’m convinced it was the right choice. Pulumi’s type safety turned out to be a game-changer – catching configuration errors at compile time saved hours of debugging that I would have spent with Terraform. ArgoCD scales beautifully, and the app-of-apps pattern makes managing multiple clusters intuitive. CPU inference is surprisingly cost-effective when you use quantized models properly.</p>
+
+<p>From a project management perspective, making incremental commits that tell a story made the project much more maintainable. Writing comprehensive documentation helped clarify the architecture in my own mind. And investing time in setup automation was absolutely worth it – the interactive scripts make the project accessible to new contributors.</p>
+
+<h2 id="whats-next">What’s Next</h2>
+
+<p>The foundation is solid and ready for expansion. The immediate priorities are:</p>
+
+<p><strong>Phase 1: Complete Cloud Deployment</strong></p>
+<ul>
+  <li>Deploy the working system to AWS, GCP, and Azure clusters</li>
+  <li>Validate the cost-aware routing across all three providers</li>
+</ul>
+
+<p><strong>Phase 2: Production Features</strong></p>
+<ul>
+  <li>Add more sophisticated models like Phi-3 and Llama 2 for production workloads</li>
+  <li>Implement circuit breaker patterns for improved reliability</li>
+  <li>Add request queueing for handling traffic spikes</li>
+  <li>Build cost dashboards in Grafana for financial monitoring</li>
+  <li>Implement A/B testing capabilities for model experimentation</li>
+</ul>
+
+<h2 id="from-learning-project-to-production-system">From Learning Project to Production System</h2>
+
+<p>What started as a way to learn new technologies is becoming a production-ready system that could save significant money for organizations running LLM workloads at scale. The combination of Go’s performance, Pulumi’s type safety, ArgoCD’s GitOps capabilities, and multi-cloud redundancy creates a powerful platform for cost-optimized AI inference.</p>
+
+<p>The project demonstrates that with the right architecture and tooling, you can build sophisticated infrastructure that’s both cost-effective and highly available. While still in active development, the foundation is solid and the local testing validates the core concepts.</p>
+
+<p>This has been an incredible journey from a simple self-hosted LLM on Hetzner to a (soon-to-be) global, multi-cloud AI infrastructure platform. The next chapter involves completing the cloud deployment and scaling to production workloads.</p>
+
+<hr />
+
+<p><em>The complete source code and documentation is available at: <a href="https://github.com/navillasa/multi-cloud-llm-router">github.com/navillasa/multi-cloud-llm-router</a></em></p>
+
+    </div>
+</div>
+</body>
+</html>
