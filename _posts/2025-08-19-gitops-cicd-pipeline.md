@@ -7,7 +7,7 @@ categories: [devops, kubernetes, gitops, ci-cd]
 author: Natalie Villasana
 ---
 
-When I started building my [TV Hub project]({% link _posts/2025-08-19-tv-hub-project-overview.md %}), I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here's the GitOps pipeline I wish I'd built from day one.
+When I started building my [TV Hub project]({% link _posts/2025-08-24-tv-hub-production-infrastructure.md %}), I did what most developers do: push to main and pray nothing breaks. Of course things did break, and I realized I needed something more sophisticated. Here's the GitOps pipeline I wish I'd built from day one.
 
 ## The Problem
 

@@ -9,7 +9,7 @@ tags: [kubernetes, vault, gitops, argocd, devops, design]
 
 ## The Question
 
-During the GitOps implementation, I considered whether HashiCorp Vault should be managed as an ArgoCD application alongside the other workloads. This post explains why I chose to keep Vault outside of the GitOps workflow.
+While building my [TV Dashboard on Kubernetes project]({{ '/blog/go-big-stay-simple/' | relative_url }}) – a production-grade streaming analytics platform running on GKE – I faced an interesting architectural decision during the GitOps implementation. Should HashiCorp Vault be managed as an ArgoCD application alongside the other workloads? This post explains why I chose to keep Vault outside of the GitOps workflow.
 
 ## The Temptation
 
