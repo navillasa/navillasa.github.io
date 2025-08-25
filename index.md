@@ -52,6 +52,13 @@ title: "DevOps Engineer"
             <p class="project-description">
                 A full-stack dashboard using production-grade DevOps practices including GitOps with ArgoCD, observability with Prometheus and Grafana, secrets management with Vault, and CI/CD pipelines deployed on Google Kubernetes Engine. Built around a simple premise – tracking trending shows across streaming platforms – to demonstrate cloud-native architecture patterns.
             </p>
+            <div class="live-dashboard">
+                <h4 class="blog-section-title">🚀 Live Dashboard:</h4>
+                <ul class="blog-list">
+                    <li><a href="https://monitoring.navillasa.dev/d/fee614ea-a1d2-4efb-af86-2f4db349482a/tv-hub-business-intelligence-dashboard?orgId=1&refresh=5s" target="_blank" class="project-link dashboard-link">Business Intelligence Dashboard</a></li>
+                </ul>
+                <p class="dashboard-note">Interactive monitoring with streaming analytics</p>
+            </div>
             <div class="project-overview">
                 <p><strong>📋 Technical Deep-Dive:</strong> <a href="{{ '/blog/go-big-stay-simple/' | relative_url }}" class="blog-link project-overview-link">Complete Architecture & Project Walkthrough</a></p>
             </div>
