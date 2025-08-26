@@ -6,9 +6,11 @@ categories: [infrastructure, llm, multi-cloud]
 tags: [go, kubernetes, argocd, pulumi, aws, gcp, azure, llm, infrastructure]
 ---
 
-After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my absolute favorite programming language).
+After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I started looking for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my favorite programming language).
 
-What started as a learning exercise is evolving into an ambitious multi-cloud LLM router that will automatically distribute requests to the cheapest available cluster across AWS, GCP, and Azure. Currently, I have the router working locally and the AWS infrastructure fully provisioned, with the remaining cloud deployments and full multi-cloud integration as the next major milestone.
+What started as a learning exercise evolved into an ambitious multi-cloud LLM router that automatically distributes requests to the cheapest available option – between external providers OpenAI, Claude, and Gemini, and self-hosted LLMs running in GKE, AKS, and EKS.
+
+Turns out an enterprise idea doesn't come with an enterprise budget – so as far as a live demo, I created a [simple dashboard](https://mini.multicloud.navillasa.dev) to demonstrate the routing logic and intended usage.
 
 ## The Problem: LLM Cost Optimization at Scale
 
@@ -96,16 +98,14 @@ In this scenario, the router automatically selects AWS, potentially saving 10-20
 
 ## Where Things Stand
 
-**Current Status: Development Phase** - The system is working locally with AWS infrastructure provisioned. Cloud deployment across all three providers is the next major milestone.
-
 ### Working System
-The router compiled successfully and is running locally. Health monitoring is detecting cluster status, API endpoints are responding correctly locally, Prometheus metrics are being collected, the cost engine is ready for real workloads, and AWS infrastructure is fully provisioned and tested.
+The router compiled successfully and is running locally. Health monitoring is detecting cluster status, API endpoints are responding correctly locally, Prometheus metrics are being collected, and the cost engine is ready for real workloads.
 
 ### Production Architecture  
 The production architecture is complete with infrastructure as code using Pulumi, a GitOps deployment pipeline with ArgoCD, professional Helm charts, and comprehensive monitoring and observability.
 
 ### Multi-Cloud Foundation
-The multi-cloud foundation has AWS infrastructure fully implemented and working, with GCP and Azure patterns established, consistent tooling and naming across clouds, and everything ready for global deployment in the next phase.
+The multi-cloud foundation has AWS, GCP and Azure patterns established, consistent tooling and naming across clouds, and everything ready for short-term deployments (to keep costs down).
 
 ## Performance and Cost Expectations
 
@@ -115,32 +115,15 @@ The scale-to-zero benefits are significant: pods scale down to 0 during low usag
 
 ## Lessons Learned
 
-Go really is fantastic for infrastructure tools. The concurrency model and standard library made building the router straightforward, and I'm convinced it was the right choice. Pulumi's type safety turned out to be a game-changer – catching configuration errors at compile time saved hours of debugging that I would have spent with Terraform. ArgoCD scales beautifully, and the app-of-apps pattern makes managing multiple clusters intuitive. CPU inference is surprisingly cost-effective when you use quantized models properly.
+Go really is fantastic for infrastructure tools. The concurrency model and standard library made building the router straightforward, and I'm convinced it was the right choice. Pulumi's type safety turned out to be a game-changer – catching configuration errors at compile time saved hours of debugging that I would have spent with Terraform. ArgoCD and the app-of-apps pattern makes managing multiple clusters intuitive. CPU inference is surprisingly cost-effective when you use quantized models properly.
 
-From a project management perspective, making incremental commits that tell a story made the project much more maintainable. Writing comprehensive documentation helped clarify the architecture in my own mind. And investing time in setup automation was absolutely worth it – the interactive scripts make the project accessible to new contributors.
-
-## What's Next
-
-The foundation is solid and ready for expansion. The immediate priorities are:
-
-**Phase 1: Complete Cloud Deployment**
-- Deploy the working system to AWS, GCP, and Azure clusters
-- Validate the cost-aware routing across all three providers
-
-**Phase 2: Production Features**
-- Add more sophisticated models like Phi-3 and Llama 2 for production workloads
-- Implement circuit breaker patterns for improved reliability
-- Add request queueing for handling traffic spikes
-- Build cost dashboards in Grafana for financial monitoring
-- Implement A/B testing capabilities for model experimentation
+From a project management perspective, making incremental commits that tell a story made the project much more maintainable. Writing comprehensive documentation helped clarify the architecture in my own mind.
 
 ## From Learning Project to Production System
 
 What started as a way to learn new technologies is becoming a production-ready system that could save significant money for organizations running LLM workloads at scale. The combination of Go's performance, Pulumi's type safety, ArgoCD's GitOps capabilities, and multi-cloud redundancy creates a powerful platform for cost-optimized AI inference.
 
 The project demonstrates that with the right architecture and tooling, you can build sophisticated infrastructure that's both cost-effective and highly available. While still in active development, the foundation is solid and the local testing validates the core concepts.
-
-This has been an incredible journey from a simple self-hosted LLM on Hetzner to a (soon-to-be) global, multi-cloud AI infrastructure platform. The next chapter involves completing the cloud deployment and scaling to production workloads.
 
 ---
 

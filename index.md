@@ -1,4 +1,5 @@
 ---
+                <span class="tech-tag">Prometheus</span>
 layout: default
 title: "DevOps Engineer"
 ---
@@ -85,8 +86,15 @@ title: "DevOps Engineer"
                 </div>
             </div>
             <p class="project-description">
-                An intelligent routing system that automatically distributes LLM requests to the cheapest available cluster across AWS, GCP, and Azure. Features real-time cost calculation, health monitoring, and scale-to-zero capabilities. Currently working locally with AWS infrastructure provisioned - cloud deployment in progress.
+                An intelligent routing system that automatically distributes LLM requests to the cheapest available cluster across external providers (OpenAI, Claude, Gemini) and LLMs self-hosted on Kubernetes clusters in AWS, GCP, and Azure. Routing based on cost, latency, and capability requirements. Features real-time cost calculation, health monitoring, and scale-to-zero capabilities.
             </p>
+            <div class="live-dashboard">
+                <h4 class="blog-section-title">🧊 Simulated Demo:</h4>
+                <ul class="blog-list">
+                    <li><a href="https://mini.multicloud.navillasa.dev" target="_blank" class="project-link dashboard-link">Router Dashboard</a></li>
+                </ul>
+                <p class="dashboard-note">Password: demo123</p>
+            </div>
             <div class="project-overview">
                 <p><strong>📋 Technical Deep-Dive:</strong> <a href="{{ '/blog/multi-cloud-llm-router-journey/' | relative_url }}" class="blog-link project-overview-link">Multi-Cloud Architecture & Cost Optimization</a></p>
             </div>
@@ -94,12 +102,14 @@ title: "DevOps Engineer"
                 <span class="tech-tag">Go</span>
                 <span class="tech-tag">Pulumi</span>
                 <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">Prometheus</span>
                 <span class="tech-tag">ArgoCD</span>
                 <span class="tech-tag">AWS EKS</span>
                 <span class="tech-tag">GCP GKE</span>
                 <span class="tech-tag">Azure AKS</span>
-                <span class="tech-tag">llama.cpp</span>
-                <span class="tech-tag">Prometheus</span>
+                <span class="tech-tag">OpenAI</span>
+                <span class="tech-tag">Claude</span>
+                <span class="tech-tag">Gemini</span>
             </div>
         </div>
 

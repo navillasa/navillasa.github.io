@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money | Natalie Villasana</title>
-    <meta name="description" content="After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my int...">
+    <meta name="description" content="After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I started looking for a bigger challenge. I wanted to combine several of my interes...">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/main.css">
@@ -21,8 +21,8 @@
 <meta property="og:title" content="Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money" />
 <meta name="author" content="Natalie Villasana" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my absolute favorite programming language)." />
-<meta property="og:description" content="After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my absolute favorite programming language)." />
+<meta name="description" content="After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I started looking for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my favorite programming language)." />
+<meta property="og:description" content="After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I started looking for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my favorite programming language)." />
 <link rel="canonical" href="http://localhost:4000/blog/multi-cloud-llm-router-journey/" />
 <meta property="og:url" content="http://localhost:4000/blog/multi-cloud-llm-router-journey/" />
 <meta property="og:site_name" content="Natalie Villasana" />
@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-24T00:00:00-04:00","datePublished":"2025-08-24T00:00:00-04:00","description":"After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my absolute favorite programming language).","headline":"Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/multi-cloud-llm-router-journey/"},"url":"http://localhost:4000/blog/multi-cloud-llm-router-journey/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Natalie Villasana"},"dateModified":"2025-08-24T00:00:00-04:00","datePublished":"2025-08-24T00:00:00-04:00","description":"After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I started looking for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my favorite programming language).","headline":"Multi-Cloud LLM Routing: When Infrastructure Gets Smart About Money","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/multi-cloud-llm-router-journey/"},"url":"http://localhost:4000/blog/multi-cloud-llm-router-journey/"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -53,9 +53,11 @@
     </header>
 
     <div class="blog-content">
-        <p>After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I found myself hungry for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my absolute favorite programming language).</p>
+        <p>After successfully running a self-hosted mini LLM (gpt4all-j) on Hetzner, I started looking for a bigger challenge. I wanted to combine several of my interests and learning goals into one ambitious project: running Kubernetes across all three major cloud providers, gaining more hands-on experience with ArgoCD, diving deeper into LLM hosting, and finally getting to work with Pulumi and Go (my favorite programming language).</p>
 
-<p>What started as a learning exercise is evolving into an ambitious multi-cloud LLM router that will automatically distribute requests to the cheapest available cluster across AWS, GCP, and Azure. Currently, I have the router working locally and the AWS infrastructure fully provisioned, with the remaining cloud deployments and full multi-cloud integration as the next major milestone.</p>
+<p>What started as a learning exercise evolved into an ambitious multi-cloud LLM router that automatically distributes requests to the cheapest available option – between external providers OpenAI, Claude, and Gemini, and self-hosted LLMs running in GKE, AKS, and EKS.</p>
+
+<p>Turns out an enterprise idea doesn’t come with an enterprise budget – so as far as a live demo, I created a <a href="https://mini.multicloud.navillasa.dev">simple dashboard</a> to demonstrate the routing logic and intended usage.</p>
 
 <h2 id="the-problem-llm-cost-optimization-at-scale">The Problem: LLM Cost Optimization at Scale</h2>
 
@@ -146,16 +148,14 @@
 
 <h2 id="where-things-stand">Where Things Stand</h2>
 
-<p><strong>Current Status: Development Phase</strong> - The system is working locally with AWS infrastructure provisioned. Cloud deployment across all three providers is the next major milestone.</p>
-
 <h3 id="working-system">Working System</h3>
-<p>The router compiled successfully and is running locally. Health monitoring is detecting cluster status, API endpoints are responding correctly locally, Prometheus metrics are being collected, the cost engine is ready for real workloads, and AWS infrastructure is fully provisioned and tested.</p>
+<p>The router compiled successfully and is running locally. Health monitoring is detecting cluster status, API endpoints are responding correctly locally, Prometheus metrics are being collected, and the cost engine is ready for real workloads.</p>
 
 <h3 id="production-architecture">Production Architecture</h3>
 <p>The production architecture is complete with infrastructure as code using Pulumi, a GitOps deployment pipeline with ArgoCD, professional Helm charts, and comprehensive monitoring and observability.</p>
 
 <h3 id="multi-cloud-foundation">Multi-Cloud Foundation</h3>
-<p>The multi-cloud foundation has AWS infrastructure fully implemented and working, with GCP and Azure patterns established, consistent tooling and naming across clouds, and everything ready for global deployment in the next phase.</p>
+<p>The multi-cloud foundation has AWS, GCP and Azure patterns established, consistent tooling and naming across clouds, and everything ready for short-term deployments (to keep costs down).</p>
 
 <h2 id="performance-and-cost-expectations">Performance and Cost Expectations</h2>
 
@@ -165,36 +165,15 @@
 
 <h2 id="lessons-learned">Lessons Learned</h2>
 
-<p>Go really is fantastic for infrastructure tools. The concurrency model and standard library made building the router straightforward, and I’m convinced it was the right choice. Pulumi’s type safety turned out to be a game-changer – catching configuration errors at compile time saved hours of debugging that I would have spent with Terraform. ArgoCD scales beautifully, and the app-of-apps pattern makes managing multiple clusters intuitive. CPU inference is surprisingly cost-effective when you use quantized models properly.</p>
+<p>Go really is fantastic for infrastructure tools. The concurrency model and standard library made building the router straightforward, and I’m convinced it was the right choice. Pulumi’s type safety turned out to be a game-changer – catching configuration errors at compile time saved hours of debugging that I would have spent with Terraform. ArgoCD and the app-of-apps pattern makes managing multiple clusters intuitive. CPU inference is surprisingly cost-effective when you use quantized models properly.</p>
 
-<p>From a project management perspective, making incremental commits that tell a story made the project much more maintainable. Writing comprehensive documentation helped clarify the architecture in my own mind. And investing time in setup automation was absolutely worth it – the interactive scripts make the project accessible to new contributors.</p>
-
-<h2 id="whats-next">What’s Next</h2>
-
-<p>The foundation is solid and ready for expansion. The immediate priorities are:</p>
-
-<p><strong>Phase 1: Complete Cloud Deployment</strong></p>
-<ul>
-  <li>Deploy the working system to AWS, GCP, and Azure clusters</li>
-  <li>Validate the cost-aware routing across all three providers</li>
-</ul>
-
-<p><strong>Phase 2: Production Features</strong></p>
-<ul>
-  <li>Add more sophisticated models like Phi-3 and Llama 2 for production workloads</li>
-  <li>Implement circuit breaker patterns for improved reliability</li>
-  <li>Add request queueing for handling traffic spikes</li>
-  <li>Build cost dashboards in Grafana for financial monitoring</li>
-  <li>Implement A/B testing capabilities for model experimentation</li>
-</ul>
+<p>From a project management perspective, making incremental commits that tell a story made the project much more maintainable. Writing comprehensive documentation helped clarify the architecture in my own mind.</p>
 
 <h2 id="from-learning-project-to-production-system">From Learning Project to Production System</h2>
 
 <p>What started as a way to learn new technologies is becoming a production-ready system that could save significant money for organizations running LLM workloads at scale. The combination of Go’s performance, Pulumi’s type safety, ArgoCD’s GitOps capabilities, and multi-cloud redundancy creates a powerful platform for cost-optimized AI inference.</p>
 
 <p>The project demonstrates that with the right architecture and tooling, you can build sophisticated infrastructure that’s both cost-effective and highly available. While still in active development, the foundation is solid and the local testing validates the core concepts.</p>
-
-<p>This has been an incredible journey from a simple self-hosted LLM on Hetzner to a (soon-to-be) global, multi-cloud AI infrastructure platform. The next chapter involves completing the cloud deployment and scaling to production workloads.</p>
 
 <hr />
 
