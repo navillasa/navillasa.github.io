@@ -7,7 +7,7 @@ categories: [ai, llm, infrastructure, lessons]
 tags: [ai, llm, infrastructure, lessons, late-adopter]
 ---
 
-I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an LLM API project this summer was as much about refreshing my coding skills as it was about demystifying this technology that's reshaping our world.
+I left tech to pursue advertising in summer 2022, before AI really took off. During my time as a copywriter, AI tools became widespread seemingly overnight. Taking on an [LLM API project](https://github.com/navillasa/self-hosted-mini-llm) this summer was as much about refreshing my coding skills as it was about demystifying this technology that's reshaping our world.
 
 ## From Magic to Reality Check
 
@@ -72,3 +72,5 @@ Understanding AI doesn't just mean understanding the math behind it or its techn
 The future feels wide open, and I'm eager to keep learning – about LLMs, about infrastructure, and about the meeting point of creativity and automation. There's something energizing about being back in tech during such a transformative moment.
 
 So even if my LLM API is so slow that it hurts, it's reminded me that understanding these systems isn't optional anymore. It's part of playing an active role in the world we're all building.
+
+[Check out my charmingly slow API here.](https://github.com/navillasa/self-hosted-mini-llm)
