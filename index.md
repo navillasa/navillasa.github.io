@@ -31,8 +31,7 @@ title: "DevOps Engineer"
         <div class="about-container">
             <h2 class="section-title">About</h2>
             <div class="about-content">
-                <p>DevOps Engineer with 5 years of production cloud infrastructure and development experience. I combine deep technical skills in cloud-native technologies with strong communication abilities.</p>
-                <p>Previously built and scaled distributed cloud storage systems at Storj Labs. Currently expanding expertise in modern DevOps practices through hands-on projects featuring GitOps, observability, and infrastructure automation.</p>
+                <p>DevOps Engineer with 5 years of production cloud infrastructure experience at Storj Labs. After exploring advertising and creative work, I'm returning to DevOps with renewed focus on modern practices including GitOps, observability, and infrastructure automation through hands-on projects.</p>
             </div>
         </div>
     </section>
