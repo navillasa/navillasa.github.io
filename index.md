@@ -80,13 +80,13 @@ title: "DevOps Engineer"
         <!-- Multi-Cloud LLM Router Project (In Progress) -->
         <div class="project-card">
             <div class="project-header">
-                <h3 class="project-title">🪼 Multi-Cloud LLM Router <em>(In Progress)</em></h3>
+                <h3 class="project-title">🪼 Multi-Cloud LLM Router<em>(In Progress)</em></h3>
                 <div class="project-links">
                     <a href="https://github.com/navillasa/multi-cloud-llm-router" target="_blank" class="project-link">GitHub</a>
                 </div>
             </div>
             <p class="project-description">
-                An intelligent routing system that automatically distributes LLM requests to the cheapest available cluster across external providers (OpenAI, Claude, Gemini) and LLMs self-hosted on Kubernetes clusters in AWS, GCP, and Azure. Routing based on cost, latency, and capability requirements. Features real-time cost calculation, health monitoring, and scale-to-zero capabilities.
+                An AI gateway implementation that distributes LLM requests to the cheapest available cluster across external providers (OpenAI, Claude, Gemini) and LLMs self-hosted on Kubernetes clusters in AWS, GCP, and Azure. Routing based on cost, latency, and capability requirements. Features real-time cost calculation, health monitoring, and scale-to-zero capabilities.
             </p>
             <div class="live-dashboard">
                 <h4 class="blog-section-title">🧊 Simulated Demo:</h4>
