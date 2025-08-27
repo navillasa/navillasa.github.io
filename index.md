@@ -113,28 +113,6 @@ title: "DevOps Engineer"
             </div>
         </div>
 
-        <!-- VPN Ad Blocker Project -->
-        <div class="project-card">
-            <div class="project-header">
-                <h3 class="project-title">🛡️ VPN Ad Blocker</h3>
-                <div class="project-links">
-                    <a href="https://github.com/navillasa/vpn-ad-blocker" target="_blank" class="project-link">GitHub</a>
-                </div>
-            </div>
-            <p class="project-description">
-                A self-hosted WireGuard VPN combined with AdGuard Home for DNS-level ad blocking. Features automated setup scripts, secure configuration, and multi-device support with QR code generation.
-            </p>
-            <div class="tech-stack">
-                <span class="tech-tag">WireGuard</span>
-                <span class="tech-tag">AdGuard Home</span>
-                <span class="tech-tag">Ubuntu</span>
-                <span class="tech-tag">UFW</span>
-                <span class="tech-tag">Bash</span>
-                <span class="tech-tag">Hetzner Cloud</span>
-            </div>
-
-        </div>
-
         <!-- Storj Auditing & Repair Project -->
         <div class="project-card">
             <div class="project-header">
