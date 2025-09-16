@@ -152,6 +152,7 @@ title: "DevOps Engineer"
             <li><a href="{{ '/blog/vault-gitops/' | relative_url }}" class="blog-link">Why I Didn't Make Vault an ArgoCD Application</a></li>
             <li><a href="{{ '/blog/debugging-502-errors/' | relative_url }}" class="blog-link">The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s</a></li>
             <li><a href="{{ '/blog/missed-ai-revolution/' | relative_url }}" class="blog-link">Late to the AI Party: Lessons from Building LLM Infrastructure</a></li>
+            <li><a href="{{ '/blog/why-python-dominates-ai/' | relative_url }}" class="blog-link"></a>Why Python Dominates AI (And How to Build Stronger Projects Even If You’re Not Training Models)</li>
         </ul>
     </section>
 
