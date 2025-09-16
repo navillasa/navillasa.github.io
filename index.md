@@ -46,12 +46,17 @@ title: "Software / DevOps Engineer"
                 <h3 class="project-title">📺 TV Dashboard on Kubernetes</h3>
                 <div class="project-links">
                     <a href="https://github.com/navillasa/tv-dashboard-k8s" target="_blank" class="project-link">GitHub</a>
+
+<!-- Commenting dead links for now
                     <a href="http://tv-hub.navillasa.dev" target="_blank" class="project-link">Live Demo</a>
+-->
                 </div>
             </div>
             <p class="project-description">
                 A full-stack dashboard using production-grade DevOps practices including GitOps with ArgoCD, observability with Prometheus and Grafana, secrets management with Vault, and CI/CD pipelines deployed on Google Kubernetes Engine. Built around a simple premise – tracking trending shows across streaming platforms – to demonstrate cloud-native architecture patterns.
             </p>
+
+<!-- Commenting dead links for now
             <div class="live-dashboard">
                 <h4 class="blog-section-title">🚀 Live Dashboard:</h4>
                 <ul class="blog-list">
@@ -59,6 +64,7 @@ title: "Software / DevOps Engineer"
                 </ul>
                 <p class="dashboard-note">Interactive monitoring with streaming analytics</p>
             </div>
+-->
             <div class="project-overview">
                 <p><strong>📋 Technical Deep-Dive:</strong> <a href="{{ '/blog/go-big-stay-simple/' | relative_url }}" class="blog-link project-overview-link">Complete Architecture & Project Walkthrough</a></p>
             </div>
@@ -87,6 +93,7 @@ title: "Software / DevOps Engineer"
             <p class="project-description">
                 An AI gateway implementation that distributes LLM requests to the cheapest available cluster across external providers (OpenAI, Claude, Gemini) and LLMs self-hosted on Kubernetes clusters in AWS, GCP, and Azure. Routing based on cost, latency, and capability requirements. Features real-time cost calculation, health monitoring, and scale-to-zero capabilities.
             </p>
+<!-- Commenting dead links for now
             <div class="live-dashboard">
                 <h4 class="blog-section-title">🧊 Simulated Demo:</h4>
                 <ul class="blog-list">
@@ -94,6 +101,7 @@ title: "Software / DevOps Engineer"
                 </ul>
                 <p class="dashboard-note">Password: demo123</p>
             </div>
+-->
             <div class="project-overview">
                 <p><strong>📋 Technical Deep-Dive:</strong> <a href="{{ '/blog/multi-cloud-llm-router-journey/' | relative_url }}" class="blog-link project-overview-link">Multi-Cloud Architecture & Cost Optimization</a></p>
             </div>
