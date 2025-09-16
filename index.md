@@ -14,7 +14,7 @@ title: "Software / DevOps Engineer"
                 </div>
                 <div class="profile-info">
                     <h1 class="name">{{ site.author.name }}</h1>
-                    <p class="title">DevOps Engineer</p>
+                    <p class="title">Software / DevOps Engineer</p>
                     <p class="location">{{ site.author.location }} • {{ site.author.domain }}</p>
                 </div>
             </div>
