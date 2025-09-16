@@ -160,6 +160,10 @@ title: "Software / DevOps Engineer"
             <li><a href="{{ '/blog/vault-gitops/' | relative_url }}" class="blog-link">Why I Didn't Make Vault an ArgoCD Application</a></li>
             <li><a href="{{ '/blog/debugging-502-errors/' | relative_url }}" class="blog-link">The Cluster Doctor, or How I Learned to Stop Worrying and Debug 502s</a></li>
             <li><a href="{{ '/blog/missed-ai-revolution/' | relative_url }}" class="blog-link">Late to the AI Party: Lessons from Building LLM Infrastructure</a></li>
+        </ul>
+
+        <h3 style="font-size: 1rem; font-weight: 600; color: #495057; margin-bottom: 1rem; margin-top: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e9ecef;">September 2025</h3>
+        <ul class="blog-list">
             <li><a href="{{ '/blog/why-python-dominates-ai/' | relative_url }}" class="blog-link">Why Python Dominates AI (And How to Build Stronger Projects Even If You’re Not Training Models)</a></li>
         </ul>
     </section>
