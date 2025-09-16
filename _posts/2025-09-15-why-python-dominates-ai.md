@@ -13,7 +13,7 @@ But the same qualities that make Python a great generalist language also create 
 
 For example, a prototype in C++ might take longer to build, but once it works, it already has the type safety, performance, and concurrency guarantees that production systems need. In Python, the leap from a working notebook to a resilient service often requires extra tooling, guardrails, or even rewriting parts of the stack in faster, safer languages.
 
-Yet no other language has managed to become the connective tissue of AI quite like Python. Its vast ecosystem – from NumPy, PyTorch, and TensorFlow to data pipelines, APIs, and deployment frameworks – allows developers to span research, experimentation, and production in a way that would be far slower and impractical in C++ or Java alone.
+Yet no other language has managed to become the connective tissue of AI the way that Python has. Its huge ecosystem – from NumPy, PyTorch, and TensorFlow to data pipelines, APIs, and deployment frameworks – allows developers to span research, experimentation, and production in a way that would be far slower and impractical in C++ or Java alone.
 
 For example, implementing a neural network from scratch in Rust is possible (if you have an iron will and probably a master’s degree) but extending it into a workflow that pulls live data, runs experiments, visualizes results, and deploys to a cloud service – even if you have superhuman patience and your brain is half compiler, this would take exponentially more effort without Python’s libraries and integrations. This is why surveys from IEEE and Stack Overflow consistently rank Python not just the top AI language, but one of the most widely used languages in the world.
 
@@ -23,7 +23,7 @@ It’s also critical to use tools for their strengths rather than force-fitting 
 
 ## Lessons from Building a Self-Hosted LLM API
 
-These tensions between Python’s flexibility and production readiness became real when I built a self-hosted LLM API as an exploratory project after returning to software development. I chose Python for the backend because I could focus on core challenges like integrating GPT4All for local inference, designing a clean FastAPI interface, and handling concurrent requests without getting bogged down in language complexity or tooling friction.
+These tensions between Python’s flexibility and production readiness became real when I built a [self-hosted LLM API](https://github.com/navillasa/self-hosted-mini-llm) as an exploratory project after returning to software development. I chose Python for the backend because I could focus on core challenges like integrating GPT4All for local inference, designing a clean FastAPI interface, and handling concurrent requests without getting bogged down in language complexity or tooling friction.
 
 But the project also highlighted exactly where Python’s “easy to start, harder to harden” nature shows up in practice. For instance, Python made it trivial to experiment with different model loading strategies and API response formats. But when I began setting up a CI/CD pipeline, I realized I needed explicit validation schemas, better logging, health checks, and performance metrics – all the production guardrails that a more rigid language might have forced me to consider upfront.
 
