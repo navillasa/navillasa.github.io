@@ -1,7 +1,7 @@
 ---
                 <span class="tech-tag">Prometheus</span>
 layout: default
-title: "DevOps Engineer"
+title: "Software / DevOps Engineer"
 ---
 
 <div class="container">
@@ -31,7 +31,7 @@ title: "DevOps Engineer"
         <div class="about-container">
             <h2 class="section-title">About</h2>
             <div class="about-content">
-                <p>DevOps Engineer with 5 years of production cloud infrastructure experience at Storj Labs. After exploring advertising and creative work, I'm returning to DevOps with renewed focus on modern practices including GitOps, observability, and infrastructure automation through hands-on projects.</p>
+                <p>Software / DevOps Engineer with 5 years of production cloud infrastructure experience at Storj Labs. After exploring advertising and creative work, I'm returning to tech with renewed focus on modern practices including GitOps, observability, and infrastructure automation through hands-on projects.</p>
             </div>
         </div>
     </section>
