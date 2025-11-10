@@ -39,6 +39,60 @@ title: "Software / DevOps Engineer"
     <!-- Projects Section -->
     <section class="projects">
         <h2 class="section-title">Featured Projects</h2>
+
+        <!-- Homelab -->
+        <div class="project-card">
+            <div class="project-header">
+                <h3 class="project-title">😶‍🌫️ Kubernetes Homelab with Proxmox & MicroK8s</h3>
+                <div class="project-links">
+                    <a href="https://github.com/navillasa/kubernetes-homelab" target="_blank" class="project-link">GitHub</a>
+                </div>
+            </div>
+            <p class="project-description">
+Self-hosted Kubernetes homelab built on a Dell Wyse 5070 thin client running Proxmox VE with virtualized infrastructure managed by Terraform. Built to prototype AI/LLM workloads, experiment with automation, and to refine infrastructure-as-code practices.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">Prometheus</span>
+                <span class="tech-tag">ArgoCD</span>
+            </div>
+        </div>
+
+        <!-- Multi-Cloud LLM Router Project -->
+        <div class="project-card">
+            <div class="project-header">
+                <h3 class="project-title">🪼 Multi-Cloud LLM Router (API Gateway)</h3>
+                <div class="project-links">
+                    <a href="https://github.com/navillasa/multi-cloud-llm-router" target="_blank" class="project-link">GitHub</a>
+                </div>
+            </div>
+            <p class="project-description">
+                An AI gateway implementation that distributes LLM requests to the cheapest available cluster across external providers (OpenAI, Claude, Gemini) and LLMs self-hosted on Kubernetes clusters in AWS, GCP, and Azure. Routing based on cost, latency, and capability requirements. Features real-time cost calculation, health monitoring, and scale-to-zero capabilities.
+            </p>
+            <div class="live-dashboard">
+                <h4 class="blog-section-title">🧊 Simulated Demo:</h4>
+                <ul class="blog-list">
+                    <li><a href="https://demo-multicloud.navillasa.dev" target="_blank" class="project-link dashboard-link">Router Dashboard</a></li>
+                </ul>
+                <p class="dashboard-note">Password: demo123</p>
+            </div>
+            <div class="project-overview">
+                <p><strong>📋 Technical Deep-Dive:</strong> <a href="{{ '/blog/multi-cloud-llm-router-journey/' | relative_url }}" class="blog-link project-overview-link">Multi-Cloud Architecture & Cost Optimization</a></p>
+            </div>
+            <div class="tech-stack">
+                <span class="tech-tag">Go</span>
+                <span class="tech-tag">Pulumi</span>
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">Prometheus</span>
+                <span class="tech-tag">ArgoCD</span>
+                <span class="tech-tag">AWS EKS</span>
+                <span class="tech-tag">GCP GKE</span>
+                <span class="tech-tag">Azure AKS</span>
+                <span class="tech-tag">OpenAI</span>
+                <span class="tech-tag">Claude</span>
+                <span class="tech-tag">Gemini</span>
+            </div>
+        </div>
         
         <!-- TV Hub Project -->
         <div class="project-card">
@@ -46,10 +100,7 @@ title: "Software / DevOps Engineer"
                 <h3 class="project-title">📺 TV Dashboard on Kubernetes</h3>
                 <div class="project-links">
                     <a href="https://github.com/navillasa/tv-dashboard-k8s" target="_blank" class="project-link">GitHub</a>
-
-<!-- Commenting dead links for now
                     <a href="http://tv-hub.navillasa.dev" target="_blank" class="project-link">Live Demo</a>
--->
                 </div>
             </div>
             <p class="project-description">
@@ -79,44 +130,6 @@ title: "Software / DevOps Engineer"
                 <span class="tech-tag">Node.js</span>
                 <span class="tech-tag">PostgreSQL</span>
                 <span class="tech-tag">React</span>
-            </div>
-        </div>
-
-        <!-- Multi-Cloud LLM Router Project (In Progress) -->
-        <div class="project-card">
-            <div class="project-header">
-                <h3 class="project-title">🪼 Multi-Cloud LLM Router<em>(In Progress)</em></h3>
-                <div class="project-links">
-                    <a href="https://github.com/navillasa/multi-cloud-llm-router" target="_blank" class="project-link">GitHub</a>
-                </div>
-            </div>
-            <p class="project-description">
-                An AI gateway implementation that distributes LLM requests to the cheapest available cluster across external providers (OpenAI, Claude, Gemini) and LLMs self-hosted on Kubernetes clusters in AWS, GCP, and Azure. Routing based on cost, latency, and capability requirements. Features real-time cost calculation, health monitoring, and scale-to-zero capabilities.
-            </p>
-<!-- Commenting dead links for now
-            <div class="live-dashboard">
-                <h4 class="blog-section-title">🧊 Simulated Demo:</h4>
-                <ul class="blog-list">
-                    <li><a href="https://mini.multicloud.navillasa.dev" target="_blank" class="project-link dashboard-link">Router Dashboard</a></li>
-                </ul>
-                <p class="dashboard-note">Password: demo123</p>
-            </div>
--->
-            <div class="project-overview">
-                <p><strong>📋 Technical Deep-Dive:</strong> <a href="{{ '/blog/multi-cloud-llm-router-journey/' | relative_url }}" class="blog-link project-overview-link">Multi-Cloud Architecture & Cost Optimization</a></p>
-            </div>
-            <div class="tech-stack">
-                <span class="tech-tag">Go</span>
-                <span class="tech-tag">Pulumi</span>
-                <span class="tech-tag">Kubernetes</span>
-                <span class="tech-tag">Prometheus</span>
-                <span class="tech-tag">ArgoCD</span>
-                <span class="tech-tag">AWS EKS</span>
-                <span class="tech-tag">GCP GKE</span>
-                <span class="tech-tag">Azure AKS</span>
-                <span class="tech-tag">OpenAI</span>
-                <span class="tech-tag">Claude</span>
-                <span class="tech-tag">Gemini</span>
             </div>
         </div>
 
