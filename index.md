@@ -52,9 +52,14 @@ title: "Software / DevOps Engineer"
 Self-hosted Kubernetes homelab built on a Dell Wyse 5070 thin client running Proxmox VE with virtualized infrastructure managed by Terraform. Built to prototype AI/LLM workloads, experiment with automation, and to refine infrastructure-as-code practices.
             </p>
             <div class="tech-stack">
+                <span class="tech-tag">Proxmox</span>
+                <span class="tech-tag">Tailscale</span>
+                <span class="tech-tag">Terraform</span>
                 <span class="tech-tag">Kubernetes</span>
-                <span class="tech-tag">Prometheus</span>
                 <span class="tech-tag">ArgoCD</span>
+                <span class="tech-tag">HashiCorp Vault</span>
+                <span class="tech-tag">Prometheus</span>
+                <span class="tech-tag">Grafana</span>
             </div>
         </div>
 
